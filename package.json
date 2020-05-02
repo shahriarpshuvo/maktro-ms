@@ -1,0 +1,33 @@
+{
+  "name": "maktro-ms",
+  "version": "1.0.0",
+  "description": "A business management system built for Maktro.com",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mr-spShuvo/maktro-ms.git"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "mongodb"
+  ],
+  "author": "Shahriar Parvez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mr-spShuvo/maktro-ms/issues"
+  },
+  "homepage": "https://github.com/Mr-spShuvo/maktro-ms#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  },
+  "dependencies": {
+    "ejs": "^3.1.2",
+    "express": "^4.17.1",
+    "method-override": "^3.0.0",
+    "mongoose": "^5.9.11"
+  }
+}
