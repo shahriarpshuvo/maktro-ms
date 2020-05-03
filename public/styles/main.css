@@ -1,0 +1,176 @@
+/*==============================
+=>  Base Styles
+================================*/
+
+:root {
+    --primary: #6a60a9;
+    --secondary: #FFBC42;
+    --gray: #e0e0e0;
+    --light: #fff;
+    --dark: rgb(35, 35, 35);
+}
+
+* {
+    font-family: 'Lato', Arial, Helvetica, sans-serif;
+}
+
+body {
+    font-size: .875rem;
+}
+
+/*==============================
+=>  Override Bootstrap
+================================*/
+.btn-primary,
+.btn-primary:hover {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.btn:hover {
+    opacity: .95;
+}
+
+.btn-primary:focus,
+.btn-primary:not(:disabled):not(.disabled):active,
+.btn-primary:not(:disabled):not(.disabled):active:focus {
+    background-color: var(--primary);
+    box-shadow: 0 0 0 0.2rem #6a60a990;
+}
+
+.btn-secondary,
+.btn-secondary:hover {
+    background-color: var(--secondary);
+    border-color: var(--secondary);
+}
+
+.btn-secondary:focus,
+.btn-secondary:not(:disabled):not(.disabled):active,
+.btn-secondary:not(:disabled):not(.disabled):active:focus {
+    border-color: var(--secondary);
+    background-color: var(--secondary);
+    box-shadow: 0 0 0 0.2rem #FFBC4290;
+}
+
+
+/*==============================
+=>  NavBar
+================================*/
+
+.navbar-brand {
+    padding: 10px;
+    position: relative;
+}
+
+.navbar-brand__logo {
+    height: 40px;
+
+}
+
+.navbar-brand__name {
+    font-size: 22px;
+    bottom: 12px;
+    padding-left: 5px;
+    font-weight: 700;
+    color: var(--primary);
+    position: absolute;
+}
+
+/*==============================
+=>  Sidebar
+================================*/
+
+.sidebar {
+    position: fixed;
+    top: 12px;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    /* Behind the navbar */
+    padding: 48px 0 0;
+    /* Height of navbar */
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+}
+
+.sidebar-sticky {
+    position: relative;
+    top: 0;
+    height: calc(100vh - 48px);
+    padding-top: .5rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+    /* Scrollable contents if viewport is shorter than content. */
+}
+
+@supports ((position: -webkit-sticky) or (position: sticky)) {
+    .sidebar-sticky {
+        position: -webkit-sticky;
+        position: sticky;
+    }
+}
+
+.sidebar .nav-item {
+    margin: 8px 0;
+}
+
+.sidebar .nav-link {
+    font-weight: 500;
+    color: #333;
+}
+
+.sidebar .nav-link i {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 17.5px;
+}
+
+.nav-link.active {
+    color: var(--primary);
+}
+
+
+.sidebar-heading {
+    font-size: .75rem;
+    text-transform: uppercase;
+}
+
+/*==============================
+=>  Content Area
+================================*/
+
+[role="main"] {
+    padding-top: 133px;
+    /* Space for fixed navbar */
+}
+
+@media (min-width: 768px) {
+    [role="main"] {
+        padding-top: 48px;
+        /* Space for fixed navbar */
+    }
+}
+
+.content-area {}
+
+.content-header {
+    color: var(--primary);
+}
+
+/* Content-box */
+.content-box {}
+
+.table__header {
+    background-color: var(--primary);
+    color: #fff;
+}
+
+.table__header th {
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+}
+
+.table__actions-btn {
+    color: var(--primary);
+    text-decoration: none;
+}
