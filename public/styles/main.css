@@ -4,18 +4,18 @@
 
 :root {
     --primary: #6a60a9;
-    --secondary: #FFBC42;
+    --secondary: #ffbc42;
     --gray: #e0e0e0;
     --light: #fff;
     --dark: rgb(35, 35, 35);
 }
 
 * {
-    font-family: 'Lato', Arial, Helvetica, sans-serif;
+    font-family: "Lato", Arial, Helvetica, sans-serif;
 }
 
 body {
-    font-size: .875rem;
+    font-size: 0.875rem;
 }
 
 /*==============================
@@ -28,7 +28,7 @@ body {
 }
 
 .btn:hover {
-    opacity: .95;
+    opacity: 0.95;
 }
 
 .btn-primary:focus,
@@ -49,9 +49,8 @@ body {
 .btn-secondary:not(:disabled):not(.disabled):active:focus {
     border-color: var(--secondary);
     background-color: var(--secondary);
-    box-shadow: 0 0 0 0.2rem #FFBC4290;
+    box-shadow: 0 0 0 0.2rem #ffbc4290;
 }
-
 
 /*==============================
 =>  NavBar
@@ -64,7 +63,6 @@ body {
 
 .navbar-brand__logo {
     height: 40px;
-
 }
 
 .navbar-brand__name {
@@ -89,14 +87,14 @@ body {
     /* Behind the navbar */
     padding: 48px 0 0;
     /* Height of navbar */
-    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
 }
 
 .sidebar-sticky {
     position: relative;
     top: 0;
     height: calc(100vh - 48px);
-    padding-top: .5rem;
+    padding-top: 0.5rem;
     overflow-x: hidden;
     overflow-y: auto;
     /* Scrollable contents if viewport is shorter than content. */
@@ -110,7 +108,7 @@ body {
 }
 
 .sidebar .nav-item {
-    margin: 8px 0;
+    margin: 5px 0;
 }
 
 .sidebar .nav-link {
@@ -128,9 +126,8 @@ body {
     color: var(--primary);
 }
 
-
 .sidebar-heading {
-    font-size: .75rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
 }
 
@@ -161,16 +158,29 @@ body {
 
 .table__header {
     background-color: var(--primary);
-    color: #fff;
+    color: var(--secondary)
 }
 
 .table__header th {
-    padding-top: 10px;
-    padding-bottom: 10px;
-
+    padding: 20px 15px;
 }
 
-.table__actions-btn {
+.table__body td {
+    padding: 10px 15px;
+}
+
+.table__actions a:not(:last-child) {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.table__actions-btn,
+.table__actions-btn:hover {
     color: var(--primary);
     text-decoration: none;
+    transition: color .2s;
+}
+
+.table__actions-btn:hover {
+    color: var(--secondary);
 }
