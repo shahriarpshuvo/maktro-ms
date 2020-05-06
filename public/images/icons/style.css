@@ -1,9 +1,9 @@
 @font-face {
-  font-family: 'matkroms';
-  src: url('fonts/matkroms.eot?40hb42');
-  src: url('fonts/matkroms.eot?40hb42#iefix') format('embedded-opentype'),
-    url('fonts/matkroms.ttf?40hb42') format('truetype'),
-    url('fonts/matkroms.woff?40hb42') format('woff');
+  font-family: "maktro-ms";
+  src: url("fonts/maktro-ms.eot?40hb42");
+  src: url("fonts/maktro-ms.eot?40hb42#iefix") format("embedded-opentype"),
+    url("fonts/maktro-ms.ttf?40hb42") format("truetype"),
+    url("fonts/maktro-ms.woff?40hb42") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -12,7 +12,7 @@
 [class^="ic-"],
 [class*=" ic-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'matkroms' !important;
+  font-family: "maktro-ms" !important;
   speak: none;
   font-style: normal;
   font-weight: normal;
