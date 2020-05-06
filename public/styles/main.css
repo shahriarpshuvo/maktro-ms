@@ -68,8 +68,9 @@ body {
 .navbar-brand__name {
     font-size: 22px;
     bottom: 12px;
-    padding-left: 5px;
-    font-weight: 700;
+    padding-left: 2px;
+    font-weight: 900;
+    letter-spacing: 1px;
     color: var(--primary);
     position: absolute;
 }
@@ -79,32 +80,14 @@ body {
 ================================*/
 
 .sidebar {
-    position: fixed;
-    top: 12px;
-    bottom: 0;
-    left: 0;
     z-index: 100;
-    /* Behind the navbar */
-    padding: 48px 0 0;
-    /* Height of navbar */
     box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
-}
-
-.sidebar-sticky {
-    position: relative;
-    top: 0;
-    height: calc(100vh - 48px);
-    padding-top: 0.5rem;
+    margin-top: 65px;
+    height: calc(100vh - 65px);
+    padding-top: 10px;
     overflow-x: hidden;
-    overflow-y: auto;
-    /* Scrollable contents if viewport is shorter than content. */
-}
+    overflow-y: hidden;
 
-@supports ((position: -webkit-sticky) or (position: sticky)) {
-    .sidebar-sticky {
-        position: -webkit-sticky;
-        position: sticky;
-    }
 }
 
 .sidebar .nav-item {
@@ -135,19 +118,15 @@ body {
 =>  Content Area
 ================================*/
 
-[role="main"] {
-    padding-top: 133px;
-    /* Space for fixed navbar */
+.content-area {
+    padding-top: 72px;
 }
 
-@media (min-width: 768px) {
-    [role="main"] {
+@media only screen and (min-width: 768px) {
+    .content-area {
         padding-top: 48px;
-        /* Space for fixed navbar */
     }
 }
-
-.content-area {}
 
 .content-header {
     color: var(--primary);

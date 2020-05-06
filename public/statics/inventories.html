@@ -1,42 +1,71 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
   <!-- Required meta tags -->
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta charset="utf-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- Favicon -->
-  <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../images/icons/style.css" />
+  <link
+    href="https://fonts.googleapis.com/css?family=Lato:400,700,900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../images/icons/style.css">
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="../vendors/bootstrap.min.css" />
+  <link rel="stylesheet" href="../vendors/bootstrap.min.css">
   <!-- Main CSS -->
-  <link rel="stylesheet" href="../styles/main.css" />
+  <link rel="stylesheet" href="../styles/main.css">
 
   <title>MaktroMS</title>
 </head>
 
 <body>
   <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 pr-3">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">
-      <img class="navbar-brand__logo pl-2" src="../images/logo.png" />
+    <a class="navbar-brand col-1 col-md-2 mr-0" href="/">
+      <img class="navbar-brand__logo pl-2" src="../images/logo.png">
       <span class="navbar-brand__name">MS</span>
     </a>
-    <ul class="navbar-nav">
-      <li class="nav-item text-nowrap">
+    <button class="btn btn-secondary navbar-toggler d-md-none" type="button"
+      data-toggle="collapse" data-target="#sideBar">
+      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+        viewBox="0 0 30 30" role="img" focusable="false">
+        <title>Menu</title>
+        <path stroke="currentColor" stroke-linecap="round"
+          stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22" />
+      </svg>
+    </button>
+
+    <ul
+      class="navbar-nav flex-row w-100 justify-content-center
+            justify-content-md-end align-items-center text-white py-2 bg-md-light">
+      <li class="nav-item mr-2">
+        July 11, 2020
+      </li>
+      <li class="nav-item mr-2">
+        |
+      </li>
+      <li class="nav-item text-warning font-weight-bold mr-3">
+        Tanzim Rahman
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="#">
           <i class="ic-share-alternitive"></i>&nbsp; Sign out</a>
       </li>
     </ul>
   </nav>
 
+
+
   <div class="container-fluid">
     <div class="row">
-      <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-        <div class="sidebar-sticky">
-          <ul class="nav flex-column">
+      <div class="col-md-2 bg-light navbar navbar-expand-md p-0 pl-md-3 mt-5
+        mt-md-0 overflow-hidden">
+        <nav
+          class="collapse navbar-collapse sidebar flex-column align-items-md-start "
+          id="sideBar">
+          <ul class="nav flex-column align-items-center align-items-md-start">
             <li class="nav-item">
               <a class="nav-link active" href="index.html">
                 <i class="ic-home"></i>
@@ -86,11 +115,12 @@
               </a>
             </li>
           </ul>
-
-          <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-            <span>Access Controls</span>
+          <h6 class="sidebar-heading px-3 mt-4 mb-1 text-center
+            text-muted">
+            <span class="text-center text-md-left">Access Controls</span>
           </h6>
-          <ul class="nav flex-column mb-2">
+          <ul
+            class="nav flex-column mb-2 align-items-center align-items-md-start">
             <li class="nav-item">
               <a class="nav-link" href="#">
                 <i class="ic-user"></i>
@@ -98,17 +128,21 @@
               </a>
             </li>
           </ul>
-        </div>
-      </nav>
+        </nav>
+      </div>
 
-      <main role="main" class="content-area col-md-9 ml-sm-auto col-lg-10 px-4">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-4 pb-2 mb-3 border-bottom">
+
+      <main role="main"
+        class="content-area col-md-9 ml-sm-auto col-lg-10 px-2 px-md-4">
+        <div
+          class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom mt-0 mb-3 mt-md-3 py-4">
           <h1 class="h3 content-header">
             <i class="ic-archive pr-2"></i>
             Inventories
           </h1>
           <div class="content-action btn-toolbar mb-2 mb-md-0">
-            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addInventories">
+            <button type="button" class="btn btn-sm btn-primary"
+              data-toggle="modal" data-target="#addInventories">
               <i class="ic-plus"></i>
               Add Inventories
             </button>
@@ -118,22 +152,25 @@
 
         <!-- Search Area -->
 
-        <div class="search-area my-5">
+        <div class="search-area mb-4 mt-4 mt-md-5">
           <form action="" method="" class="">
             <div class="container">
               <div class="row d-flex justify-content-center align-items-start">
                 <div class="col-lg-3 mb-3 mr-lg-3">
                   <div class="input-group">
                     <div class="input-group-prepend">
-                      <div class="input-group-text"><i class="ic-magnifying-glass"></i></div>
+                      <div class="input-group-text"><i
+                          class="ic-magnifying-glass"></i></div>
                     </div>
-                    <input type="text" class="form-control" name="productCode" placeholder="Enter Product ID">
+                    <input type="text" class="form-control" name="productCode"
+                      placeholder="Enter Product ID">
                   </div>
                 </div>
                 <div class="col-lg-7 d-flex">
                   <div class="input-group mr-4">
                     <div class="input-group-prepend">
-                      <div class="input-group-text"><i class="ic-calendar"></i></div>
+                      <div class="input-group-text"><i class="ic-calendar"></i>
+                      </div>
                     </div>
                     <input type="date" class="form-control" name="startDate" />
                     <input type="date" class="form-control" name="endDate" />
@@ -155,14 +192,16 @@
         </div>
 
         <!-- Add  Inventories-->
-        <div class="modal fade" id="addInventories" tabindex="-1" role="dialog" data-backdrop="static">
+        <div class="modal fade" id="addInventories" tabindex="-1" role="dialog"
+          data-backdrop="static">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="addInventoriesTitle">
                   Add Inventories
                 </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal"
+                  aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
@@ -178,11 +217,13 @@
 
                   <div class="form-group">
                     <label for="productQuantity">Product Quantity</label>
-                    <input type="number" class="form-control" name="productQuantity" />
+                    <input type="number" class="form-control"
+                      name="productQuantity" />
                   </div>
 
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    <button type="button" class="btn btn-secondary"
+                      data-dismiss="modal">
                       <i class="ic-cross"></i> Close
                     </button>
                     <button type="submit" class="btn btn-primary">
@@ -200,7 +241,8 @@
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title text-danger">Delete Items?</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal"
+                  aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
@@ -209,8 +251,11 @@
                 <p class="text-muted">This action is irreversible.</p>
                 <form action="" method="post">
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"> <i class="ic-cross"></i> Close</button>
-                    <button type="submit" class="btn btn-danger"><i class="ic-trash"></i> Confirm Delete</button>
+                    <button type="button" class="btn btn-secondary"
+                      data-dismiss="modal"> <i class="ic-cross"></i>
+                      Close</button>
+                    <button type="submit" class="btn btn-danger"><i
+                        class="ic-trash"></i> Confirm Delete</button>
                   </div>
                 </form>
               </div>
@@ -240,8 +285,12 @@
                   <td>3200</td>
                   <td>3023</td>
                   <td class="table__actions">
-                    <a href="#" class="table__actions-btn" data-toggle="modal" data-target="#addInventories"><i class="ic-pencil pr-2"></i>Edit</a>
-                    <a href="#" class="table__actions-btn" data-toggle="modal" data-target="#deleteModal"><i class="ic-trash pr-2"></i>Delete</a>
+                    <a href="#" class="table__actions-btn" data-toggle="modal"
+                      data-target="#addInventories"><i
+                        class="ic-pencil pr-2"></i>Edit</a>
+                    <a href="#" class="table__actions-btn" data-toggle="modal"
+                      data-target="#deleteModal"><i
+                        class="ic-trash pr-2"></i>Delete</a>
                   </td>
                 </tr>
               </tbody>
@@ -253,7 +302,9 @@
   </div>
 
   <!-- jQuery -->
-  <script src="../vendors/jquery.min.js"></script>
+  <script src="../vendors/jquery.slim.min.js"></script>
+  <!-- PopperJS -->
+  <script src="../vendors/popper.min.js"></script>
   <!-- Bootstrap Js -->
   <script src="../vendors/bootstrap.min.js"></script>
   <!-- Main Js -->
