@@ -10,12 +10,35 @@
     --dark: rgb(35, 35, 35);
 }
 
+.t-primary {
+    color: var(--primary) !important;
+}
+
+.b-primary {
+    background-color: var(--primary) !important;
+}
+
 * {
     font-family: "Lato", Arial, Helvetica, sans-serif;
 }
 
 body {
     font-size: 0.875rem;
+}
+
+.copyright {
+    font-size: 10px;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+}
+
+@media only screen and (min-width) {
+    .copyright {
+        display: none;
+    }
 }
 
 /*==============================
@@ -80,10 +103,11 @@ body {
 ================================*/
 
 .sidebar {
+    position: relative;
     z-index: 100;
     box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
-    margin-top: 65px;
-    height: calc(100vh - 65px);
+    margin-top: 60px;
+    height: calc(100vh - 60px);
     padding-top: 10px;
     overflow-x: hidden;
     overflow-y: hidden;
@@ -162,4 +186,14 @@ body {
 
 .table__actions-btn:hover {
     color: var(--secondary);
+}
+
+/*==============================
+=>  Dashboard
+================================*/
+
+.dashboard-intro {
+    background-color: var(--primary);
+    color: #fff;
+    opacity: .75;
 }
