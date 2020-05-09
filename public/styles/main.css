@@ -10,12 +10,20 @@
     --dark: rgb(35, 35, 35);
 }
 
+.z-100 {
+    z-index: 100;
+}
+
 .t-primary {
     color: var(--primary) !important;
 }
 
 .b-primary {
     background-color: var(--primary) !important;
+}
+
+.f-10 {
+    font-size: 10px !important;
 }
 
 * {
@@ -157,7 +165,9 @@ body {
 }
 
 /* Content-box */
-.content-box {}
+.table td {
+    vertical-align: middle;
+}
 
 .table__header {
     background-color: var(--primary);
@@ -165,7 +175,7 @@ body {
 }
 
 .table__header th {
-    padding: 20px 15px;
+    padding: 15px;
 }
 
 .table__body td {
@@ -188,6 +198,48 @@ body {
     color: var(--secondary);
 }
 
+tr .details-box,
+tr .address-box {
+    max-width: 220px;
+}
+
+tr td,
+.table thead th {
+    border: 2px solid #6a60a920;
+    text-align: center;
+
+}
+
+.table tr .name {
+    text-align: left;
+}
+
+.expense-box {
+    width: 540px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    text-align: left;
+}
+
+.expense-box span {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 12px;
+    background-color: #6a60a910;
+    border-radius: 10px;
+    align-items: flex-start;
+}
+
+.expense-box strong {
+    display: block;
+    border-radius: 10px;
+    color: var(--dark);
+    background-color: var(--secondary);
+    padding: 0 12px;
+}
+
 /*==============================
 =>  Dashboard
 ================================*/
@@ -195,5 +247,11 @@ body {
 .dashboard-intro {
     background-color: var(--primary);
     color: #fff;
-    opacity: .75;
+    opacity: .95;
+    margin-top: 28px;
+    border-radius: 3px;
+}
+
+.dashboard-intro p {
+    line-height: 0;
 }

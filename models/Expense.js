@@ -8,9 +8,31 @@ const expenseSchema = new mongoose.Schema({
         max: 100,
     },
     details: {
-        type: String,
-        required: true,
-        max: 1024,
+        equipments: {
+
+        },
+        transports: {
+
+        },
+        courierCommission: {
+
+        },
+        retailHoldings: {
+
+        },
+        stationaryTools: {
+
+        },
+        salaryUtilities: {
+
+        },
+        marketing: {
+
+        },
+        others: {
+
+        }
+
     },
     amount: {
         type: Number,
