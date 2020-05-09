@@ -1,0 +1,30 @@
+<%- include('./modules/_header', {page: "Login"}); %>
+
+<div class="login text-center bg-dark text-light">
+    <form class="form-signin">
+        <img class="mb-3" src="../images/logo.png" height="72">
+        <h1 class="h5 mb-5 text-warning font-weight-normal">Maktro
+            Management System</h1>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" id="inputEmail" class="form-control"
+            placeholder="Email address" name="email" required>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control"
+            placeholder="Password" name="password" required>
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" value="remember-me"> Remember me
+            </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign
+            in</button>
+        <p class="mt-5 mb-3 text-muted">&copy; <a class="text-warning"
+                href="#">Maktro.com</a>
+            2020</p>
+        <p class="f-10 text-muted">Made with &hearts; by <a
+                class="text-secondary" href="#">1MANDEV.COM</a>
+            2020</p>
+    </form>
+</div>
+
+<%- include('modules/_footer'); %>

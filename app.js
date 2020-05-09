@@ -26,7 +26,19 @@ app.use(methodOverride("_method"));
 
 //Routes
 app.get("/", (req, res) => {
-    res.send("It Worked");
+    res.render('login');
+});
+
+app.get("/products", (req, res) => {
+    res.render('products');
+});
+
+app.get("/dashboard", (req, res) => {
+    res.render('dashboard');
+});
+
+app.get("/access-control", (req, res) => {
+    res.render('users');
 });
 
 //Development Server

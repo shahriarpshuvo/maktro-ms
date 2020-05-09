@@ -1,0 +1,127 @@
+  <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 pr-3">
+      <a class="navbar-brand col-1 col-md-2 mr-0" href="/">
+          <img class="navbar-brand__logo pl-2" src="../images/logo.png">
+          <span class="navbar-brand__name">MS</span>
+      </a>
+      <button class="btn btn-secondary navbar-toggler d-md-none" type="button"
+          data-toggle="collapse" data-target="#sideBar">
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+              viewBox="0 0 30 30" role="img" focusable="false">
+              <title>Menu</title>
+              <path stroke="currentColor" stroke-linecap="round"
+                  stroke-miterlimit="10" stroke-width="2"
+                  d="M4 7h22M4 15h22M4 23h22" />
+          </svg>
+      </button>
+
+      <ul
+          class="navbar-nav flex-row w-100 justify-content-center
+            justify-content-md-end align-items-center text-white py-2 bg-md-light">
+          <li class="nav-item mr-2">
+              July 11, 2020
+          </li>
+          <li class="nav-item mr-2">
+              |
+          </li>
+          <li class="nav-item text-warning font-weight-bold mr-3">
+              Tanzim Rahman
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="#">
+                  <i class="ic-share-alternitive"></i>&nbsp; Sign out</a>
+          </li>
+      </ul>
+  </nav>
+
+
+
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-2 bg-light navbar navbar-expand-md p-0 mt-5
+        mt-md-0 overflow-hidden position-fixed z-100">
+              <nav class="collapse navbar-collapse sidebar flex-column align-items-md-start "
+                  id="sideBar">
+                  <ul
+                      class="nav flex-column align-items-center align-items-md-start">
+                      <li class="nav-item">
+                          <a class="nav-link<% if(page=="Dashboard"){%> <%= "active"; %> <% } %>"
+                              href="/dashboard">
+                              <i class="ic-home"></i>
+                              Dashboard
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link<% if(page=="Inventory"){%> <%= "active"; %> <% } %>"
+                              href="/invetory">
+                              <i class="ic-archive"></i>
+                              Inventory
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link <% if(page=="Sales"){%> <%= "active"; %> <% } %>"
+                              href="/sales">
+                              <i class="ic-calculator"></i>
+                              Sales
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link <% if(page=="Returns"){%> <%= "active"; %> <% } %>"
+                              href="/returns">
+                              <i class="ic-back-in-time"></i>
+                              Returns
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link <% if(page=="Customers"){%> <%= "active"; %> <% } %>"
+                              href="/customers">
+                              <i class="ic-v-card"></i>
+                              Customers
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link <% if(page=="Expense"){%> <%= "active"; %> <% } %>"
+                              href="/expenses">
+                              <i class="ic-credit-card"></i>
+                              Expenses
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link <% if(page=="Servicing"){%> <%= "active"; %> <% } %>"
+                              href="/servicing">
+                              <i class="ic-tools"></i>
+                              Servicing
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link <% if(page=="Products"){%> <%= "active"; %> <% } %>"
+                              href="/products">
+                              <i class="ic-shopping-cart"></i>
+                              Products
+                          </a>
+                      </li>
+                  </ul>
+                  <h6 class="sidebar-heading px-3 mt-4 mb-3 text-center
+            text-muted">
+                      <span class="text-center text-md-left">Access
+                          Controls</span>
+                  </h6>
+                  <ul
+                      class="nav flex-column mb-2 align-items-center align-items-md-start">
+                      <li class="nav-item">
+                          <a class="nav-link <% if(page=="Users"){%> <%= "active"; %> <% } %>"
+                              href="/access-control">
+                              <i class="ic-user"></i>
+                              Users
+                          </a>
+                      </li>
+                  </ul>
+                  <div class="copyright text-center text-muted">
+                      Made with &hearts; by <a href="#"
+                          class="text-secondary">1MANDEV.COM</a>
+                  </div>
+              </nav>
+          </div>
+
+
+          <main role="main"
+              class="content-area col-md-9 ml-sm-auto col-lg-10 px-2 px-md-4">

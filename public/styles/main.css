@@ -122,23 +122,46 @@ body {
 
 }
 
+.sidebar ul {
+    width: 100%;
+}
+
 .sidebar .nav-item {
     margin: 5px 0;
+    width: 100%;
+    padding: 0 15px;
+    backface-visibility: hidden;
+    transition: all .3s;
 }
 
 .sidebar .nav-link {
+    padding: 8px;
     font-weight: 500;
     color: #333;
+    backface-visibility: hidden;
+    transition: all .3s ease-in-out;
 }
 
 .sidebar .nav-link i {
     display: inline-block;
     margin-right: 10px;
-    font-size: 17.5px;
+    font-size: 16px;
+    backface-visibility: hidden;
+    transition: all .3s ease-in-out;
 }
 
-.nav-link.active {
-    color: var(--primary);
+.sidebar .nav-link.active,
+.sidebar .nav-link:hover {
+    background-color: var(--primary);
+    border-radius: 100px;
+    color: #fff;
+    opacity: .95;
+    text-align: center;
+}
+
+.sidebar .nav-link.active i,
+.sidebar .nav-link:hover i {
+    font-size: 15px;
 }
 
 .sidebar-heading {
