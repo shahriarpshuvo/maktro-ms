@@ -1,7 +1,9 @@
-require("dotenv").config();
-const express = require("express");
-const mongoose = require("mongoose");
-const methodOverride = require("method-override");
+/* eslint-disable no-console */
+require('dotenv').config();
+
+const express = require('express');
+const mongoose = require('mongoose');
+const methodOverride = require('method-override');
 
 // Database Connection
 mongoose.connect(process.env.DATABASE_URI, {
@@ -10,38 +12,42 @@ mongoose.connect(process.env.DATABASE_URI, {
     useCreateIndex: true,
 });
 const db = mongoose.connection;
-db.on("error", (error) => console.error(error));
-db.once("open", () => console.log("Connected to Database"));
+db.on('error', (error) => console.error(error));
+db.once('open', () => console.log('Connected to Database'));
 
 // App Engine
 const app = express();
-app.set("view engine", "ejs");
-app.use(express.static(__dirname + "/public"));
+app.set('view engine', 'ejs');
+app.use(express.static(`${__dirname}/public`));
 app.use(
     express.urlencoded({
         extended: false,
     })
 );
-app.use(methodOverride("_method"));
+app.use(methodOverride('_method'));
 
-//Routes
-app.get("/", (req, res) => {
+// Routes
+app.get('/', (req, res) => {
     res.render('login');
 });
 
-app.get("/products", (req, res) => {
+app.get('/test', (req, res) => {
+    res.render('test');
+});
+
+app.get('/products', (req, res) => {
     res.render('products');
 });
 
-app.get("/dashboard", (req, res) => {
+app.get('/dashboard', (req, res) => {
     res.render('dashboard');
 });
 
-app.get("/access-control", (req, res) => {
+app.get('/access-control', (req, res) => {
     res.render('users');
 });
 
-//Development Server
+// Development Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Application started on port: http://localhost:${PORT}`);

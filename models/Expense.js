@@ -1,5 +1,4 @@
-//jshint esversion:6
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 // Independent Schema
 const expenseSchema = new mongoose.Schema({
     title: {
@@ -7,33 +6,14 @@ const expenseSchema = new mongoose.Schema({
         required: true,
         max: 100,
     },
-    details: {
-        equipments: {
-
-        },
-        transports: {
-
-        },
-        courierCommission: {
-
-        },
-        retailHoldings: {
-
-        },
-        stationaryTools: {
-
-        },
-        salaryUtilities: {
-
-        },
-        marketing: {
-
-        },
-        others: {
-
-        }
-
-    },
+    equipments: {},
+    transports: {},
+    courierCommission: {},
+    retailHoldings: {},
+    stationaryTools: {},
+    salaryUtilities: {},
+    marketing: {},
+    others: {},
     amount: {
         type: Number,
         required: true,
@@ -45,4 +25,4 @@ const expenseSchema = new mongoose.Schema({
     },
 });
 
-module.exports = mongoose.model("Expense", expenseSchema);
+module.exports = mongoose.model('Expense', expenseSchema);

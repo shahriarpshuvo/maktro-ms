@@ -1,5 +1,4 @@
-//jshint esversion:6
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 // Depends on: productSchema
 const servicingSchema = new mongoose.Schema({
     name: {
@@ -24,7 +23,7 @@ const servicingSchema = new mongoose.Schema({
         max: 50,
     },
     product: {
-        //TODO: Foreign Key
+        // TODO: Foreign Key
         name: {},
         code: {},
     },
@@ -42,4 +41,4 @@ const servicingSchema = new mongoose.Schema({
     },
 });
 
-module.exports = mongoose.model("Servicing", servicingSchema);
+module.exports = mongoose.model('Servicing', servicingSchema);
