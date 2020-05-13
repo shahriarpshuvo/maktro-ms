@@ -4,7 +4,7 @@ const queryGroup = document.querySelector('.input-query-group');
 const fetchURI = {
     product: 'https://jsonplaceholder.typicode.com/posts',
 };
-
+console.log();
 const searchData = async (keyword, fetchURI) => {
     const res = await fetch(fetchURI);
     const data = await res.json();

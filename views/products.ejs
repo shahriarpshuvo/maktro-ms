@@ -1,8 +1,9 @@
 <%- include('./modules/_header', {page: "Products"}); %>
 <%- include('./modules/_navs', {page: "Products"}); %>
 
+
 <div
-    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom mb-3 mt-5 mt-md-3 py-4">
+    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom mt-0 mb-3 mt-md-3 py-4">
     <h1 class="h3 content-header">
         <i class="ic-shopping-cart"></i>
         Products
@@ -20,30 +21,17 @@
     <form action="" method="" class="">
         <div class="container">
             <div class="row d-flex justify-content-center align-items-start">
-                <div class="col-lg-4 mb-3 mr-lg-3">
+                <div class="col-lg-5 mb-3 mr-lg-3 justify-self-center">
                     <div class="input-group">
                         <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <i class="ic-magnifying-glass"></i>
-                            </div>
+                            <div class="input-group-text"><i
+                                    class="ic-magnifying-glass"></i></div>
                         </div>
                         <input type="text" class="form-control"
-                            name="searchQuery" placeholder="Enter Product ID" />
+                            name=" searchQuery" placeholder="Enter Product ID">
                     </div>
                 </div>
-                <div class="col-lg-7 d-flex">
-                    <div class="input-group mr-4">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <i class="ic-calendar"></i>
-                            </div>
-                        </div>
-                        <input type="date" class="form-control"
-                            name="startDate" />
-                        <input type="date" class="form-control"
-                            name="endDate" />
-                    </div>
-
+                <div class="col-lg-2 d-flex">
                     <button type="submit" class="btn btn-primary mr-2">
                         <i class="ic-magnifying-glass"></i>
                         Search
@@ -52,6 +40,7 @@
                         <i class="ic-print"></i>
                         Print
                     </button>
+
                 </div>
             </div>
         </div>
@@ -80,12 +69,8 @@
                     </div>
                     <div class="form-group">
                         <label for="code">Product Code</label>
-                        <input type="text" class="form-control input-query"
-                            name="code" />
-                        <ul class="list-group input-query-group">
-                        </ul>
+                        <input type="text" class="form-control" name="code" />
                     </div>
-
                     <div class="form-group">
                         <label for="rates">Product Rates</label>
                         <input type="number" class="form-control"
@@ -153,6 +138,7 @@
                     <td>Bike Lock</td>
                     <td>MBK-3028-34</td>
                     <td>3200</td>
+
                     <td class="table__actions text-center">
                         <a href="#" class="table__actions-btn"
                             data-toggle="modal" data-target="#addProduct"><i
@@ -166,5 +152,6 @@
         </table>
     </div>
 </div>
+
 
 <%- include('./modules/_footer'); %>
