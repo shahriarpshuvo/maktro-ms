@@ -1,25 +1,13 @@
-//jshint esversion:6
 const mongoose = require("mongoose");
-
-// Depends on: customerSchema and productSchema
-
 const returnSchema = new mongoose.Schema({
     customer: {
-        //TODO: Foreign Key
-        name: {},
-        phone: {},
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Customer',
     },
     product: {
-        //TODO: Foreign Key
-        name: {},
-        code: {},
-        rate: {},
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Product',
     },
-    // shippingCost: {
-    //     type: Number,
-    //     required: true,
-    //     max: 10,
-    // },
     quantity: {
         type: Number,
         required: true,

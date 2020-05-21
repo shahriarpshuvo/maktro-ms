@@ -4,21 +4,18 @@ const mongoose = require('mongoose');
 // Will be updated on sales.quantity and returns.quantity
 const inventorySchema = new mongoose.Schema({
     quantity: {
-        // Subject to changed on: re
         type: Number,
         required: true,
         max: 50
     },
+    sales:{
+        type: Number,
+    },
     product: {
-        // TODO: Foreign Schema
-        name: {},
-        code: {},
-        rate: {}
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Product',
     },
-    createdAt: {
-        type: Date,
-        default: Date.now
-    },
+    //TODO: Add Entries or not
 });
 
 module.exports = mongoose.model('Inventory', inventorySchema);

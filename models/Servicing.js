@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
 // Depends on: productSchema
 const servicingSchema = new mongoose.Schema({
+    product: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Product',
+        required: true
+    },
     name: {
         type: String,
         required: true,
@@ -22,18 +27,13 @@ const servicingSchema = new mongoose.Schema({
         required: true,
         max: 50,
     },
-    product: {
-        // TODO: Foreign Key
-        name: {},
-        code: {},
+    status: {
+        type: String,
+        required: true,
     },
     deliveryDate: {
         type: Date,
         default: Date.now,
-    },
-    status: {
-        type: String,
-        required: true,
     },
     createdAt: {
         type: Date,

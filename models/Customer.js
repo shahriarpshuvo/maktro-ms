@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-// Independent Schema
-// Will be Updated based on Sales and Returns
 const customerSchema = new mongoose.Schema({
     name: {
         type: String,

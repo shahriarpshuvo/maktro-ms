@@ -1,6 +1,4 @@
-//jshint esversion:6
 const mongoose = require("mongoose");
-// Independent Schema
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
