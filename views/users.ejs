@@ -1,4 +1,4 @@
-<%- include('./modules/_header', {page: "Access Control"}); %>
+<%- include('./modules/_header', {page: "User Management"}); %>
 <%- include('./modules/_navs', {page: "Users"}); %>
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap
     align-items-center border-bottom mt-5 mt-md-3 py-4">
@@ -19,13 +19,15 @@
     Only Admin Can Access This Page
 </h5>
 
-<!-- Add Product -->
+<%- include('./modules/_alert') %>
+
+<!-- Add/Edit User -->
 <div class="modal fade" id="addUser" tabindex="-1" role="dialog"
     data-backdrop="static">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title t-primary">
+                <h5 class="modal-title t-primary userForm-title">
                     Add New User
                 </h5>
                 <button type="button" class="close" data-dismiss="modal"
@@ -34,17 +36,17 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="" method="">
+                <form class="userForm" action="/users" method="post">
                     <div class="form-group">
                         <label for="name">
                             Name</label>
-                        <input type="text" class="form-control" name="name"
-                            placeholder="John Doe" required />
+                        <input type="text" class="form-control userForm-name" name="name"
+                            placeholder="John Doe" required minlength="5"/>
                     </div>
                     <div class="form-group">
                         <label for="email">Email
                             Address</label>
-                        <input type="email" class="form-control" name="email"
+                        <input type="email" class="form-control userForm-email" name="email"
                             placeholder="johndoe@gmail.com" required />
                     </div>
                     <div class="form-group">
@@ -55,9 +57,9 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="roles">Roles</label>
-                        <select class="form-control" name="roles" required>
-                            <option>Select User Roles</option>
+                        <label for="role">User Role</label>
+                        <select class="form-control userForm-role" name="role" required>
+                            <option value="">Select Current User Role</option>
                             <option value="admin">Admin
                             </option>
                             <option value="service">Services
@@ -99,7 +101,7 @@
                 Do you really want to delete this?
                 <p class="text-muted">This action is
                     irreversible.</p>
-                <form action="" method="post">
+                <form method="Post" class="delete-form">
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary"
                             data-dismiss="modal">
@@ -128,21 +130,24 @@
                 </tr>
             </thead>
             <tbody class="table__body">
+                <% if(locals.users) {
+                    users.forEach((user)=>{ %>
                 <tr>
-                    <td>Tanzim Rahman</td>
-                    <td>mtr.robi@gmail.com</td>
-                    <td><span
-                            class="badge badge-warning text-uppercase">Admin</span>
+                    <td><%= user.name %></td>
+                    <td><%= user.email %></td>
+                    <td>
+                        <span class="badge badge-warning text-uppercase">
+                            <%= user.role %>
+                        </span>
                     </td>
-                    <td class="table__actions text-center">
-                        <a href="#" class="table__actions-btn"
-                            data-toggle="modal" data-target="#addUser"><i
-                                class="ic-pencil pr-2"></i>Edit</a>
-                        <a href="#" class="table__actions-btn"
-                            data-toggle="modal" data-target="#deleteModal"><i
-                                class="ic-trash pr-2"></i>Delete</a>
+                    <td class="table__actions text-center" data-item-id="<%= user.id %>">
+                        <a href="#" class="table__actions-btn userEditButtons" data-toggle="modal" data-target="#addUser">
+                            <i class="ic-pencil pr-2"></i>Edit</a>
+                        <a href="#" class="table__actions-btn" data-toggle="modal" data-target="#deleteModal">
+                            <i class="ic-trash pr-2"></i>Delete</a>
                     </td>
                 </tr>
+                <% })} %>
             </tbody>
         </table>
     </div>

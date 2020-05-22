@@ -4,7 +4,8 @@
   "description": "A business management system built for Maktro.com",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "node app.js",
+    "server": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -22,19 +23,22 @@
   },
   "homepage": "https://github.com/Mr-spShuvo/maktro-ms#readme",
   "devDependencies": {
-
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.2",
     "nodemon": "^2.0.3"
   },
   "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "ejs": "^3.1.2",
     "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "jsonwebtoken": "^8.5.1",
     "method-override": "^3.0.0",
     "mongoose": "^5.9.11",
-    "pdfmake": "^0.1.65",
-    "dotenv": "^8.2.0"
-
+    "pdfmake": "^0.1.65"
   }
 }
