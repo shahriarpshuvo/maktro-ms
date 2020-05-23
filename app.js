@@ -4,9 +4,13 @@ const path = require('path');
 const express = require('express');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
-const session = require('express-session');
+var cookieParser = require('cookie-parser');
+var session      = require('express-session');
+var flash        = require('connect-flash');
+
 
 const userRouter = require('./routes/user');
+const productRouter = require('./routes/product');
 
 
 
@@ -33,22 +37,27 @@ app.use(
 );
 app.use(express.json());
 app.use(methodOverride('_method'));
-app.use(session({ secret: 'maktro-ms', saveUninitialized: true, resave: true }));
-app.use(function(req, res, next) {
-    res.locals.alert = req.session.alert;
+app.use(cookieParser());
+app.use(session({ secret: 'maktro-ms', saveUninitialized: true, resave: true}));
+app.use(flash());
+app.use(function (req, res, next) {
+    const successFlashMessageArr = req.flash('success');
+    const errorFlashMessageArr = req.flash('error');
+    res.locals.successMsg = successFlashMessageArr[0];
+    res.locals.errorMsg = errorFlashMessageArr[0];
     next();
-});
+})
 
 // Routes
 app.get('/', (req, res) => {
-    if(false) return res.render('dashboard');
     res.render('login');
 });
-app.use('/users', userRouter);
 
-// app.get('/access-control', (req, res) => {
-//     res.render('users');
-// });
+
+//app.use(AuthHandler);
+app.use('/users', userRouter);
+app.use('/products', productRouter);
+
 
 
 
@@ -60,4 +69,6 @@ app.use('/users', userRouter);
 
 // Development Server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {console.log(`Application started on port: http://localhost:${PORT} 🔥`)});
+app.listen(PORT, () => {
+    console.log(`Application started on port: http://localhost:${PORT} 🔥`)
+});

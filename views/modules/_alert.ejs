@@ -1,17 +1,15 @@
-<% if (alert){
-    if(alert.success) {%>
+<%  if(successMsg) {%>
     <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <%= alert.success %>
+        <%= successMsg  %>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <% } if(alert.error) {%>
+    <% } if(errorMsg) {%>
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <%= alert.error %>
+            <%= errorMsg %>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
         </div>
-<%  }
-} %>
+<%  } %>

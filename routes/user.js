@@ -9,5 +9,4 @@ router.post('/login', UserController.login);
 router.post('/', UserController.create);
 router.patch('/:id', UserController.updateUser);
 
-
 module.exports = router;

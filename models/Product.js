@@ -14,7 +14,7 @@ const productSchema = new mongoose.Schema({
         max: 50
     },
     rate: {
-        type: String,
+        type: Number,
         required: true,
         max: 50
     },
