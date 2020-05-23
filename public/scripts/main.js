@@ -2,8 +2,6 @@
 const inputQuery = document.querySelector('.input-query');
 const queryGroup = document.querySelector('.input-query-group');
 
-const host = 'http://localhost:8000'
-
 const fetchURI = {
     product: 'https://jsonplaceholder.typicode.com/posts',
 };
@@ -49,20 +47,32 @@ const outputData = (matches) => {
 
 // Delete
 
-const deleteForm = document.querySelector('.delete-form');
-const deleteButtons = document.querySelectorAll('[data-target="#deleteModal"]');
 
-if(deleteButtons){
-    deleteButtons.forEach((btn)=>{
-        btn.addEventListener('click', ()=>{
-            const ItemID = btn.parentElement.getAttribute('data-item-id');
-            deleteForm.setAttribute('action', `${host}/users/${ItemID}?_method=delete`)
+const host = 'http://localhost:8000';
+
+
+function deleteItemTrigger(path){
+    const deleteForm = document.querySelector('.delete-form');
+    const deleteButtons = document.querySelectorAll('[data-target="#deleteModal"]');
+    if(deleteButtons){
+        deleteButtons.forEach((btn)=>{
+            btn.addEventListener('click', ()=>{
+                const ItemID = btn.parentElement.getAttribute('data-item-id');
+                deleteForm.setAttribute('action', `${host}/${path}/${ItemID}?_method=delete`)
+                console.log(`${host}/${path}/${ItemID}?_method=delete`);
+            })
         })
-    })
+    }
 }
 
+//DeleteItems
+const path = document.querySelector('[data-item-types]').getAttribute('data-item-types');
+deleteItemTrigger(path);
 
-//Get User & Edit
+
+/**************************
+ * => Get User & Edit
+ * ***********************/
 const userForm = document.querySelector('.userForm');
 const userFormTitle = document.querySelector('.userForm-title');
 const userFormName = document.querySelector('.userForm-name');
@@ -73,8 +83,7 @@ if(userEditButtons){
     userEditButtons.forEach((btn)=>{
         btn.addEventListener('click', async()=>{
             const ItemID = btn.parentElement.getAttribute('data-item-id');
-            console.log(ItemID);
-            const res = await fetch(`http://localhost:8000/users/${ItemID}`);
+            const res = await fetch(`${host}/users/${ItemID}`);
             const data = await res.json();
             userForm.setAttribute('action', `/users/${ItemID}?_method=patch`);
             userFormTitle.innerText = "Edit User";
@@ -82,16 +91,45 @@ if(userEditButtons){
             userFormEmail.value = data.email;
             userFormEmail.setAttribute('disabled', 'true');
             userFormRole.value = data.role;
-
             $('[data-dismiss="modal"]').on('click', function(){
                 userForm.reset();
                 userFormTitle.innerText = "Add New User";
-                userForm.setAttribute('action', `/users`);
+                userFormEmail.removeAttribute('disabled')
+                userForm.setAttribute('action', '/users');
             })
         })
     })
 }
-
+/**************************
+ * => Get Product & Edit
+ * ***********************/
+const productForm = document.querySelector('.productForm');
+const productFormTitle = document.querySelector('.productForm-title');
+const productFormName = document.querySelector('.productForm-name');
+const productFormCode = document.querySelector('.productForm-code');
+const productFormRate = document.querySelector('.productForm-rate');
+const productEditButtons = document.querySelectorAll('[data-target="#addProduct"]');
+if(productEditButtons){
+    productEditButtons.forEach((btn)=>{
+        btn.addEventListener('click', async()=>{
+            const ItemID = btn.parentElement.getAttribute('data-item-id');
+            const res = await fetch(`${host}/products/${ItemID}`);
+            const data = await res.json();
+            productForm.setAttribute('action', `/products/${ItemID}?_method=patch`);
+            productFormTitle.innerText = "Edit Product";
+            productFormName.value = data.name;
+            productFormCode.value = data.code;
+            productFormCode.setAttribute('disabled', 'true');
+            productFormRate.value = data.rate;
+            $('[data-dismiss="modal"]').on('click', function(){
+                productForm.reset();
+                productFormTitle.innerText = "Add New Product";
+                productFormCode.removeAttribute('disabled')
+                productForm.setAttribute('action', '/products');
+            })
+        })
+    })
+}
 
 
 
@@ -105,7 +143,7 @@ window.setTimeout(function() {
     $(".alert").fadeTo(500, 0).slideUp(500, function() {
         $(this).hide();
     });
-}, 3000);
+}, 5000);
 
 // Clear Form Field
 $('[data-dismiss="modal"]').on('click', function(){

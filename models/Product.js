@@ -16,7 +16,6 @@ const productSchema = new mongoose.Schema({
     rate: {
         type: Number,
         required: true,
-        max: 50
     },
     createdAt: {
         type: Date,

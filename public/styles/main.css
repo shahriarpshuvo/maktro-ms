@@ -156,7 +156,7 @@ body {
     border-radius: 100px;
     color: #fff;
     opacity: .95;
-    text-align: center;
+    padding-left: 30px;
 }
 
 .sidebar .nav-link.active i,

@@ -16,9 +16,9 @@
         </button>
     </div>
 </div>
-
+<%- include('./modules/_alert') %>
 <div class="search-area mt-4 mt-md-5 mb-4">
-    <form action="" method="" class="">
+    <form action="" method="get" class="">
         <div class="container">
             <div class="row d-flex justify-content-center align-items-start">
                 <div class="col-lg-5 mb-3 mr-lg-3 justify-self-center">
@@ -53,8 +53,8 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title t-primary">
-                    Add New Products
+                <h5 class="modal-title t-primary productForm-title">
+                    Add New Product
                 </h5>
                 <button type="button" class="close" data-dismiss="modal"
                     aria-label="Close">
@@ -62,19 +62,19 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="" method="">
+                <form action="/products" method="post" class="productForm">
                     <div class="form-group">
                         <label for="name">Product Name</label>
-                        <input type="text" class="form-control" name="name" />
+                        <input minlength="3" type="text" class="form-control productForm-name" name="name" required />
                     </div>
                     <div class="form-group">
                         <label for="code">Product Code</label>
-                        <input type="text" class="form-control" name="code" />
+                        <input type="text" class="form-control productForm-code" name="code" minlength="3" required/>
                     </div>
                     <div class="form-group">
-                        <label for="rates">Product Rates</label>
-                        <input type="number" class="form-control"
-                            name="rates" />
+                        <label for="rate">Product Rates</label>
+                        <input type="number" class="form-control productForm-rate"
+                            name="rate" required/>
                     </div>
 
                     <div class="modal-footer">
@@ -93,7 +93,7 @@
 </div>
 
 <!-- Delete Modals -->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog">
+<div data-item-types="products"  class="modal fade" id="deleteModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -106,7 +106,7 @@
             <div class="modal-body">
                 Do you really want to delete this?
                 <p class="text-muted">This action is irreversible.</p>
-                <form action="" method="post">🙌
+                <form method="post" class="delete-form">
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary"
                             data-dismiss="modal">
@@ -134,13 +134,15 @@
                 </tr>
             </thead>
             <tbody class="table__body">
+                <% if(locals.products) {
+                    products.forEach((product)=>{ %>
                 <tr>
-                    <td>Bike Lock</td>
-                    <td>MBK-3028-34</td>
-                    <td>3200</td>
+                    <td><%= product.name %></td>
+                    <td><%= product.code %></td>
+                    <td><%= product.rate %></td>
 
-                    <td class="table__actions text-center">
-                        <a href="#" class="table__actions-btn"
+                    <td class="table__actions text-center" data-item-id="<%= product.id %>">
+                        <a href="#" class="table__actions-btn productEditButtons"
                             data-toggle="modal" data-target="#addProduct"><i
                                 class="ic-pencil pr-2"></i>Edit</a>
                         <a href="#" class="table__actions-btn"
@@ -148,6 +150,7 @@
                                 class="ic-trash pr-2"></i>Delete</a>
                     </td>
                 </tr>
+                <% })} %>
             </tbody>
         </table>
     </div>

@@ -28,9 +28,9 @@ const LoginValidator = (data) => {
 
 const ProductValidator = (data) => {
     const schema = Joi.object({
-        name: Joi.string().min(3).required().trim(),
-        code: Joi.string().uppercase().min(3).required().trim(),
-        rate: Joi.number().min(2).required().trim(),
+        name: Joi.string().required().trim(),
+        code: Joi.string().uppercase().required().trim(),
+        rate: Joi.number().required(),
     });
     return validateSchema(schema, data);
 }
