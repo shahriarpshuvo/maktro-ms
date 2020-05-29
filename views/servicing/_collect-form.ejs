@@ -1,0 +1,96 @@
+<div class="modal fade" id="addServicing" tabindex="-1" role="dialog"
+    data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title t-primary servicingForm-title">
+                    Add New Servicing
+                </h5>
+                <button type="button" class="close" data-dismiss="modal"
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/servicing" method="post" class="servicingForm">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control servicingForm-name" name="name"
+                            placeholder="Jane Doe" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <input type="text" class="form-control servicingForm-address" name="address"
+                            placeholder="22B Baker Street, London" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="text" class="form-control servicingForm-phone" name="phone"
+                            placeholder="01717000000" maxlength="11" required />
+                    </div>
+
+                    <div class="row align-items-center">
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <label for="product">Product Code</label>
+                                <span class="f-10 text-muted">(Can be found on
+                                    product
+                                    page)</span>
+                                    <input type="text"
+                                    class="form-control servicingForm-product product-input-query" name="product"
+                                    placeholder="Eg. MBL-001-002" required />
+                                    <ul class="list-group product-input-query-group">
+                                    </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="quantity">Quantity</label>
+                                <input type="number" class="form-control servicingForm-quantity"
+                                    name="quantity" placeholder="Eg. 50"
+                                    required min="1"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="deliveryDate">Delivery Date</label>
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="ic-calendar"></i>
+                                    </div>
+                                    <input type="date" class="form-control servicingForm-deliveryDate"
+                                        name="deliveryDate" required/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="product">Status</label>
+                                <select class="form-control servicingForm-status" name="status"
+                                    required>
+                                    <option value="">Select Current Phase</option>
+                                    <option value="received">Received</option>
+                                    <option value="completed">Completed</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                            data-dismiss="modal">
+                            <i class="ic-cross"></i> Close
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="ic-check"></i> Save
+                            Changes
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -173,6 +173,46 @@ if(inventoryEditButtons){
     })
 }
 
+/*******************************
+ * Get Serving and Edit
+ *******************************/
+const servicingForm = document.querySelector('.servicingForm');
+const servicingFormTitle = document.querySelector('.servicingForm-title');
+const servicingFormName = document.querySelector('.servicingForm-name');
+const servicingFormAddress = document.querySelector('.servicingForm-address');
+const servicingFormPhone = document.querySelector('.servicingForm-phone');
+const servicingFormProduct = document.querySelector('.servicingForm-product');
+const servicingFormQuantity = document.querySelector('.servicingForm-quantity');
+const servicingFormDeliveryDate = document.querySelector('.servicingForm-deliveryDate');
+const servicingFormStatus = document.querySelector('.servicingForm-status');
+const servicingEditButtons = document.querySelectorAll('.servicingEditButton');
+
+if(servicingEditButtons){
+    servicingEditButtons.forEach((btn)=>{
+        btn.addEventListener('click', async()=>{
+            const ItemID = btn.parentElement.getAttribute('data-item-id');
+            const res = await fetch(`${hostAPI}/servicing/${ItemID}`);
+            const { name, address, phone, product, quantity, deliveryDate, status } = await res.json();
+            servicingForm.setAttribute('action', `/servicing/${ItemID}?_method=patch`);
+            servicingFormTitle.innerText = "Edit Servicing";
+            servicingFormName.value = name;
+            servicingFormAddress.value = address;
+            servicingFormPhone.value = phone;
+            servicingFormProduct.value = product.code;
+            servicingFormQuantity.value = quantity;
+            servicingFormDeliveryDate.valueAsDate = new Date(deliveryDate);
+            servicingFormStatus.value = status;
+            servicingFormProduct.setAttribute('disabled', 'true');
+            $('[data-dismiss="modal"]').on('click', function(){
+                servicingForm.reset();
+                servicingFormTitle.innerText = "Add New Servicing";
+                servicingFormProduct.removeAttribute('disabled')
+                servicingForm.setAttribute('action', '/entries');
+            })
+        })
+    })
+}
+
 
 /**************************************
  * Enhanced Bootstrap Functionality

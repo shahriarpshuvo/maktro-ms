@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-// Depends on: productSchema
+
 const servicingSchema = new mongoose.Schema({
     product: {
         type: mongoose.Schema.Types.ObjectId,
@@ -19,13 +19,11 @@ const servicingSchema = new mongoose.Schema({
     phone: {
         type: String,
         required: true,
-        unique: true,
         max: 11,
     },
     quantity: {
         type: Number,
         required: true,
-        max: 50,
     },
     status: {
         type: String,

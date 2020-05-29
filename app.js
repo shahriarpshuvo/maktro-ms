@@ -13,6 +13,7 @@ const userRouter = require('./routes/user');
 const productRouter = require('./routes/product');
 const inventoryRouter = require('./routes/inventory');
 const entryRouter = require('./routes/entry');
+const servicingRouter = require('./routes/servicing');
 
 
 
@@ -64,6 +65,7 @@ app.use('/users', userRouter);
 app.use('/products', productRouter);
 app.use('/inventories', inventoryRouter);
 app.use('/entries', entryRouter);
+app.use('/servicing', servicingRouter);
 
 
 

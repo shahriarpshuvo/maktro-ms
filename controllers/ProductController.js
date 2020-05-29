@@ -16,21 +16,15 @@ ProductController.create = async (req, res) => {
         req.flash('error', `A product with "${existProduct.code}" has already existed!`);
         return res.redirect('/products');
     }
-    const product = new Product({
-        name: validator.value.name,
-        code: validator.value.code,
-        rate: validator.value.rate,
-    });
 
     try {
-        const savedProduct = await product.save();
+        const { name, code, rate } = validator.value;
+        const savedProduct = await new Product({ name, code, rate }).save();
         await new Inventory({
             product: savedProduct._id,
         }).save();
         req.flash('success', `Product (${savedProduct.name}) has been successfully added!`);
         return res.redirect('/products');
-
-
     } catch (e) {
         req.flash('error', `Error While Saving Data - ${e}`);
         return res.redirect('/products');

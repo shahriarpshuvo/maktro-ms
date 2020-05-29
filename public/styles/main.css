@@ -215,6 +215,10 @@ body {
 
 .table__actions-btn,
 .table__actions-btn:hover {
+    font-size: 14px;
+    line-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
     color: var(--primary);
     text-decoration: none;
     transition: color .2s;

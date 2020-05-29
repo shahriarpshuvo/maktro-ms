@@ -70,7 +70,6 @@ UserController.getUser = async (req, res) => {
         }
         return res.send("User Doesn't Exist");
     } catch (e) {
-        // console.error(e);
         return '';
     }
 };

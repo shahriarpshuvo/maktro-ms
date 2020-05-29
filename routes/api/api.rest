@@ -1,0 +1,6 @@
+### All Product
+GET  http://localhost:8000/api/products
+### Single Product
+GET  http://localhost:8000/api/products/5ed0bbe691e0f72cec2b7168
+### Servicing
+GET http://localhost:8000/api/servicing/5ed18e7a883fd117189303a0

@@ -1,24 +1,24 @@
-<%- include('../modules/_header', {page: "Products"}); %>
-<%- include('../modules/_navs', {page: "Products"}); %>
-
+<%- include('../modules/_header', {page: "Servicing"}); %>
+<%- include('../modules/_navs', {page: "Servicing"}); %>
 
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap
     align-items-center border-bottom mt-0 mb-3 mt-md-3 py-4">
     <h1 class="h3 content-header">
-        <i class="ic-shopping-cart"></i>
-        Products
+        <i class="ic-tools"></i>
+        Servicing
     </h1>
     <div class="content-action btn-toolbar mb-2 mb-md-0">
         <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
-            data-target="#addProduct">
+            data-target="#addServicing">
             <i class="ic-plus"></i>
-            Add Product
+            New Servicing
         </button>
     </div>
 </div>
+
 <%- include('../modules/_alert'); %>
 <%- include('./_search-form'); %>
 <%- include('./_data'); %>
 <%- include('./_collect-form'); %>
-<%- include('../modules/_delete-form', {deleteItemTypes: 'products'}); %>
+<%- include('../modules/_delete-form', {deleteItemTypes: 'servicing'}); %>
 <%- include('../modules/_footer'); %>
