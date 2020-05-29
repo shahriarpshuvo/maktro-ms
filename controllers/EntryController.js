@@ -1,67 +1,77 @@
 const Entry = require('../models/Entry');
-//const { EntryValidator } = require('../middlewares/Validator');
+const Inventory = require('../models/Inventory');
+const Product = require('../models/Product');
+const { EntryValidator } = require('../middlewares/Validator');
 
 const EntryController = {};
 
+EntryController.create = async (req, res) => {
+    const { product, quantity} = req.body;
+    const validator = EntryValidator({ product, quantity });
+    if (validator.error) {
+        req.flash('error', validator.error);
+        return res.redirect('/inventories');
+    }
+    let entry;
+    try{
+        const getProduct = await Product.findOne({code: validator.value.product});
+        await Inventory.findOneAndUpdate({product: getProduct._id}, {$inc: {quantity : validator.value.quantity}});
+        entry = new Entry({
+            product: getProduct._id,
+            quantity: validator.value.quantity,
+        });
+    } catch{
+        req.flash('error', `Product Doesn't Exist`);
+        return res.redirect('/inventories');
+    }
+    try {
+        await entry.save();
+        req.flash('success', `New inventory has been successfully added!`);
+        return res.redirect('/inventories');
+    } catch (e) {
+        req.flash('error', `Error While Saving Data - ${e}`);
+        return res.redirect('/inventories');
+    }
+};
+
 EntryController.read = async (req, res) => {
-    const entries = await Entry.find({});
+    const entries = await Entry.find({}).populate('product').sort({createdAt: -1});
     res.render('entries/index', { entries });
 };
 
-/*
+EntryController.delete = async (req, res) => {
+    const entry = await Entry.findById(req.params.id);
+    await Inventory.findOneAndUpdate({product: entry.product}, {$inc: {quantity: - entry.quantity}});
+    entry.remove();
+    req.flash('success', `Entry has been deleted successfully!`);
+    res.redirect('/entries');
+};
+
+EntryController.update = async (req, res) => {
+    const newEntry = await Entry.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true });
+    const entries = await Entry.find({product: newEntry.product});
+    console.log(entries);
+    const newQuantity = entries.reduce((acc, curr)=>{
+        return acc+curr.quantity;
+    }, 0);
+    await Inventory.findOneAndUpdate({product: newEntry.product}, {$set:{quantity: newQuantity}});
+    req.flash('success', `Entry has been updated successfully!`);
+    res.redirect('/entries');
+};
+
+//API
 EntryController.getEntry = async (req, res) => {
     try {
-        const Entry = await Entry.findById(req.params.id);
-        if (Entry) return res.send(Entry);
+        const entry = await Entry.findById(req.params.id).populate('product');
+        if (entry) {
+            return res.send({
+                product: entry.product.code,
+                quantity: entry.quantity,
+            });
+        }
         return res.send("Entry Doesn't Exist");
     } catch (e) {
-        // console.error(e);
         return '';
     }
 };
-
-EntryController.create = async (req, res) => {
-    const { name, code, rate } = req.body;
-    const validator = EntryValidator({ name, code, rate });
-    if (validator.error) {
-        req.flash('error', validator.error);
-        return res.redirect('/Entrys');
-    }
-    const existEntry = await Entry.findOne({ code: validator.value.code });
-    if (existEntry) {
-        req.flash('error', `A Entry with "${existEntry.code}" has already existed!`);
-        return res.redirect('/Entrys');
-    }
-    const Entry = new Entry({
-        name: validator.value.name,
-        code: validator.value.code,
-        rate: validator.value.rate,
-    });
-    try {
-        const savedEntry = await Entry.save();
-        req.flash('success', `Entry (${savedEntry.name}) has been successfully added!`);
-        return res.redirect('/Entrys');
-    } catch (e) {
-        req.flash('error', `Error While Saving Data - ${e}`);
-        return res.redirect('/Entrys');
-    }
-};
-
-
-EntryController.updateEntry = async (req, res) => {
-    const Entry = await Entry.findByIdAndUpdate(req.params.id,
-        { $set: req.body },
-        { new: true });
-    req.flash('success', `Entry (${Entry.name}) has been updated successfully!`);
-    res.redirect('/Entrys');
-};
-
-
-EntryController.deleteEntry = async (req, res) => {
-    const Entry = await Entry.findByIdAndDelete(req.params.id);
-    req.flash('success', `Entry (${Entry.name}) has been deleted successfully!`);
-    res.redirect('/Entrys');
-};
-
-*/
 module.exports = EntryController;

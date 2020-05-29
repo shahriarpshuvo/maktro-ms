@@ -1,4 +1,5 @@
 const Product = require('../models/Product');
+const Inventory = require('../models/Inventory');
 const { ProductValidator } = require('../middlewares/Validator');
 
 const ProductController = {};
@@ -20,10 +21,16 @@ ProductController.create = async (req, res) => {
         code: validator.value.code,
         rate: validator.value.rate,
     });
+
     try {
         const savedProduct = await product.save();
+        await new Inventory({
+            product: savedProduct._id,
+        }).save();
         req.flash('success', `Product (${savedProduct.name}) has been successfully added!`);
         return res.redirect('/products');
+
+
     } catch (e) {
         req.flash('error', `Error While Saving Data - ${e}`);
         return res.redirect('/products');
@@ -31,7 +38,7 @@ ProductController.create = async (req, res) => {
 };
 
 ProductController.read = async (req, res) => {
-    const products = await Product.find({});
+    const products = await Product.find({}).sort({createdAt: -1});
     res.render('products/index', { products });
 };
 
@@ -46,6 +53,7 @@ ProductController.update = async (req, res) => {
 
 ProductController.delete = async (req, res) => {
     const product = await Product.findByIdAndDelete(req.params.id);
+    await Inventory.findOneAndDelete({product: req.params.id});
     req.flash('success', `Product (${product.name}) has been deleted successfully!`);
     res.redirect('/products');
 };
@@ -62,7 +70,6 @@ ProductController.getProduct = async (req, res) => {
         if (product) return res.send(product);
         return res.send("User Doesn't Exist");
     } catch (e) {
-        // console.error(e);
         return '';
     }
 };

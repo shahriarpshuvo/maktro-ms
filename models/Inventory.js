@@ -4,10 +4,11 @@ const inventorySchema = new mongoose.Schema({
     quantity: {
         type: Number,
         required: true,
-        min: 1,
+        default: 0
     },
     sales:{
         type: Number,
+        default: 0,
     },
     product: {
         type: mongoose.Schema.Types.ObjectId,

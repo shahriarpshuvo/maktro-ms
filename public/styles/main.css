@@ -83,6 +83,9 @@ body {
     box-shadow: 0 0 0 0.2rem #ffbc4290;
 }
 
+.list-group-item:hover{
+    cursor: pointer;
+}
 /*==============================
 =>  NavBar
 ================================*/

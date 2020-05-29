@@ -1,56 +1,64 @@
-const host = 'http://localhost:8000/api';
-
-const inputQuery = document.querySelector('.input-query');
-const queryGroup = document.querySelector('.input-query-group');
-
+const host = 'http://localhost:8000';
+const hostAPI = 'http://localhost:8000/api';
 const fetchURI = {
-    products: `${host}/products`,
+    products: `${hostAPI}/products`,
+    customers: `${hostAPI}/customers`
 };
 
-const searchData = async (keyword, fetchURI) => {
+/***********************
+ *  Live Search Result
+ **********************/
+const searchData = async (keyword, fetchURI, types, matchValue, matchTitle, inputQuery, queryGroup) => {
     const res = await fetch(fetchURI);
     const data = await res.json();
-    console.log(data);
     let matches = data.filter((datum) => {
         const regex = new RegExp(`^${keyword}`, 'gi');
-        return datum.name.match(regex);
+        return datum[matchValue].match(regex);
     });
     if (keyword.length === 0) {
         matches = [];
         queryGroup.innerHTML = '';
     }
-    outputData(matches);
+    outputData(matches, types, matchValue, matchTitle, inputQuery, queryGroup);
 };
 
-const outputData = (matches) => {
+const outputData = (matches, types, matchValue, matchTitle, inputQuery, queryGroup) => {
     if (matches.length > 0) {
         const htmlElements = matches
             .map(
                 (match) =>
-                    `<li class="list-group-item input-query-data">
-                    ${match.title}
+                    `<li class="list-group-item ${types}-input-query-data">
+                        <span>${match[matchValue]}</span>
+                        <span class="text-muted">(${match[matchTitle]})</span>
                     </li>`
             )
             .join('');
         queryGroup.innerHTML = htmlElements;
-        const queryData = document.querySelectorAll('.input-query-data');
+        const queryData = document.querySelectorAll(`.${types}-input-query-data`);
+        console.log(`${types}-input-query-data`);
         for (let queryDatum of queryData) {
             queryDatum.addEventListener('click', () => {
-                inputQuery.value = queryDatum.innerText;
+                const value = queryDatum.children[0];
+                inputQuery.value = value.innerText;
                 queryGroup.innerHTML = '';
             });
         }
     }
 };
 
-inputQuery.addEventListener('input', () =>
-    searchData(inputQuery.value, 'http://localhost:8000/api/products')
-);
+const productInputQuery = document.querySelector('.product-input-query');
+const productQueryGroup = document.querySelector('.product-input-query-group');
+if(productInputQuery){
+    productInputQuery.addEventListener('input', () =>
+        searchData(productInputQuery.value, fetchURI.products, 'product', 'code', 'name', productInputQuery, productQueryGroup)
+    );
+}
 
 
 
-
-
+/************************
+ * Delete Functionality
+ *************************/
 
 function deleteItemTrigger(path){
     const deleteForm = document.querySelector('.delete-form');
@@ -67,7 +75,9 @@ function deleteItemTrigger(path){
 }
 
 //DeleteItems
-const path = document.querySelector('[data-item-types]').getAttribute('data-item-types');
+const dataItemTypes = document.querySelector('[data-item-types]');
+let path;
+if(dataItemTypes) path = dataItemTypes.getAttribute('data-item-types');
 deleteItemTrigger(path);
 
 
@@ -114,7 +124,7 @@ if(productEditButtons){
     productEditButtons.forEach((btn)=>{
         btn.addEventListener('click', async()=>{
             const ItemID = btn.parentElement.getAttribute('data-item-id');
-            const res = await fetch(`${host}/products/${ItemID}`);
+            const res = await fetch(`${hostAPI}/products/${ItemID}`);
             const data = await res.json();
             productForm.setAttribute('action', `/products/${ItemID}?_method=patch`);
             productFormTitle.innerText = "Edit Product";
@@ -132,12 +142,45 @@ if(productEditButtons){
     })
 }
 
+/*******************************
+ * Get Entries and Edit
+ *******************************/
 
+const inventoryForm = document.querySelector('.inventoryForm');
+const inventoryFormTitle = document.querySelector('.inventoryForm-title');
+const inventoryFormProduct = document.querySelector('.inventoryForm-product');
+const inventoryFormQuantity = document.querySelector('.inventoryForm-quantity');
+const inventoryEditButtons = document.querySelectorAll('.inventoryEditButton');
+
+if(inventoryEditButtons){
+    inventoryEditButtons.forEach((btn)=>{
+        btn.addEventListener('click', async()=>{
+            const ItemID = btn.parentElement.getAttribute('data-item-id');
+            const res = await fetch(`${hostAPI}/entries/${ItemID}`);
+            const data = await res.json();
+            inventoryForm.setAttribute('action', `/entries/${ItemID}?_method=patch`);
+            inventoryFormTitle.innerText = "Edit Inventory";
+            inventoryFormProduct.value = data.product;
+            inventoryFormProduct.setAttribute('disabled', 'true');
+            inventoryFormQuantity.value = data.quantity;
+            $('[data-dismiss="modal"]').on('click', function(){
+                inventoryForm.reset();
+                inventoryFormTitle.innerText = "Add New inventory";
+                inventoryFormProduct.removeAttribute('disabled')
+                inventoryForm.setAttribute('action', '/entries');
+            })
+        })
+    })
+}
 
 
 /**************************************
  * Enhanced Bootstrap Functionality
  **************************************/
+// Clear Form Field
+$('[data-dismiss="modal"]').on('click', function(){
+    document.querySelector('form').reset()
+})
 
 // Alert Animation
 window.setTimeout(function() {
@@ -146,7 +189,3 @@ window.setTimeout(function() {
     });
 }, 5000);
 
-// Clear Form Field
-$('[data-dismiss="modal"]').on('click', function(){
-    document.querySelector('form').reset()
-})

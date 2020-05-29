@@ -1,0 +1,26 @@
+<div class="content-box">
+    <div class="table-responsive">
+        <table class="table table-striped table-sm">
+            <thead class="table__header">
+                <tr>
+                    <th>Product Name</th>
+                    <th>Quantity (Total)</th>
+                    <th>Sales (Total)</th>
+                    <th>Left Over</th>
+                </tr>
+            </thead>
+            <tbody class="table__body">
+                <% if(locals.inventories) {
+                    inventories.forEach((inventory)=>{ %>
+                <tr>
+                    <td><%= inventory.product.name; %></td>
+                    <td><%= inventory.quantity; %></td>
+                    <td><%= inventory.sales %></td>
+                    <td class="text-danger">
+                        <%= inventory.quantity - inventory.sales %></td>
+                </tr>
+                <% })} %>
+            </tbody>
+        </table>
+    </div>
+</div>

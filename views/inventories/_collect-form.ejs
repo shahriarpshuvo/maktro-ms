@@ -1,0 +1,47 @@
+<div class="modal fade" id="addInventory" tabindex="-1" role="dialog"
+    data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title inventoryForm-title">
+                    Add Inventories
+                </h5>
+                <button type="button" class="close" data-dismiss="modal"
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="inventoryForm" action="/entries" method="post">
+                    <div class="form-group">
+                        <label for="product">Product Code</label>
+                        <span class="f-10 text-muted">(Can be found on product
+                            page)</span>
+                        <input type="text"
+                            class="form-control inventoryForm-product product-input-query" name="product"
+                            placeholder="Eg. MBL-001-002" required />
+                        <ul class="list-group product-input-query-group">
+                        </ul>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="productQuantity">Product Quantity</label>
+                        <input type="number" class="form-control inventoryForm-quantity"
+                            placeholder="Eg. 1350" name="quantity" required
+                            min="1" />
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                            data-dismiss="modal">
+                            <i class="ic-cross"></i> Close
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="ic-check"></i> Save Changes
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

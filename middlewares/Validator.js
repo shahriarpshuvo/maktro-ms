@@ -35,4 +35,17 @@ const ProductValidator = (data) => {
     return validateSchema(schema, data);
 }
 
-module.exports = { RegisterValidator, LoginValidator, ProductValidator };
+const EntryValidator = (data) => {
+    const schema = Joi.object({
+        product: Joi.string().uppercase().required().trim(),
+        quantity: Joi.number().min(1).required(),
+    });
+    return validateSchema(schema, data);
+}
+
+module.exports = {
+    RegisterValidator,
+    LoginValidator,
+    ProductValidator,
+    EntryValidator,
+};
