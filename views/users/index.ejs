@@ -1,0 +1,24 @@
+<%- include('../modules/_header', {page: "User Management"}); %>
+<%- include('../modules/_navs', {page: "Users"}); %>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap
+    align-items-center border-bottom mt-5 mt-md-3 py-4">
+    <h1 class="h3 content-header">
+        <i class="ic-user"></i>
+        User Access Controls
+    </h1>
+    <div class="content-action btn-toolbar mb-2 mb-md-0">
+        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
+            data-target="#addUser">
+            <i class="ic-add-user"></i>&nbsp;
+            Add New User
+        </button>
+    </div>
+</div>
+<h5 class="text-center t-primary my-4">
+    Only Admin Can Access This Page
+</h5>
+<%- include('../modules/_alert'); %>
+<%- include('./_data'); %>
+<%- include('./_collect-form'); %>
+<%- include('../modules/_delete-form', {deleteItemTypes: 'users'}); %>
+<%- include('../modules/_footer'); %>

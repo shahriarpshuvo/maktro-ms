@@ -6,7 +6,7 @@
         "node": true
     },
     "extends": [
-        //"airbnb-base"
+        "airbnb-base"
     ],
     "globals": {
         "Atomics": "readonly",
@@ -16,6 +16,6 @@
         "ecmaVersion": 11
     },
     "rules": {
-        "indent": ["error", 4]
+        "indent": ["error", 4],
     }
 }

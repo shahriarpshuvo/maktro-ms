@@ -1,24 +1,31 @@
-<%- include('./modules/_header', {page: "Products"}); %>
-<%- include('./modules/_navs', {page: "Products"}); %>
-
-
+<%- include('../modules/_header', {page: "Inventories"}); %>
+<%- include('../modules/_navs', {page: "Inventories"}); %>
 <div
     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom mt-0 mb-3 mt-md-3 py-4">
     <h1 class="h3 content-header">
-        <i class="ic-shopping-cart"></i>
-        Products
+        <i class="ic-archive pr-2"></i>
+        Inventories
     </h1>
     <div class="content-action btn-toolbar mb-2 mb-md-0">
+        <a href="/entries" class="btn btn-sm btn-secondary mr-3">
+            <i class="ic-hour-glass"></i>
+            View Entries
+        </a>
+
         <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
-            data-target="#addProduct">
+            data-target="#addInventory">
             <i class="ic-plus"></i>
-            Add Product
+            Add Inventory
         </button>
     </div>
 </div>
-<%- include('./modules/_alert') %>
-<div class="search-area mt-4 mt-md-5 mb-4">
-    <form action="" method="get" class="">
+
+<%- include('../modules/_alert'); %>
+
+<!-- Search Area -->
+
+<div class="search-area mb-4 mt-4 mt-md-5">
+    <form action="" method="" class="">
         <div class="container">
             <div class="row d-flex justify-content-center align-items-start">
                 <div class="col-lg-5 mb-3 mr-lg-3 justify-self-center">
@@ -47,14 +54,14 @@
     </form>
 </div>
 
-<!-- Add Product -->
-<div class="modal fade" id="addProduct" tabindex="-1" role="dialog"
+<!-- Add  Inventories-->
+<div class="modal fade" id="addInventory" tabindex="-1" role="dialog"
     data-backdrop="static">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title t-primary productForm-title">
-                    Add New Product
+                <h5 class="modal-title" id="addInventoryTitle">
+                    Add Inventories
                 </h5>
                 <button type="button" class="close" data-dismiss="modal"
                     aria-label="Close">
@@ -62,19 +69,21 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="/products" method="post" class="productForm">
+                <form action="" method="">
                     <div class="form-group">
-                        <label for="name">Product Name</label>
-                        <input minlength="3" type="text" class="form-control productForm-name" name="name" required />
+                        <label for="productName">Product Name</label>
+                        <select class="form-control" name="productName">
+                            <option>Select Product</option>
+                            <option value="MBL-1020-3383">Bike Lock</option>
+                            <option value="MGT-1020-3384">Maktro GPS Tracker
+                            </option>
+                        </select>
                     </div>
+
                     <div class="form-group">
-                        <label for="code">Product Code</label>
-                        <input type="text" class="form-control productForm-code" name="code" minlength="3" required/>
-                    </div>
-                    <div class="form-group">
-                        <label for="rate">Product Rates</label>
-                        <input type="number" class="form-control productForm-rate"
-                            name="rate" required/>
+                        <label for="productQuantity">Product Quantity</label>
+                        <input type="number" class="form-control"
+                            name="productQuantity" />
                     </div>
 
                     <div class="modal-footer">
@@ -92,8 +101,7 @@
     </div>
 </div>
 
-<!-- Delete Modals -->
-<div data-item-types="products"  class="modal fade" id="deleteModal" tabindex="-1" role="dialog">
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -106,18 +114,17 @@
             <div class="modal-body">
                 Do you really want to delete this?
                 <p class="text-muted">This action is irreversible.</p>
-                <form method="post" class="delete-form">
+                <form action="" method="post">
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary"
-                            data-dismiss="modal">
-                            <i class="ic-cross"></i> Close
-                        </button>
-                        <button type="submit" class="btn btn-danger">
-                            <i class="ic-trash"></i> Confirm Delete
-                        </button>
+                            data-dismiss="modal"> <i class="ic-cross"></i>
+                            Close</button>
+                        <button type="submit" class="btn btn-danger"><i
+                                class="ic-trash"></i> Confirm Delete</button>
                     </div>
                 </form>
             </div>
+
         </div>
     </div>
 </div>
@@ -128,21 +135,20 @@
             <thead class="table__header">
                 <tr>
                     <th>Product Name</th>
-                    <th>Product Code</th>
-                    <th>Rates(Tk.)</th>
+                    <th>Quantity (Total)</th>
+                    <th>Stock (In)</th>
+                    <th>Sales (Quantity)</th>
                     <th class="text-center">Actions</th>
                 </tr>
             </thead>
             <tbody class="table__body">
-                <% if(locals.products) {
-                    products.forEach((product)=>{ %>
                 <tr>
-                    <td><%= product.name %></td>
-                    <td><%= product.code %></td>
-                    <td><%= product.rate %></td>
-
-                    <td class="table__actions text-center" data-item-id="<%= product.id %>">
-                        <a href="#" class="table__actions-btn productEditButtons"
+                    <td>Bike Lock</td>
+                    <td>1200</td>
+                    <td>200</td>
+                    <td>1000</td>
+                    <td class="table__actions text-center">
+                        <a href="#" class="table__actions-btn"
                             data-toggle="modal" data-target="#addProduct"><i
                                 class="ic-pencil pr-2"></i>Edit</a>
                         <a href="#" class="table__actions-btn"
@@ -150,11 +156,9 @@
                                 class="ic-trash pr-2"></i>Delete</a>
                     </td>
                 </tr>
-                <% })} %>
             </tbody>
         </table>
     </div>
 </div>
 
-
-<%- include('./modules/_footer'); %>
+<%- include('../modules/_footer'); %>

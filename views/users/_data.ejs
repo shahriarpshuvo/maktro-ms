@@ -1,0 +1,34 @@
+<div class="content-box">
+    <div class="table-responsive">
+        <table class="table table-striped table-sm">
+            <thead class="table__header">
+                <tr>
+                    <th>Name</th>
+                    <th>Email Address</th>
+                    <th>Roles</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="table__body">
+                <% if(locals.users) {
+                    users.forEach((user)=>{ %>
+                <tr>
+                    <td><%= user.name %></td>
+                    <td><%= user.email %></td>
+                    <td>
+                        <span class="badge badge-warning text-uppercase">
+                            <%= user.role %>
+                        </span>
+                    </td>
+                    <td class="table__actions text-center" data-item-id="<%= user.id %>">
+                        <a href="#" class="table__actions-btn userEditButton" data-toggle="modal" data-target="#addUser">
+                            <i class="ic-pencil pr-2"></i>Edit</a>
+                        <a href="#" class="table__actions-btn" data-toggle="modal" data-target="#deleteModal">
+                            <i class="ic-trash pr-2"></i>Delete</a>
+                    </td>
+                </tr>
+                <% })} %>
+            </tbody>
+        </table>
+    </div>
+</div>

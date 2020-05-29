@@ -1,7 +1,7 @@
-const InventoryController = require('../controllers/InventoryController');
+const EntryController = require('../controllers/EntryController');
 const router = require('express').Router();
+router.get('/', EntryController.read);
 
-router.get('/', InventoryController.read);
 // router.get('/:id', InventoryController.getInventory);
 // router.post('/', InventoryController.create);
 // router.patch('/:id', InventoryController.updateInventory);

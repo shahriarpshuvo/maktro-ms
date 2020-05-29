@@ -1,0 +1,62 @@
+<div class="modal fade" id="addUser" tabindex="-1" role="dialog"
+    data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title t-primary userForm-title">
+                    Add New User
+                </h5>
+                <button type="button" class="close" data-dismiss="modal"
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="userForm" action="/users" method="post">
+                    <div class="form-group">
+                        <label for="name">
+                            Name</label>
+                        <input type="text" class="form-control userForm-name" name="name"
+                            placeholder="John Doe" required minlength="5"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email
+                            Address</label>
+                        <input type="email" class="form-control userForm-email" name="email"
+                            placeholder="johndoe@gmail.com" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control"
+                            name="password" placeholder="***********"
+                            required minlength="6"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="role">User Role</label>
+                        <select class="form-control userForm-role" name="role" required>
+                            <option value="">Select Current User Role</option>
+                            <option value="admin">Admin
+                            </option>
+                            <option value="service">Services
+                            </option>
+                            <option value="sales">Sales
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                            data-dismiss="modal">
+                            <i class="ic-cross"></i> Close
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="ic-check"></i> Save
+                            Changes
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

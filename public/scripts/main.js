@@ -1,17 +1,19 @@
+const host = 'http://localhost:8000/api';
 
 const inputQuery = document.querySelector('.input-query');
 const queryGroup = document.querySelector('.input-query-group');
 
 const fetchURI = {
-    product: 'https://jsonplaceholder.typicode.com/posts',
+    products: `${host}/products`,
 };
-console.log();
+
 const searchData = async (keyword, fetchURI) => {
     const res = await fetch(fetchURI);
     const data = await res.json();
+    console.log(data);
     let matches = data.filter((datum) => {
         const regex = new RegExp(`^${keyword}`, 'gi');
-        return datum.title.match(regex);
+        return datum.name.match(regex);
     });
     if (keyword.length === 0) {
         matches = [];
@@ -41,14 +43,13 @@ const outputData = (matches) => {
     }
 };
 
-// inputQuery.addEventListener('input', () =>
-//     searchData(inputQuery.value, fetchURI.product)
-// );
-
-// Delete
+inputQuery.addEventListener('input', () =>
+    searchData(inputQuery.value, 'http://localhost:8000/api/products')
+);
 
 
-const host = 'http://localhost:8000';
+
+
 
 
 function deleteItemTrigger(path){
@@ -78,7 +79,7 @@ const userFormTitle = document.querySelector('.userForm-title');
 const userFormName = document.querySelector('.userForm-name');
 const userFormEmail = document.querySelector('.userForm-email');
 const userFormRole = document.querySelector('.userForm-role');
-const userEditButtons = document.querySelectorAll('[data-target="#addUser"]');
+const userEditButtons = document.querySelectorAll('.userEditButton');
 if(userEditButtons){
     userEditButtons.forEach((btn)=>{
         btn.addEventListener('click', async()=>{
@@ -108,7 +109,7 @@ const productFormTitle = document.querySelector('.productForm-title');
 const productFormName = document.querySelector('.productForm-name');
 const productFormCode = document.querySelector('.productForm-code');
 const productFormRate = document.querySelector('.productForm-rate');
-const productEditButtons = document.querySelectorAll('[data-target="#addProduct"]');
+const productEditButtons = document.querySelectorAll('.productEditButton');
 if(productEditButtons){
     productEditButtons.forEach((btn)=>{
         btn.addEventListener('click', async()=>{

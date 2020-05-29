@@ -1,0 +1,31 @@
+<div data-item-types="<%= deleteItemTypes %>" class="modal fade" id="deleteModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-danger">Delete
+                    User?</h5>
+                <button type="button" class="close" data-dismiss="modal"
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Do you really want to delete this?
+                <p class="text-muted">This action is
+                    irreversible.</p>
+                <form method="post" class="delete-form">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                            data-dismiss="modal">
+                            <i class="ic-cross"></i> Close
+                        </button>
+                        <button type="submit" class="btn btn-danger">
+                            <i class="ic-trash"></i> Confirm
+                            Delete
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

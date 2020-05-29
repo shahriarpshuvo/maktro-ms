@@ -7,7 +7,7 @@ const entrySchema = new mongoose.Schema({
     quantity: {
         type: Number,
         required: true,
-        max: 50
+        min: 1,
     },
     createdAt: {
         type: Date,
