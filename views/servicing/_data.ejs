@@ -18,7 +18,7 @@
                 <tr>
                     <td><%= servicing.name; %></td>
                     <td><%= servicing.product.name; %></td>
-                    <td><%= servicing.quantity; %></td>
+                    <td><%= servicing.quantity.toLocaleString(); %></td>
                     <td><%= servicing.phone; %></td>
                     <td>
                         <% if(servicing.status =='received'){ %>
@@ -27,7 +27,7 @@
                             <span class="badge badge-success text-uppercase">completed</span>
                         <% } %>
                     </td>
-                    <td><%= servicing.deliveryDate.toLocaleString().split(',')[0]; %></td>
+                    <td><%= servicing.deliveryDate.toLocaleDateString(); %></td>
                     <td class="table__actions text-center" data-item-id="<%= servicing.id %>">
                         <% if(servicing.status =='received'){ %>
                         <form class="d-inline-block p-0 m-0" action="<%=`/servicing/${servicing.id}?_method=patch`%>" method="post">

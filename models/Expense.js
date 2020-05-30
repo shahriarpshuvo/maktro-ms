@@ -1,55 +1,57 @@
 const mongoose = require('mongoose');
-// Independent Schema
+
 const expenseSchema = new mongoose.Schema({
-    title: {
+    purpose: {
         type: String,
         required: true,
-        max: 100,
     },
     equipments: {
         type: Number,
         required: true,
-        max: 50,
+        default: 0
     },
     transports: {
         type: Number,
         required: true,
-        max: 50,
+        default: 0
     },
     courierCommission: {
         type: Number,
         required: true,
-        max: 50,
+        default: 0
     },
     retailHoldings: {
         type: Number,
         required: true,
-        max: 50,
+        default: 0
     },
-    stationaryTools: {
+    stationeryTools: {
         type: Number,
         required: true,
-        max: 50,
+        default: 0
     },
     salaryUtilities: {
         type: Number,
         required: true,
-        max: 50,
+        default: 0
     },
     marketing: {
         type: Number,
         required: true,
-        max: 50,
+        default: 0
     },
     others: {
         type: Number,
         required: true,
-        max: 50,
+        default: 0
     },
     amount: {
         type: Number,
         required: true,
-        max: 50,
+    },
+    expenseDate: {
+        type: Date,
+        default: Date.now,
     },
     createdAt: {
         type: Date,

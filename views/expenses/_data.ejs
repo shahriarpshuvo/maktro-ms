@@ -1,0 +1,83 @@
+<div class="content-box">
+    <div class="table-responsive">
+        <table class="table table-striped table-sm">
+            <thead class="table__header">
+                <tr>
+                    <th>Date</th>
+                    <th>Title</th>
+                    <th>Details</th>
+                    <th>Amount(Tk.)</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="table__body">
+                <% if(locals.expenses){
+                    expenses.forEach((expense) => { %>
+                <tr>
+                    <td><%if(expense.expenseDate) { %>
+                        <%= expense.expenseDate.toLocaleDateString(); %>
+                    <% } else { %>
+                        <%= expense.createdAt.toLocaleDateString(); %>
+                    <% } %>
+                    </td>
+                    <td><%= expense.purpose %></td>
+                    <td>
+                        <div class="expense-box">
+                            <span>Equipments: <strong>
+                                <%if(expense.equipments) { %>
+                                    <%= expense.equipments.toLocaleString(); %>
+                                <% } else { %> <small>N/A</small> <% } %>
+                            </strong></span>
+                            <span>Transports: <strong>
+                                <%if(expense.transports) { %>
+                                    <%= expense.transports.toLocaleString(); %>
+                                <% } else { %> <small>N/A</small> <% } %>
+                            </strong></span>
+                            <span>Salary & Utilities:
+                                <strong>
+                                    <%if(expense.salaryUtilities) { %>
+                                        <%= expense.salaryUtilities.toLocaleString(); %>
+                                    <% } else { %> <small>N/A</small> <% } %>
+                                </strong></span>
+                            <span>Retail H/Ds: <strong>
+                                <%if(expense.retailHoldings) { %>
+                                    <%= expense.retailHoldings.toLocaleString(); %>
+                                <% } else { %> <small>N/A</small> <% } %>
+                            </strong></span>
+                            <span>Stationery & Tools: <strong>
+                                <%if(expense.stationeryTools) { %>
+                                    <%= expense.stationeryTools.toLocaleString(); %>
+                                <% } else { %> <small>N/A</small> <% } %>
+                            </strong></span>
+                            <span>Marketing: <strong>
+                                <%if(expense.marketing) { %>
+                                    <%= expense.marketing.toLocaleString(); %>
+                                <% } else { %> <small>N/A</small> <% } %>
+                            </strong></span>
+                            <span>Courier & Commission: <strong>
+                                <%if(expense.courierCommission) { %>
+                                    <%= expense.courierCommission.toLocaleString(); %>
+                                <% } else { %> <small>N/A</small> <% } %>
+                            </strong></span>
+                            <span>Others: <strong>
+                                <%if(expense.others) { %>
+                                    <%= expense.others.toLocaleString(); %>
+                                <% } else { %> <small>N/A</small> <% } %>
+                            </strong></span>
+                        </div>
+                    </td>
+                    <td class="text-danger font-weight-bold"><%= expense.amount.toLocaleString(); %></>
+                    <td class="table__actions text-center" data-item-id="<%= expense.id %>">
+                        <a href="#" class="table__actions-btn expenseEditButton"
+                            data-toggle="modal" data-target="#addExpense"><i
+                                class="ic-pencil pr-2"></i>Edit</a>
+                        <a href="#" class="table__actions-btn"
+                            data-toggle="modal" data-target="#deleteModal"><i
+                                class="ic-trash pr-2"></i>Delete</a>
+                    </td>
+                </tr>
+                <% })} %>
+            </tbody>
+        </table>
+    </div>
+</div>

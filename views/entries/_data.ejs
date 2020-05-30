@@ -13,9 +13,9 @@
                 <% if(locals.entries) {
                     entries.forEach((entry)=>{ %>
                 <tr>
-                    <td><%= entry.createdAt.toLocaleString().split(',')[0]; %></td>
+                    <td><%= entry.createdAt.toLocaleDateString(); %></td>
                     <td><%= entry.product.name; %></td>
-                    <td><%= entry.quantity; %></td>
+                    <td><%= entry.quantity.toLocaleString(); %></td>
                     <td class="table__actions text-center" data-item-id="<%= entry.id %>">
                         <a href="#" class="table__actions-btn inventoryEditButton"
                             data-toggle="modal" data-target="#addInventory"><i

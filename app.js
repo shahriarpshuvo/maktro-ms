@@ -1,12 +1,12 @@
 require('dotenv').config();
-const path = require('path');
-const express = require('express');
-const mongoose = require('mongoose');
-const methodOverride = require('method-override');
-const cookieParser = require('cookie-parser');
-const session      = require('express-session');
-const flash        = require('connect-flash');
-const cors = require('cors');
+const path              = require('path');
+const express           = require('express');
+const mongoose          = require('mongoose');
+const methodOverride    = require('method-override');
+const cookieParser      = require('cookie-parser');
+const session           = require('express-session');
+const flash             = require('connect-flash');
+const cors              = require('cors');
 
 const apiRouter = require('./routes/api/index');
 const userRouter = require('./routes/user');
@@ -14,6 +14,7 @@ const productRouter = require('./routes/product');
 const inventoryRouter = require('./routes/inventory');
 const entryRouter = require('./routes/entry');
 const servicingRouter = require('./routes/servicing');
+const expenseRouter = require('./routes/expense');
 
 
 
@@ -35,11 +36,7 @@ const app = express();
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
-app.use(
-    express.urlencoded({
-        extended: false,
-    })
-);
+app.use( express.urlencoded({ extended: false }) );
 app.use(express.json());
 app.use(methodOverride('_method'));
 app.use(cookieParser());
@@ -54,25 +51,14 @@ app.use(function (req, res, next) {
 })
 
 // Routes
-app.get('/', (req, res) => {
-    res.render('login');
-});
-
-
-//app.use(AuthHandler);
+app.get('/', (req, res) => { res.render('login'); });
 app.use('/api', apiRouter);
 app.use('/users', userRouter);
 app.use('/products', productRouter);
 app.use('/inventories', inventoryRouter);
 app.use('/entries', entryRouter);
 app.use('/servicing', servicingRouter);
-
-
-
-
-
-
-
+app.use('/expenses', expenseRouter);
 
 
 

@@ -1,0 +1,121 @@
+<div class="modal fade" id="addExpense" tabindex="-1" role="dialog"
+    data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title t-primary expenseForm-title">
+                    Add New Expense
+                </h5>
+                <button type="button" class="close" data-dismiss="modal"
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/expenses" method="post" class="expenseForm">
+                    <div class="form-group">
+                        <label for="purpose">Purpose</label>
+                        <input type="text" class="form-control expenseForm-purpose" name="purpose"
+                            placeholder="Office Furniture" required/>
+                    </div>
+
+                    <div class="row align-items-center">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="equipments">Equipments</label>
+                                <input type="number" class="form-control expenseForm-equipments"
+                                    name="equipments"
+                                    placeholder="Eg. 1230" min="0" required />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="transports">Transports</label>
+                                <input type="number" class="form-control expenseForm-transports"
+                                    name="transports"
+                                    placeholder="Eg. 1230" min="0" required />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="salaryUtilities">Salary &
+                                    Utilities</label>
+                                <input type="number" class="form-control expenseForm-salaryUtilities"
+                                    name="salaryUtilities"
+                                    placeholder="Eg. 1230" min="0" required />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="retailHoldings">Retail H/Ds</label>
+                                <input type="number" class="form-control expenseForm-retailHoldings"
+                                    name="retailHoldings"
+                                    placeholder="Eg. 1230" min="0" required />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label
+                                for="stationeryTools">Stationery &
+                                    Tools</label>
+                                <input type="number" class="form-control expenseForm-stationeryTools"
+                                    name="stationeryTools"
+                                    placeholder="Eg. 1230" min="0" required />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="marketing">Marketing</label>
+                                <input type="number" class="form-control expenseForm-marketing"
+                                    name="marketing"
+                                    placeholder="Eg. 1230" min="0" required />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="courierCommission">Courier &
+                                    Commission</label>
+                                <input type="number" class="form-control expenseForm-courierCommission"
+                                    name="courierCommission"
+                                    placeholder="Eg. 1230" min="0" required />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="others">Other Costs</label>
+                                <input type="number" class="form-control expenseForm-others"
+                                    name="others"
+                                    placeholder="Eg. 1230"
+                                    min="0" required />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="expenseDate">Expense
+                                    Date</label>
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="ic-calendar"></i>
+                                    </div>
+                                    <input type="date" class="form-control expenseForm-expenseDate"
+                                        name="expenseDate" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                            data-dismiss="modal">
+                            <i class="ic-cross"></i> Close
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="ic-check"></i> Save
+                            Changes
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

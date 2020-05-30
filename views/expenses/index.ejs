@@ -1,0 +1,25 @@
+<%- include('../modules/_header', {page: "Expenses"}); %>
+<%- include('../modules/_navs', {page: "Expenses"}); %>
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap
+align-items-center border-bottom mt-0 mb-3 mt-md-3 py-4">
+    <h1 class="h3 content-header">
+        <i class="ic-credit-card"></i>
+        Expenses
+    </h1>
+    <div class="content-action btn-toolbar mb-2 mb-md-0">
+        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
+            data-target="#addExpense">
+            <i class="ic-plus"></i>
+            Add Expense
+        </button>
+    </div>
+</div>
+
+
+<%- include('../modules/_alert'); %>
+<%- include('./_search-form'); %>
+<%- include('./_data'); %>
+<%- include('./_collect-form'); %>
+<%- include('../modules/_delete-form', {deleteItemTypes: 'expenses'}); %>
+<%- include('../modules/_footer'); %>

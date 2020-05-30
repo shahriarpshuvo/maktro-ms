@@ -215,6 +215,7 @@ body {
 
 .table__actions-btn,
 .table__actions-btn:hover {
+    display: inline-block;
     font-size: 14px;
     line-height: 0;
     padding-top: 0;
@@ -222,6 +223,10 @@ body {
     color: var(--primary);
     text-decoration: none;
     transition: color .2s;
+}
+
+.table__actions-btn:not(:last-of-type){
+    margin-bottom: 15px;
 }
 
 .table__actions-btn:hover {
@@ -245,7 +250,7 @@ tr td,
 }
 
 .expense-box {
-    width: 540px;
+    width: 525px;
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -265,9 +270,14 @@ tr td,
 .expense-box strong {
     display: block;
     border-radius: 10px;
+    letter-spacing: .5px;
     color: var(--dark);
     background-color: var(--secondary);
     padding: 0 12px;
+}
+.expense-box strong small{
+    font-size: 11px;
+    font-weight: bolder;
 }
 
 /*==============================

@@ -213,6 +213,53 @@ if(servicingEditButtons){
     })
 }
 
+/*******************************
+ * Get Serving and Edit
+ *******************************/
+const expenseForm = document.querySelector('.expenseForm');
+const expenseFormTitle = document.querySelector('.expenseForm-title');
+const expenseFormPurpose = document.querySelector('.expenseForm-purpose');
+const expenseFormEquipments = document.querySelector('.expenseForm-equipments');
+const expenseFormTransports = document.querySelector('.expenseForm-transports');
+const expenseFormSalaryUtilities = document.querySelector('.expenseForm-salaryUtilities');
+const expenseFormRetailHoldings = document.querySelector('.expenseForm-retailHoldings');
+const expenseFormMarketing = document.querySelector('.expenseForm-marketing');
+const expenseFormStationeryTools = document.querySelector('.expenseForm-stationeryTools');
+const expenseFormCourierCommission = document.querySelector('.expenseForm-courierCommission');
+const expenseFormOthers = document.querySelector('.expenseForm-others');
+const expenseFormExpenseDate = document.querySelector('.expenseForm-expenseDate');
+const expenseEditButtons = document.querySelectorAll('.expenseEditButton');
+
+if(expenseEditButtons){
+    expenseEditButtons.forEach((btn)=>{
+        btn.addEventListener('click', async()=>{
+            const ItemID = btn.parentElement.getAttribute('data-item-id');
+            const res = await fetch(`${hostAPI}/expenses/${ItemID}`);
+            const { purpose, equipments, transports, courierCommission, retailHoldings, stationeryTools, salaryUtilities, marketing, others, expenseDate, createdAt } = await res.json();
+            expenseForm.setAttribute('action', `/expenses/${ItemID}?_method=patch`);
+            expenseFormTitle.innerText = "Edit Expense";
+            expenseFormPurpose.value = purpose;
+            expenseFormEquipments.value = equipments;
+            expenseFormTransports.value = transports;
+            expenseFormCourierCommission.value = courierCommission;
+            expenseFormRetailHoldings.value = retailHoldings;
+            expenseFormStationeryTools.value = stationeryTools;
+            expenseFormSalaryUtilities.value = salaryUtilities;
+            expenseFormMarketing.value = marketing;
+            expenseFormOthers.value = others;
+            if(expenseDate) expenseFormExpenseDate.valueAsDate = new Date(expenseDate);
+            else expenseFormExpenseDate.valueAsDate = new Date(createdAt);
+            expenseFormExpenseDate.setAttribute('required', "true");
+            $('[data-dismiss="modal"]').on('click', function(){
+                expenseForm.reset();
+                expenseFormTitle.innerText = "Add New Expense";
+                expenseFormExpenseDate.removeAttribute('required');
+                expenseForm.setAttribute('action', '/expenses');
+            })
+        })
+    })
+}
+
 
 /**************************************
  * Enhanced Bootstrap Functionality

@@ -15,7 +15,7 @@
                 <tr>
                     <td><%= product.name %></td>
                     <td><%= product.code %></td>
-                    <td><%= product.rate %></td>
+                    <td><%= product.rate.toLocaleString(); %></td>
 
                     <td class="table__actions text-center"
                         data-item-id="<%= product.id %>">

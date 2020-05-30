@@ -14,10 +14,11 @@
                     inventories.forEach((inventory)=>{ %>
                 <tr>
                     <td><%= inventory.product.name; %></td>
-                    <td><%= inventory.quantity; %></td>
-                    <td><%= inventory.sales %></td>
+                    <td><%= inventory.quantity.toLocaleString(); %></td>
+                    <td><%= inventory.sales.toLocaleString(); %></td>
                     <td class="text-danger">
-                        <%= inventory.quantity - inventory.sales %></td>
+                        <% const leftOverQuantity = inventory.quantity - inventory.sales; %>
+                        <%= leftOverQuantity.toLocaleString(); %></td>
                 </tr>
                 <% })} %>
             </tbody>
