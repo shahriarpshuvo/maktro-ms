@@ -1,5 +1,5 @@
-const EntryController = require('../../controllers/EntryController');
 const router = require('express').Router();
+const EntryController = require('../../controllers/EntryController');
 
 router.get('/:id', EntryController.getEntry);
 
