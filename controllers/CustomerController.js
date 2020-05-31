@@ -14,8 +14,8 @@ CustomerController.create = async (req, res) => {
         req.flash('error', 'Paid amount cannot exceed more than the total amount.');
         return res.redirect('/customers');
     }
-    const customerExist = await Customer.findOne({ phone: validator.value.phone });
-    if(customerExist) {
+    const getCustomer = await Customer.findOne({ phone: validator.value.phone });
+    if(getCustomer) {
         req.flash('error', 'Phone number must be unique. Customer already exists!');
         return res.redirect('/customers');
     }
@@ -59,17 +59,17 @@ CustomerController.update = async (req, res) => {
 
 CustomerController.updateBalance = async (req, res) => {
     const {phone, paid} = req.body;
-    const customerExist = await Customer.findOne({ phone });
-    if(!customerExist) {
+    const getCustomer = await Customer.findOne({ phone });
+    if(!getCustomer) {
         req.flash('error', 'Customers ID doesn\'t match. Try Again!');
         return res.redirect('/customers');
     }
-    const newBalance = parseInt(paid)
-    if(customerExist.amount <  (newBalance + customerExist.paid)){
+    const newBalance = parseInt(paid);
+    if(getCustomer.amount <  (newBalance + getCustomer.paid)){
         req.flash('error', 'Paid amount cannot exceed more than the total amount.');
         return res.redirect('/customers');
     }
-    const newCustomer = await Customer.findByIdAndUpdate(customerExist._id,
+    const newCustomer = await Customer.findByIdAndUpdate(getCustomer._id,
         { $inc: {paid: newBalance}, $set: {updatedAt: new Date()}}, { new: true });
     req.flash('success', `New payment for "${newCustomer.name}" added successfully!`);
     res.redirect('/customers');

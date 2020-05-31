@@ -284,10 +284,8 @@ if(customerEditButtons){
     customerEditButtons.forEach((btn)=>{
         btn.addEventListener('click', async()=>{
             const ItemID = btn.parentElement.getAttribute('data-item-id');
-            console.log(`${hostAPI}/customers/${ItemID}`);
             const res = await fetch(`${hostAPI}/customers/${ItemID}`);
             const { name, address, phone, amount, paid } = await res.json();
-            console.log(name, address, phone, amount, paid)
             customerForm.setAttribute('action', `/customers/${ItemID}?_method=patch`);
             customerFormTitle.innerText = "Edit Customer";
             customerFormName.value = name;
@@ -303,6 +301,54 @@ if(customerEditButtons){
                 customerFormAmount.removeAttribute('disabled')
                 customerFormPaid.removeAttribute('disabled')
                 customerForm.setAttribute('action', '/customers');
+            })
+        })
+    })
+}
+
+/*******************************
+ * Get Customer and Edit
+ *******************************/
+const saleForm = document.querySelector('.saleForm');
+const saleFormTitle = document.querySelector('.saleForm-title');
+const saleFormCustomer = document.querySelector('.saleForm-customer');
+const saleFormProduct = document.querySelector('.saleForm-product');
+const saleFormQuantity = document.querySelector('.saleForm-quantity');
+const saleFormRate = document.querySelector('.saleForm-rate');
+const saleFormShippingCost = document.querySelector('.saleForm-shippingCost');
+const saleFormDiscount = document.querySelector('.saleForm-discount');
+const saleFormPaid = document.querySelector('.saleForm-paid');
+const saleFormSalesDate = document.querySelector('.saleForm-salesDate');
+const saleEditButtons = document.querySelectorAll('.saleEditButton');
+
+if(saleEditButtons){
+    saleEditButtons.forEach((btn)=>{
+        btn.addEventListener('click', async()=>{
+            const ItemID = btn.parentElement.getAttribute('data-item-id');
+            console.log(`${hostAPI}/sales/${ItemID}`);
+            const res = await fetch(`${hostAPI}/sales/${ItemID}`);
+            const { entry, customer, product, quantity, rate, shippingCost, discount, paid, salesDate } = await res.json();
+            console.log(salesDate);
+            saleForm.setAttribute('action', `/sales/${ItemID}?_method=patch`);
+            saleForm.insertAdjacentHTML('afterbegin', `<input id="entryHiddenField" type="hidden" name="entry" value="${entry}">`);
+            saleFormCustomer.value = customer;
+            saleFormProduct.value = product;
+            saleFormQuantity.value = quantity;
+            saleFormRate.value = rate;
+            saleFormShippingCost.value = shippingCost;
+            saleFormDiscount.value = discount;
+            saleFormPaid.value = paid;
+            saleFormSalesDate.valueAsDate = new Date(salesDate);
+            saleFormCustomer.setAttribute('disabled', 'true');
+            saleFormProduct.setAttribute('disabled', 'true');
+            $('[data-dismiss="modal"]').on('click', function(){
+                saleForm.reset();
+                const hiddenField = document.getElementById('entryHiddenField');
+                hiddenField.remove();
+                saleFormTitle.innerText = "Add New sale";
+                saleFormCustomer.removeAttribute('disabled')
+                saleFormProduct.removeAttribute('disabled')
+                saleForm.setAttribute('action', '/sales');
             })
         })
     })

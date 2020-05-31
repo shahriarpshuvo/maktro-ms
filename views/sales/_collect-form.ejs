@@ -1,0 +1,113 @@
+<div class="modal fade" id="addSales" tabindex="-1" role="dialog"
+    data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title t-primary saleForm-title">
+                    New Sales
+                </h5>
+                <button type="button" class="close" data-dismiss="modal"
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/sales" method="post" class="saleForm">
+                    <div class="form-group">
+                        <label for="customer">Customer ID</label>
+                        <span class="f-10 text-muted">(Can be
+                            found on customer page)</span>
+                        <input type="text"
+                            class="form-control customer-input-query saleForm-customer"
+                            name="customer" placeholder="Eg. 01717998833"
+                            maxlength="11" required autocomplete="off"/>
+                        <ul class="list-group auto-suggestion customer-input-query-group"></ul>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="product">Product Code</label>
+                        <span class="f-10 text-muted">(Can be found on product page)</span>
+                        <input type="text"
+                            class="form-control product-input-query saleForm-product"
+                            name="product" placeholder="Eg. MBL-001-002"
+                            required autocomplete="off"/>
+                        <ul class="list-group  auto-suggestion product-input-query-group"></ul>
+                    </div>
+
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="quantity">Quantity</label>
+                                <input type="number" class="form-control saleForm-quantity"
+                                    name="quantity" placeholder="Eg. 50"
+                                    required min="0"/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="rate">Product Rates</label>
+                                <input type="number" class="form-control saleForm-rate"
+                                    name="rate" placeholder="Eg. 2900"
+                                    required min="0"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="salesDate">Sales Date</label>
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="ic-calendar"></i>
+                                    </div>
+                                    <input type="date" class="form-control saleForm-salesDate"
+                                        name="salesDate" required/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="shippingCost">Shipping
+                                    Cost</label>
+                                <input type="number" class="form-control saleForm-shippingCost"
+                                    name="shippingCost"
+                                    placeholder="Eg. 1000" min="0"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="discount">Discount</label>
+                                <input type="number" class="form-control saleForm-discount"
+                                    name="discount" placeholder="Eg. 121000"
+                                    required min="0"/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="paid">Paid
+                                    Amount</label>
+                                <input type="number" class="form-control saleForm-paid"
+                                    name="paid" placeholder="Eg. 21000"
+                                    required min="0"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                            data-dismiss="modal">
+                            <i class="ic-cross"></i> Close
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="ic-check"></i> Save
+                            Changes
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

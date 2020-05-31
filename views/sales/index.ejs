@@ -1,0 +1,25 @@
+<%- include('../modules/_header', {page: 'Sales'}); %>
+<%- include('../modules/_navs', {page: 'Sales'}); %>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap
+align-items-center border-bottom mt-0 mb-3 mt-md-3 py-4">
+    <h1 class="h3 content-header">
+        <i class="ic-calculator"></i>
+        Sales
+    </h1>
+    <div class="content-action btn-toolbar mb-2 mb-md-0">
+        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
+            data-target="#addSales">
+            <i class="ic-plus"></i>
+            New Sales
+        </button>
+
+    </div>
+</div>
+
+
+<%- include('../modules/_alert'); %>
+<%- include('./_search-form'); %>
+<%- include('./_data'); %>
+<%- include('./_collect-form'); %>
+<%- include('../modules/_delete-form', {deleteItemTypes: 'sales'}); %>
+<%- include('../modules/_footer'); %>

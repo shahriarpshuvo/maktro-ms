@@ -9,6 +9,10 @@ const entrySchema = new mongoose.Schema({
         required: true,
         min: 1,
     },
+    type: {
+        type: String,
+        default: 'inventory'
+    },
     createdAt: {
         type: Date,
         default: Date.now

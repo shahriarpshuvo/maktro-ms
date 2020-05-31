@@ -82,6 +82,20 @@ const CustomerValidator = (data) => {
     return validateSchema(schema, data);
 }
 
+const SaleValidator = (data) => {
+    const schema = Joi.object({
+        customer: Joi.string().required().trim(),
+        product: Joi.string().required().trim(),
+        quantity: Joi.number().min(0),
+        rate: Joi.number().min(0),
+        shippingCost: Joi.number().min(0),
+        discount: Joi.number().min(0),
+        paid: Joi.number().min(0),
+        salesDate: Joi.date().required(),
+    });
+    return validateSchema(schema, data);
+}
+
 module.exports = {
     RegisterValidator,
     LoginValidator,
@@ -90,4 +104,5 @@ module.exports = {
     ServicingValidator,
     ExpenseValidator,
     CustomerValidator,
+    SaleValidator
 };

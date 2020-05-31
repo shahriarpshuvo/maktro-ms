@@ -8,9 +8,9 @@ const entryRouter = require('./entry');
 const servicingRouter = require('./servicing');
 const expenseRouter = require('./expense');
 const customerRouter = require('./customer');
+const saleRouter = require('./sale');
 
 
-// Routes
 router.get('/', (req, res) => { res.render('login'); });
 router.use('/api', apiRouter);
 router.use('/users', userRouter);
@@ -20,5 +20,6 @@ router.use('/entries', entryRouter);
 router.use('/servicing', servicingRouter);
 router.use('/expenses', expenseRouter);
 router.use('/customers', customerRouter);
+router.use('/sales', saleRouter);
 
 module.exports = router;
