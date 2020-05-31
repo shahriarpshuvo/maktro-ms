@@ -75,7 +75,6 @@ function deleteItemTrigger(path){
             btn.addEventListener('click', ()=>{
                 const ItemID = btn.parentElement.getAttribute('data-item-id');
                 deleteForm.setAttribute('action', `${host}/${path}/${ItemID}?_method=delete`)
-                console.log(`${host}/${path}/${ItemID}?_method=delete`);
             })
         })
     }
@@ -325,10 +324,8 @@ if(saleEditButtons){
     saleEditButtons.forEach((btn)=>{
         btn.addEventListener('click', async()=>{
             const ItemID = btn.parentElement.getAttribute('data-item-id');
-            console.log(`${hostAPI}/sales/${ItemID}`);
             const res = await fetch(`${hostAPI}/sales/${ItemID}`);
             const { entry, customer, product, quantity, rate, shippingCost, discount, paid, salesDate } = await res.json();
-            console.log(salesDate);
             saleForm.setAttribute('action', `/sales/${ItemID}?_method=patch`);
             saleForm.insertAdjacentHTML('afterbegin', `<input id="entryHiddenField" type="hidden" name="entry" value="${entry}">`);
             saleFormCustomer.value = customer;

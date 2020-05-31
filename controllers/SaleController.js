@@ -64,7 +64,7 @@ SaleController.update = async (req, res) => {
     res.redirect('/sales');
 };
 
-//API
+// API
 SaleController.getSale = async (req, res) => {
     try {
         const { entry, customer, product, quantity, rate, shippingCost, discount, amount, paid, salesDate } = await Sale.findById(req.params.id).populate('product').populate('customer');

@@ -11,12 +11,12 @@ const returnSchema = new mongoose.Schema({
     quantity: {
         type: Number,
         required: true,
-        max: 50,
+        min:0
     },
     amount: {
         type: Number,
         required: true,
-        max: 50,
+        min:0
     },
     createdAt: {
         type: Date,
