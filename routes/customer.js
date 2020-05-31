@@ -1,9 +1,11 @@
 const router = require('express').Router();
-const ServicingController = require('../controllers/ServicingController');
+const CustomerController = require('../controllers/CustomerController');
 
-router.post('/', ServicingController.create);
-router.get('/', ServicingController.read);
-router.patch('/:id', ServicingController.update);
-router.delete('/:id', ServicingController.delete);
+router.post('/', CustomerController.create);
+router.get('/', CustomerController.read);
+router.patch('/payment', CustomerController.updateBalance);
+router.patch('/:id', CustomerController.update);
+router.delete('/:id', CustomerController.delete);
+
 
 module.exports = router;

@@ -1,1 +1,31 @@
-hi
+<%- include('../modules/_header', {page: "Customers"}); %>
+<%- include('../modules/_navs', {page: "Customers"}); %>
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap
+align-items-center border-bottom mt-0 mb-3 mt-md-3 py-4">
+    <h1 class="h3 content-header">
+        <i class="ic-v-card"></i>
+        Customers
+    </h1>
+    <div class="content-action btn-toolbar mb-2 mb-md-0">
+        <button type="button" class="btn btn-sm  mr-3 btn-secondary"
+            data-toggle="modal" data-target="#addBalance">
+            <i class="ic-plus"></i>
+            Add Balance
+        </button>
+        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
+            data-target="#addCustomer">
+            <i class="ic-plus"></i>
+            Add New Customer
+        </button>
+    </div>
+</div>
+
+
+<%- include('../modules/_alert'); %>
+<%- include('./_search-form'); %>
+<%- include('./_data'); %>
+<%- include('./_collect-form'); %>
+<%- include('./_balance-form'); %>
+<%- include('../modules/_delete-form', {deleteItemTypes: 'customers'}); %>
+<%- include('../modules/_footer'); %>

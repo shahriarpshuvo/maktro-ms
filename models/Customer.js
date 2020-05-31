@@ -17,18 +17,12 @@ const customerSchema = new mongoose.Schema({
         max: 11,
     },
     amount: {
-        // Will be updated on sales.amount && returns.amount
         type: Number,
-        required: true,
         default: 0,
-        max: 50,
     },
     paid: {
-        // Will be updated on sales.amount && returns.amount
         type: Number,
-        required: true,
         default: 0,
-        max: 50,
     },
     createdAt: {
         type: Date,

@@ -35,7 +35,6 @@ const outputData = (matches, types, matchValue, matchTitle, inputQuery, queryGro
             .join('');
         queryGroup.innerHTML = htmlElements;
         const queryData = document.querySelectorAll(`.${types}-input-query-data`);
-        console.log(`${types}-input-query-data`);
         for (let queryDatum of queryData) {
             queryDatum.addEventListener('click', () => {
                 const value = queryDatum.children[0];
@@ -51,6 +50,14 @@ const productQueryGroup = document.querySelector('.product-input-query-group');
 if(productInputQuery){
     productInputQuery.addEventListener('input', () =>
         searchData(productInputQuery.value, fetchURI.products, 'product', 'code', 'name', productInputQuery, productQueryGroup)
+    );
+}
+
+const customerInputQuery = document.querySelector('.customer-input-query');
+const customerQueryGroup = document.querySelector('.customer-input-query-group');
+if(customerInputQuery){
+    customerInputQuery.addEventListener('input', () =>
+        searchData(customerInputQuery.value, fetchURI.customers, 'customer', 'phone', 'name', customerInputQuery, customerQueryGroup)
     );
 }
 
@@ -261,6 +268,46 @@ if(expenseEditButtons){
 }
 
 
+/*******************************
+ * Get Customer and Edit
+ *******************************/
+const customerForm = document.querySelector('.customerForm');
+const customerFormTitle = document.querySelector('.customerForm-title');
+const customerFormName = document.querySelector('.customerForm-name');
+const customerFormAddress = document.querySelector('.customerForm-address');
+const customerFormPhone = document.querySelector('.customerForm-phone');
+const customerFormAmount = document.querySelector('.customerForm-amount');
+const customerFormPaid = document.querySelector('.customerForm-paid');
+const customerEditButtons = document.querySelectorAll('.customerEditButton');
+
+if(customerEditButtons){
+    customerEditButtons.forEach((btn)=>{
+        btn.addEventListener('click', async()=>{
+            const ItemID = btn.parentElement.getAttribute('data-item-id');
+            console.log(`${hostAPI}/customers/${ItemID}`);
+            const res = await fetch(`${hostAPI}/customers/${ItemID}`);
+            const { name, address, phone, amount, paid } = await res.json();
+            console.log(name, address, phone, amount, paid)
+            customerForm.setAttribute('action', `/customers/${ItemID}?_method=patch`);
+            customerFormTitle.innerText = "Edit Customer";
+            customerFormName.value = name;
+            customerFormAddress.value = address;
+            customerFormPhone.value = phone;
+            customerFormAmount.value = amount;
+            customerFormPaid.value = paid;
+            customerFormAmount.setAttribute('disabled', 'true');
+            customerFormPaid.setAttribute('disabled', 'true');
+            $('[data-dismiss="modal"]').on('click', function(){
+                customerForm.reset();
+                customerFormTitle.innerText = "Add New Customer";
+                customerFormAmount.removeAttribute('disabled')
+                customerFormPaid.removeAttribute('disabled')
+                customerForm.setAttribute('action', '/customers');
+            })
+        })
+    })
+}
+
 /**************************************
  * Enhanced Bootstrap Functionality
  **************************************/
@@ -274,5 +321,5 @@ window.setTimeout(function() {
     $(".alert").fadeTo(500, 0).slideUp(500, function() {
         $(this).hide();
     });
-}, 5000);
+}, 6000);
 

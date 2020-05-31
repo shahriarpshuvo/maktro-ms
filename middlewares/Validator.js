@@ -71,11 +71,23 @@ const ExpenseValidator = (data) => {
     return validateSchema(schema, data);
 }
 
+const CustomerValidator = (data) => {
+    const schema = Joi.object({
+        name: Joi.string().required().trim(),
+        address: Joi.string().required().trim(),
+        phone: Joi.string().required().trim(),
+        amount: Joi.number().min(0),
+        paid: Joi.number().min(0),
+    });
+    return validateSchema(schema, data);
+}
+
 module.exports = {
     RegisterValidator,
     LoginValidator,
     ProductValidator,
     EntryValidator,
     ServicingValidator,
-    ExpenseValidator
+    ExpenseValidator,
+    CustomerValidator,
 };

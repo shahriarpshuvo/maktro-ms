@@ -4,7 +4,10 @@ const { ExpenseValidator } = require('../middlewares/Validator');
 const ExpenseController = {};
 
 ExpenseController.create = async (req, res) => {
-    const { purpose, equipments, transports, courierCommission, retailHoldings, stationeryTools, salaryUtilities, marketing, others, expenseDate } = req.body;
+    const {
+        purpose, equipments, transports, courierCommission, retailHoldings,
+        stationeryTools, salaryUtilities, marketing, others, expenseDate,
+    } = req.body;
     const validator = ExpenseValidator({ purpose, equipments, transports, courierCommission, retailHoldings, stationeryTools, salaryUtilities, marketing, others });
     if (validator.error) {
         req.flash('error', validator.error);
@@ -52,7 +55,7 @@ ExpenseController.update = async (req, res) => {
     }
 };
 
-//API
+// API
 ExpenseController.getExpense = async (req, res) => {
     try {
         const { purpose, equipments, transports, courierCommission, retailHoldings, stationeryTools, salaryUtilities, marketing, others, expenseDate, createdAt  } = await Expense.findById(req.params.id);

@@ -48,7 +48,27 @@ body {
         display: none;
     }
 }
+.alert-box{
+    box-shadow: 10px 10px 30px #00000005;
+    position: fixed;
+    top: 130px;
+    right: 30px;
+    z-index: 9999;
+}
 
+
+.auto-suggestion{
+    position: absolute;
+    z-index: 1111;
+    width: 80%;
+}
+
+.auto-suggestion .list-group-item:hover{
+    cursor: pointer;
+}
+.auto-suggestion .list-group-item{
+    width: 100%;
+}
 /*==============================
 =>  Override Bootstrap
 ================================*/
@@ -83,9 +103,7 @@ body {
     box-shadow: 0 0 0 0.2rem #ffbc4290;
 }
 
-.list-group-item:hover{
-    cursor: pointer;
-}
+
 /*==============================
 =>  NavBar
 ================================*/
@@ -226,7 +244,7 @@ body {
 }
 
 .table__actions-btn:not(:last-of-type){
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 }
 
 .table__actions-btn:hover {
