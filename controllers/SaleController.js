@@ -25,7 +25,6 @@ SaleController.create = async (req, res) => {
         return res.redirect('/sales');
     }
     const getInventory = await Inventory.findOne({product: getProduct._id});
-    console.log(getInventory.quantity);
     if(getInventory.quantity <= 0 || getInventory.quantity < quantity){
         req.flash('error', `Oops! Insufficient amount of product in the inventory.`);
         return res.redirect('/sales');
@@ -50,10 +49,12 @@ SaleController.create = async (req, res) => {
     }
 };
 
+
 SaleController.read = async (req, res) => {
     const sales = await Sale.find({}).populate('product').populate('customer').sort({createdAt: -1});
     res.render('sales/index', { sales });
 };
+
 
 SaleController.delete = async (req, res) => {
     const getSale = await Sale.findByIdAndDelete(req.params.id);
@@ -61,6 +62,7 @@ SaleController.delete = async (req, res) => {
     req.flash('success', `Sale has been deleted successfully!`);
     res.redirect('/sales');
 };
+
 
 SaleController.update = async (req, res) => {
     const { entry, product, quantity, rate, shippingCost, discount, paid, salesDate } = req.body;
@@ -80,6 +82,7 @@ SaleController.update = async (req, res) => {
     req.flash('success', `Sales information has been updated successfully!`);
     res.redirect('/sales');
 };
+
 
 // API
 SaleController.getSale = async (req, res) => {

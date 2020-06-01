@@ -22,13 +22,13 @@
                     <td><%= customer.amount.toLocaleString(); %></td>
                     <td>
                         <strong class="text-success"><%= customer.paid.toLocaleString(); %></strong>
-                        <br>
+                        <% /*<br>
                         <small class="text-muted p-0 font-weight-bold">
-                            (Updated: <%= customer.updatedAt.toLocaleDateString(); %>)
-                        </small>
+                            (Updated:  //customer.updatedAt.toLocaleDateString();)
+                        </small> */%>
                     </td>
                     <td class="text-danger">
-                        <%= (customer.amount - customer.paid).toLocaleString(); %>
+                        <%= customer.due.toLocaleString(); %>
                     </td>
                     <td class="table__actions text-center" data-item-id="<%= customer.id %>">
                         <a href="#" class="table__actions-btn customerEditButton"

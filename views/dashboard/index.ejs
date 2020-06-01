@@ -1,12 +1,13 @@
-<%- include('./modules/_header', {page: "Dashboard"}); %>
-<%- include('./modules/_navs', {page: "Dashboard"}); %>
+<%- include('../modules/_header', {page: "Dashboard"}); %>
+<%- include('../modules/_navs', {page: "Dashboard"}); %>
 
 <div class="dashboard-intro text-center p-3">
     <h3 class="display-4">👨‍💻</h3>
     <h5 class="mb-3">Welcome, Tanzim Rahman!</h5>
-    <p> Maktro Management System </p>
+    <p>Maktro Management System</p>
 </div>
-<div class="profit card border-warning text-uppercase my-3">
+
+<!-- <div class="profit card border-warning text-uppercase my-3">
     <div class="card-header bg-warning border-warning">
         <div class=" d-flex justify-content-between align-items-center">
             <div class="text-white">
@@ -39,7 +40,8 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
+
 <div class="overview card border-success text-uppercase my-3">
     <div class="card-header bg-success border-success">
         <h2 class="h4 text-light text-center my-3">
@@ -263,7 +265,5 @@
 </div>
 
 
-<p class="text-center text-muted mt-4"> &copy; Maktro.com
-    2020 | We Make Consumers' Electronics. </p>
-
-<%- include('./modules/_footer');  %>
+<p class="text-center text-muted mt-4">&copy; Maktro.com 2020 | We Make Consumers' Electronics.</p>
+<%- include('../modules/_footer');  %>

@@ -1,6 +1,7 @@
 const Customer = require('../models/Customer');
+const Sale = require('../models/Sale');
+const ReturnModel = require('../models/Return');
 const { CustomerValidator } = require('../middlewares/Validator');
-
 const CustomerController = {};
 
 
@@ -34,8 +35,37 @@ CustomerController.create = async (req, res) => {
 
 
 CustomerController.read = async (req, res) => {
+    const getSales = await Sale.find({});
+    const getReturn = await ReturnModel.find({});
+    const getCustomers = await Customer.find({});
+    let customerRecords = {}
+    getCustomers.forEach((customer) => {
+        let totalAmount = 0, totalPaid = 0, totalReturn = 0;
+        customerID = customer.id;
+        getSales.forEach(sale => {
+            if(sale.customer == customerID){
+                totalAmount += sale.amount;
+                totalPaid += sale.paid;
+            }
+            customerRecords[customerID] = { total: totalAmount, paid: totalPaid, due: (totalAmount - totalPaid) };
+        });
+        getReturn.forEach(returnRecord => {
+            if(returnRecord.customer == customerID){
+                totalReturn += returnRecord.amount;
+            }
+            customerRecords[customerID].returnAmount = totalReturn;
+        });
+    });
+    for(const id in customerRecords){
+        await Customer.findByIdAndUpdate(id, {$set: {
+            amount: (customerRecords[id].total - customerRecords[id].returnAmount),
+            paid: customerRecords[id].paid,
+            due: customerRecords[id].due,
+        }});
+    }
     const customers = await Customer.find({}).sort({createdAt: -1});
     res.render('customers/index', { customers });
+
 };
 
 
@@ -80,7 +110,6 @@ CustomerController.updateBalance = async (req, res) => {
 };
 
 
-// API
 CustomerController.getCustomers = async (req, res) => {
     const customers = await Customer.find({});
     res.send(customers);

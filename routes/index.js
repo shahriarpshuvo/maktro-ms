@@ -10,6 +10,7 @@ const expenseRouter = require('./expense');
 const customerRouter = require('./customer');
 const saleRouter = require('./sale');
 const returnRouter = require('./return');
+const dashboardRouter = require('./dashboard');
 
 
 router.get('/', (req, res) => { res.render('login'); });
@@ -23,5 +24,7 @@ router.use('/expenses', expenseRouter);
 router.use('/customers', customerRouter);
 router.use('/sales', saleRouter);
 router.use('/returns', returnRouter);
+router.use('/dashboard', dashboardRouter);
+
 
 module.exports = router;
