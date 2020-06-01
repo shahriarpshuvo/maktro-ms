@@ -100,7 +100,7 @@ if(userEditButtons){
     userEditButtons.forEach((btn)=>{
         btn.addEventListener('click', async()=>{
             const ItemID = btn.parentElement.getAttribute('data-item-id');
-            const res = await fetch(`${host}/users/${ItemID}`);
+            const res = await fetch(`${hostAPI}/users/${ItemID}`);
             const data = await res.json();
             userForm.setAttribute('action', `/users/${ItemID}?_method=patch`);
             userFormTitle.innerText = "Edit User";
@@ -395,6 +395,13 @@ if(returnEditButtons){
         })
     })
 }
+
+
+/*********
+ * Pagination
+ *
+ */
+
 
 
 /**************************************

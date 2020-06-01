@@ -30,8 +30,11 @@ ExpenseController.create = async (req, res) => {
 };
 
 ExpenseController.read = async (req, res) => {
-    const expenses = await Expense.find({}).sort({createdAt: -1});
-    res.render('expenses/index', { expenses});
+    const perPage = 30;
+    const page = req.params.page || 1;
+    const expenses = await Expense.find({}).skip((perPage * page) - perPage).limit(perPage).sort({createdAt: -1});
+    const count =  await Expense.countDocuments();
+    res.render('expenses/index', { expenses, current: page, pages: Math.ceil(count / perPage)});
 };
 
 ExpenseController.delete = async (req, res) => {

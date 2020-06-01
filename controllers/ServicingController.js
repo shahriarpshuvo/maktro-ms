@@ -31,8 +31,11 @@ ServicingController.create = async (req, res) => {
 };
 
 ServicingController.read = async (req, res) => {
-    const allServicing = await Servicing.find({}).populate('product').sort({createdAt: -1});
-    res.render('servicing/index', { allServicing });
+    const perPage = 30;
+    const page = req.params.page || 1;
+    const allServicing = await Servicing.find({}).populate('product').sort({createdAt: -1}).skip((perPage * page) - perPage).limit(perPage);
+    const  count =  await Servicing.countDocuments();
+    res.render('servicing/index', { allServicing, current: page, pages: Math.ceil(count / perPage)});
 };
 
 ServicingController.delete = async (req, res) => {

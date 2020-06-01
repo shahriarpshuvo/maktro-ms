@@ -63,9 +63,12 @@ CustomerController.read = async (req, res) => {
             due: customerRecords[id].due,
         }});
     }
-    const customers = await Customer.find({}).sort({createdAt: -1});
-    res.render('customers/index', { customers });
 
+    const perPage = 30;
+    const page = req.params.page || 1;
+    const customers = await Customer.find({}).skip((perPage * page) - perPage).limit(perPage).sort({createdAt: -1});
+    const count =  await Customer.countDocuments();
+    res.render('customers/index', { customers, current: page, pages: Math.ceil(count / perPage)});
 };
 
 

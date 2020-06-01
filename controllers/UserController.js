@@ -40,8 +40,11 @@ UserController.create = async (req, res) => {
 };
 
 UserController.read = async (req, res) => {
-    const users = await User.find({});
-    res.render('users/index', { users });
+    const perPage = 30;
+    const page = req.params.page || 1;
+    const users = await User.find({}).skip((perPage * page) - perPage).limit(perPage);
+    const  count =  await User.countDocuments();
+    res.render('users/index', { users, current: page, pages: Math.ceil(count / perPage)});
 };
 
 UserController.update = async (req, res) => {

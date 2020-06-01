@@ -23,12 +23,14 @@ InventoryController.read = async (req, res) => {
         for(const id in data){
             let leftOver = (data[id].inventoryQuantity + data[id].returnQuantity) - data[id].salesQuantity;
             const n = await Inventory.findOneAndUpdate({product:id}, {$set: {quantity: data[id].inventoryQuantity, leftOver:leftOver,  returns: data[id].returnQuantity, sales:  data[id].salesQuantity}});
-            console.log(n);
         }
     })
 
-    const inventories = await Inventory.find({}).populate('product');
-    res.render('inventories/index', { inventories });
+    const perPage = 30;
+    const page = req.params.page || 1;
+    const inventories = await Inventory.find({}).skip((perPage * page) - perPage).limit(perPage).populate('product');
+    const count =  await Inventory.countDocuments();
+    res.render('inventories/index', { inventories, current: page, pages: Math.ceil(count / perPage)});
 };
 
 module.exports = InventoryController;

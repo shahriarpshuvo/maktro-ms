@@ -51,8 +51,11 @@ SaleController.create = async (req, res) => {
 
 
 SaleController.read = async (req, res) => {
-    const sales = await Sale.find({}).populate('product').populate('customer').sort({createdAt: -1});
-    res.render('sales/index', { sales });
+    const perPage = 30;
+    const page = req.params.page || 1;
+    const sales = await Sale.find({}).skip((perPage * page) - perPage).limit(perPage).populate('product').populate('customer').sort({createdAt: -1});
+    const  count =  await Sale.countDocuments();
+    res.render('sales/index', { sales, current: page, pages: Math.ceil(count / perPage)});
 };
 
 

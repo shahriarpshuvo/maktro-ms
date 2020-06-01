@@ -52,8 +52,11 @@ ReturnController.create = async (req, res) => {
 
 
 ReturnController.read = async (req, res) => {
-    const returnRecords = await ReturnModel.find({}).populate('product').populate('customer').sort({createdAt: -1});
-    res.render('returns/index', { returnRecords });
+    const perPage = 30;
+    const page = req.params.page || 1;
+    const returnRecords = await ReturnModel.find({}).skip((perPage * page) - perPage).limit(perPage).populate('product').populate('customer').sort({createdAt: -1});
+    const  count =  await ReturnModel.countDocuments();
+    res.render('returns/index', { returnRecords, current: page, pages: Math.ceil(count / perPage)});
 };
 
 

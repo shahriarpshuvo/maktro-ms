@@ -32,8 +32,11 @@ ProductController.create = async (req, res) => {
 };
 
 ProductController.read = async (req, res) => {
-    const products = await Product.find({}).sort({createdAt: -1});
-    res.render('products/index', { products });
+    const perPage = 30;
+    const page = req.params.page || 1;
+    const products = await Product.find({}).skip((perPage * page) - perPage).limit(perPage).sort({createdAt: -1});
+    const  count =  await Product.countDocuments();
+    res.render('products/index', { products, current: page, pages: Math.ceil(count / perPage)});
 };
 
 ProductController.update = async (req, res) => {

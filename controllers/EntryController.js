@@ -16,8 +16,6 @@ EntryController.create = async (req, res) => {
     let entry;
     try {
         const getProduct = await Product.findOne({ code: validator.value.product });
-        // await Inventory.findOneAndUpdate({ product: getProduct._id },
-        //     { $inc: { quantity: validator.value.quantity } });
         entry = new Entry({
             product: getProduct._id,
             quantity: validator.value.quantity,
@@ -37,15 +35,15 @@ EntryController.create = async (req, res) => {
 };
 
 EntryController.read = async (req, res) => {
-    const entries = await Entry.find({}).populate('product').sort({ createdAt: -1 });
-    res.render('entries/index', { entries });
+    const perPage = 30;
+    const page = req.params.page || 1;
+    const entries = await Entry.find({type:'inventory'}).skip((perPage * page) - perPage).limit(perPage).populate('product').sort({createdAt: -1});
+    const count =  await Entry.find({type: 'inventory'}).countDocuments();
+    res.render('entries/index', { entries, current: page, pages: Math.ceil(count / perPage)});
 };
 
 EntryController.delete = async (req, res) => {
-    const entry = await Entry.findById(req.params.id);
-    // await Inventory.findOneAndUpdate({ product: entry.product },
-    //     { $inc: { quantity: -entry.quantity } });
-    entry.remove();
+    const entry = await Entry.findByIdAndDelete(req.params.id);
     req.flash('success', 'Entry has been deleted successfully!');
     res.redirect('/entries');
 };
@@ -55,8 +53,6 @@ EntryController.update = async (req, res) => {
         { $set: req.body }, { new: true });
     const entries = await Entry.find({ product: newEntry.product });
     const newQuantity = entries.reduce((acc, curr) => acc + curr.quantity, 0);
-    // await Inventory.findOneAndUpdate({ product: newEntry.product },
-    //     { $set: { quantity: newQuantity } });
     req.flash('success', 'Entry has been updated successfully!');
     res.redirect('/entries');
 };
