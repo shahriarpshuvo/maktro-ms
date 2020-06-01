@@ -2,6 +2,7 @@ const ReturnModel = require('../models/Return');
 const Product = require('../models/Product');
 const Customer = require('../models/Customer');
 const Entry = require('../models/Entry');
+const Inventory = require('../models/Inventory');
 const { ReturnValidator } = require('../middlewares/Validator');
 
 const ReturnController = {};
@@ -22,6 +23,11 @@ ReturnController.create = async (req, res) => {
     const getCustomer = await Customer.findOne({phone: validator.value.customer});
     if(!getCustomer) {
         req.flash('error', 'User doesn\'t exist with this ID. Please try again!');
+        return res.redirect('/returns');
+    }
+    const getInventory = await Inventory.findOne({product: getProduct._id});
+    if(getInventory.sales < quantity){
+        req.flash('error', `Oops! You can't return more products than sales.`);
         return res.redirect('/returns');
     }
     try{
@@ -60,7 +66,13 @@ ReturnController.delete = async (req, res) => {
 
 
 ReturnController.update = async (req, res) => {
-    const { entry, quantity, amount, returnDate } = req.body;
+    const { entry, product, quantity, amount, returnDate } = req.body;
+    const getProduct = await Product.findOne({code: product});
+    const getInventory = await Inventory.findOne({product: getProduct._id});
+    if(getInventory.sales < quantity){
+        req.flash('error', `Oops! You can't return more product than you sales.`);
+        return res.redirect('/return');
+    }
     await Entry.findByIdAndUpdate(entry, {$set: {quantity}});
     await ReturnModel.findByIdAndUpdate(req.params.id, { $set: {quantity, amount, returnDate}});
     req.flash('success', `Returns information has been updated successfully!`);

@@ -11,7 +11,8 @@
             </thead>
             <tbody class="table__body">
                 <% if(locals.entries) {
-                    entries.forEach((entry)=>{ %>
+                    entries.forEach((entry)=>{
+                        if (entry.type == 'inventory') { %>
                 <tr>
                     <td><%= entry.createdAt.toLocaleDateString(); %></td>
                     <td><%= entry.product.name; %></td>
@@ -25,7 +26,7 @@
                                 class="ic-trash pr-2"></i>Delete</a>
                     </td>
                 </tr>
-                <% })} %>
+                <% }})} %>
             </tbody>
         </table>
     </div>

@@ -6,6 +6,7 @@
                     <th>Product Name</th>
                     <th>Quantity (Total)</th>
                     <th>Sales (Total)</th>
+                    <th>Returns (Total)</th>
                     <th>Left Over</th>
                 </tr>
             </thead>
@@ -14,11 +15,10 @@
                     inventories.forEach((inventory)=>{ %>
                 <tr>
                     <td><%= inventory.product.name; %></td>
-                    <td><%= inventory.quantity.toLocaleString(); %></td>
-                    <td><%= inventory.sales.toLocaleString(); %></td>
-                    <td class="text-danger">
-                        <% const leftOverQuantity = inventory.quantity - inventory.sales; %>
-                        <%= leftOverQuantity.toLocaleString(); %></td>
+                    <td class="font-weight-bold"><%= inventory.quantity.toLocaleString(); %></td>
+                    <td class="text-success font-weight-bold"><%= inventory.sales.toLocaleString(); %></td>
+                    <td class="text-danger font-weight-bold"><%= inventory.returns.toLocaleString(); %></td>
+                    <td class="text-info font-weight-bold"> <%= inventory.leftOver.toLocaleString(); %></td>
                 </tr>
                 <% })} %>
             </tbody>

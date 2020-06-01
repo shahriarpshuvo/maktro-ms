@@ -340,7 +340,7 @@ if(saleEditButtons){
             saleFormPaid.value = paid;
             saleFormSalesDate.valueAsDate = new Date(salesDate);
             saleFormCustomer.setAttribute('disabled', 'true');
-            saleFormProduct.setAttribute('disabled', 'true');
+            saleFormProduct.setAttribute('readonly', 'true');
             $('[data-dismiss="modal"]').on('click', function(){
                 saleForm.reset();
                 const hiddenField = document.getElementById('entryHiddenField');
@@ -382,7 +382,7 @@ if(returnEditButtons){
             returnFormAmount.value = amount;
             returnFormReturnDate.valueAsDate = new Date(returnDate);
             returnFormCustomer.setAttribute('disabled', 'true');
-            returnFormProduct.setAttribute('disabled', 'true');
+            returnFormProduct.setAttribute('readonly', 'true');
             $('[data-dismiss="modal"]').on('click', function(){
                 returnForm.reset();
                 const hiddenField = document.getElementById('entryHiddenField');

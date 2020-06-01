@@ -1,6 +1,7 @@
 const Sale = require('../models/Sale');
 const Product = require('../models/Product');
 const Customer = require('../models/Customer');
+const Inventory = require('../models/Inventory');
 const Entry = require('../models/Entry');
 const { SaleValidator } = require('../middlewares/Validator');
 
@@ -21,6 +22,12 @@ SaleController.create = async (req, res) => {
     const getCustomer = await Customer.findOne({phone: validator.value.customer});
     if(!getCustomer) {
         req.flash('error', 'User doesn\'t exist with this ID. Please try again!');
+        return res.redirect('/sales');
+    }
+    const getInventory = await Inventory.findOne({product: getProduct._id});
+    console.log(getInventory.quantity);
+    if(getInventory.quantity <= 0 || getInventory.quantity < quantity){
+        req.flash('error', `Oops! Insufficient amount of product in the inventory.`);
         return res.redirect('/sales');
     }
     try{
@@ -56,7 +63,17 @@ SaleController.delete = async (req, res) => {
 };
 
 SaleController.update = async (req, res) => {
-    const { entry, quantity, rate, shippingCost, discount, paid, salesDate } = req.body;
+    const { entry, product, quantity, rate, shippingCost, discount, paid, salesDate } = req.body;
+    const getProduct = await Product.findOne({code: product});
+    if(!getProduct) {
+        req.flash('error', 'Product code doesn\'t match. Try again!');
+        return res.redirect('/sales');
+    }
+    const getInventory = await Inventory.findOne({product: getProduct._id});
+    if(getInventory.quantity <= 0 || getInventory.quantity < quantity){
+        req.flash('error', `Oops! Insufficient amount of product in the inventory.`);
+        return res.redirect('/sales');
+    }
     const amount = (parseInt(quantity) * parseInt(rate)) + parseInt(shippingCost) - parseInt(discount);
     await Entry.findByIdAndUpdate(entry, {$set: {quantity}});
     await Sale.findByIdAndUpdate(req.params.id, { $set: {quantity, rate, shippingCost, discount, paid, amount, salesDate}});
