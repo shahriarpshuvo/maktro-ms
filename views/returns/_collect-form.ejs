@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title t-primary">
+                <h5 class="modal-title t-primary returnForm-title">
                     Returns
                 </h5>
                 <button type="button" class="close" data-dismiss="modal"
@@ -12,15 +12,16 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="" method="">
+                <form action="/returns" method="post" class="returnForm">
                     <div class="form-group">
                         <label for="customer">Customer
                             ID</label>
                         <span class="f-10 text-muted">(Can be
                             found on customer page)</span>
-                        <input type="text" class="form-control" name="customer"
+                        <input type="text" class="form-control returnForm-customer customer-input-query" name="customer"
                             placeholder="Eg. 01717998833" maxlength="11"
-                            required />
+                            required autocomplete="off"/>
+                        <ul class="list-group auto-suggestion customer-input-query-group"></ul>
                     </div>
 
                     <div class="form-group">
@@ -29,27 +30,27 @@
                         <span class="f-10 text-muted">(Can be
                             found on product
                             page)</span>
-                        <input type="text" class="form-control" name="product"
-                            placeholder="Eg. MBL-001-002" required />
+                        <input type="text" class="form-control product-input-query returnForm-product" name="product" placeholder="Eg. MBL-001-002" required autocomplete="off"/>
+                        <ul class="list-group auto-suggestion product-input-query-group"></ul>
                     </div>
 
                     <div class="form-group">
                         <label for="quantity">Quantity</label>
-                        <input type="number" class="form-control"
-                            name="quantity" placeholder="Eg. 50" required>
+                        <input type="number" class="form-control returnForm-quantity"
+                            name="quantity" placeholder="Eg. 50" required min="0">
                     </div>
 
                     <div class="row align-items-center">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="deliveryDate">Returns
+                                <label for="returnDate">Returns
                                     Date</label>
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
                                         <i class="ic-calendar"></i>
                                     </div>
-                                    <input type="date" class="form-control"
-                                        name="deliveryDate" />
+                                    <input type="date" class="form-control returnForm-returnDate"
+                                        name="returnDate" />
                                 </div>
                             </div>
                         </div>
@@ -57,9 +58,9 @@
                             <div class="form-group">
                                 <label for="amount">Amount
                                     Reduced</label>
-                                <input type="number" class="form-control"
+                                <input type="number" class="form-control returnForm-amount"
                                     name="amount" required
-                                    placeholder="Eg. 4500" />
+                                    placeholder="Eg. 4500" min="0"/>
                             </div>
                         </div>
                     </div>

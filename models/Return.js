@@ -1,5 +1,9 @@
 const mongoose = require("mongoose");
 const returnSchema = new mongoose.Schema({
+    entry:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Entry',
+    },
     customer: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Customer',
@@ -17,6 +21,10 @@ const returnSchema = new mongoose.Schema({
         type: Number,
         required: true,
         min:0
+    },
+    returnDate: {
+        type: Date,
+        default: Date.now,
     },
     createdAt: {
         type: Date,

@@ -59,7 +59,7 @@ SaleController.update = async (req, res) => {
     const { entry, quantity, rate, shippingCost, discount, paid, salesDate } = req.body;
     const amount = (parseInt(quantity) * parseInt(rate)) + parseInt(shippingCost) - parseInt(discount);
     await Entry.findByIdAndUpdate(entry, {$set: {quantity}});
-    const newSale = await Sale.findByIdAndUpdate(req.params.id, { $set: {quantity, rate, shippingCost, discount, paid, amount, salesDate}}, { new: true });
+    await Sale.findByIdAndUpdate(req.params.id, { $set: {quantity, rate, shippingCost, discount, paid, amount, salesDate}});
     req.flash('success', `Sales information has been updated successfully!`);
     res.redirect('/sales');
 };

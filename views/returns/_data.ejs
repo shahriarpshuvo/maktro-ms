@@ -12,21 +12,24 @@
                 </tr>
             </thead>
             <tbody class="table__body">
+                <% if(locals.returnRecords) {
+                    returnRecords.forEach((record) => { %>
                 <tr>
-                    <td>11/07/2020</td>
-                    <td>Shahriar Parvez</td>
-                    <td>Bike Lock</td>
-                    <td>53</td>
-                    <td class="text-danger">- 22000</td>
-                    <td class="table__actions text-center">
-                        <a href="#" class="table__actions-btn"
-                            data-toggle="modal" data-target="#addSales"><i
+                    <td><%= record.returnDate.toLocaleDateString(); %> </td>
+                    <td><%= record.customer.name; %></td>
+                    <td><%= record.product.name; %></td>
+                    <td><%= record.quantity.toLocaleString(); %></td>
+                    <td class="text-danger font-weight-bold">- <%= record.amount.toLocaleString(); %></td>
+                    <td class="table__actions text-center" data-item-id="<%= record.id %>">
+                        <a href="#" class="table__actions-btn returnEditButton"
+                            data-toggle="modal" data-target="#addReturns"><i
                                 class="ic-pencil pr-2"></i>Edit</a>
                         <a href="#" class="table__actions-btn"
                             data-toggle="modal" data-target="#deleteModal"><i
                                 class="ic-trash pr-2"></i>Delete</a>
                     </td>
                 </tr>
+                <% })} %>
             </tbody>
         </table>
     </div>

@@ -305,8 +305,10 @@ if(customerEditButtons){
     })
 }
 
+
+
 /*******************************
- * Get Customer and Edit
+ * Get Sales and Edit
  *******************************/
 const saleForm = document.querySelector('.saleForm');
 const saleFormTitle = document.querySelector('.saleForm-title');
@@ -328,6 +330,7 @@ if(saleEditButtons){
             const { entry, customer, product, quantity, rate, shippingCost, discount, paid, salesDate } = await res.json();
             saleForm.setAttribute('action', `/sales/${ItemID}?_method=patch`);
             saleForm.insertAdjacentHTML('afterbegin', `<input id="entryHiddenField" type="hidden" name="entry" value="${entry}">`);
+            saleFormTitle.innerText = "Edit Sales Information";
             saleFormCustomer.value = customer;
             saleFormProduct.value = product;
             saleFormQuantity.value = quantity;
@@ -342,7 +345,7 @@ if(saleEditButtons){
                 saleForm.reset();
                 const hiddenField = document.getElementById('entryHiddenField');
                 hiddenField.remove();
-                saleFormTitle.innerText = "Add New sale";
+                saleFormTitle.innerText = "Add New Sales";
                 saleFormCustomer.removeAttribute('disabled')
                 saleFormProduct.removeAttribute('disabled')
                 saleForm.setAttribute('action', '/sales');
@@ -350,6 +353,49 @@ if(saleEditButtons){
         })
     })
 }
+
+
+/*******************************
+ * Get Returns and Edit
+ *******************************/
+const returnForm = document.querySelector('.returnForm');
+const returnFormTitle = document.querySelector('.returnForm-title');
+const returnFormCustomer = document.querySelector('.returnForm-customer');
+const returnFormProduct = document.querySelector('.returnForm-product');
+const returnFormQuantity = document.querySelector('.returnForm-quantity');
+const returnFormAmount = document.querySelector('.returnForm-amount');
+const returnFormReturnDate = document.querySelector('.returnForm-returnDate');
+const returnEditButtons = document.querySelectorAll('.returnEditButton');
+
+if(returnEditButtons){
+    returnEditButtons.forEach((btn)=>{
+        btn.addEventListener('click', async()=>{
+            const ItemID = btn.parentElement.getAttribute('data-item-id');
+            const res = await fetch(`${hostAPI}/returns/${ItemID}`);
+            const { entry, customer, product, quantity, amount, returnDate } = await res.json();
+            returnForm.setAttribute('action', `/returns/${ItemID}?_method=patch`);
+            returnForm.insertAdjacentHTML('afterbegin', `<input id="entryHiddenField" type="hidden" name="entry" value="${entry}">`);
+            returnFormTitle.innerText = "Edit Return Information";
+            returnFormCustomer.value = customer;
+            returnFormProduct.value = product;
+            returnFormQuantity.value = quantity;
+            returnFormAmount.value = amount;
+            returnFormReturnDate.valueAsDate = new Date(returnDate);
+            returnFormCustomer.setAttribute('disabled', 'true');
+            returnFormProduct.setAttribute('disabled', 'true');
+            $('[data-dismiss="modal"]').on('click', function(){
+                returnForm.reset();
+                const hiddenField = document.getElementById('entryHiddenField');
+                hiddenField.remove();
+                returnFormTitle.innerText = "Add New Return";
+                returnFormCustomer.removeAttribute('disabled')
+                returnFormProduct.removeAttribute('disabled')
+                returnForm.setAttribute('action', '/sales');
+            })
+        })
+    })
+}
+
 
 /**************************************
  * Enhanced Bootstrap Functionality

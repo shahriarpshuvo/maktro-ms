@@ -3,6 +3,7 @@ const { CustomerValidator } = require('../middlewares/Validator');
 
 const CustomerController = {};
 
+
 CustomerController.create = async (req, res) => {
     const { name, phone, address, amount, paid } = req.body;
     const validator = CustomerValidator({ name, phone, address, amount, paid });
@@ -31,10 +32,12 @@ CustomerController.create = async (req, res) => {
     }
 };
 
+
 CustomerController.read = async (req, res) => {
     const customers = await Customer.find({}).sort({createdAt: -1});
     res.render('customers/index', { customers });
 };
+
 
 CustomerController.delete = async (req, res) => {
     await Customer.findByIdAndDelete(req.params.id);
@@ -42,13 +45,14 @@ CustomerController.delete = async (req, res) => {
     res.redirect('/customers');
 };
 
+
 CustomerController.update = async (req, res) => {
     const { name, phone, address } = req.body;
     const validator = CustomerValidator({ name, phone, address });
     if (validator.error) {
         req.flash('error', validator.error);
         return res.redirect('/customers');
-    } else{
+    } else {
         const { name, phone, address } = validator.value;
         const newCustomer = await Customer.findByIdAndUpdate(req.params.id, { $set: {name, phone, address}},
             { new: true });
@@ -75,11 +79,13 @@ CustomerController.updateBalance = async (req, res) => {
     res.redirect('/customers');
 };
 
-//API
+
+// API
 CustomerController.getCustomers = async (req, res) => {
     const customers = await Customer.find({});
     res.send(customers);
 };
+
 
 CustomerController.getCustomer = async (req, res) => {
     try {
