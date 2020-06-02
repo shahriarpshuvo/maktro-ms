@@ -1,12 +1,8 @@
 
-const fs = require('fs');
 
-const InvoiceController = {}
+// const InvoiceController = {}
+// const fs = require('fs');
 
-InvoiceController.sales = async (req, res) => {
-    var data = fs.readFileSync(`./${req.params.id}.pdf`);
-    res.contentType("application/pdf");
-    res.send(data);
-}
+// InvoiceController.sales = (
 
-module.exports = InvoiceController;
+// module.exports = InvoiceController;

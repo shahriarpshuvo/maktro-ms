@@ -65,11 +65,11 @@ CustomerController.read = async (req, res) => {
     for(const id in customerRecords){
         console.log(customerRecords);
         let returnAmount = customerRecords[id].returnAmount || 0;
-        let totalAmount = customerRecords[id].total || 0;
-        let amount = totalAmount - returnAmount;
+        let amount = customerRecords[id].total || 0;
         let paid = customerRecords[id].paid || 0;
         let due = amount - paid;
-        await Customer.findByIdAndUpdate(id, {$set: { amount, paid, due }});
+        let profit = amount - returnAmount;
+        await Customer.findByIdAndUpdate(id, {$set: { amount, paid, due, returnAmount, profit }});
     }
 
     const perPage = 30;

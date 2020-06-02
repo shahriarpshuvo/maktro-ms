@@ -28,6 +28,14 @@ const customerSchema = new mongoose.Schema({
         type: Number,
         default: 0,
     },
+    returnAmount: {
+        type: Number,
+        default: 0,
+    },
+    profit: {
+        type: Number,
+        default: 0,
+    },
     createdAt: {
         type: Date,
         default: Date.now,

@@ -4,11 +4,13 @@
             <thead class="table__header">
                 <tr>
                     <th>Name</th>
-                    <th>Phone Number</th>
+                    <th>Phone</th>
                     <th>Address</th>
-                    <th>Total Amount(Tk.)</th>
-                    <th>Paid(Tk.)</th>
-                    <th>Due(Tk.)</th>
+                    <th>Total</th>
+                    <th>Paid</th>
+                    <th>Due</th>
+                    <th>Return</th>
+                    <th>Profit</th>
                     <th class="text-center">Actions</th>
                 </tr>
             </thead>
@@ -27,8 +29,14 @@
                             (Updated:  //customer.updatedAt.toLocaleDateString();)
                         </small> */%>
                     </td>
-                    <td class="text-danger">
+                    <td class="text-danger font-weight-bold">
                         <%= customer.due.toLocaleString(); %>
+                    </td>
+                    <td class="text-danger font-weight-bold">
+                        <%= customer.returnAmount.toLocaleString(); %>
+                    </td>
+                    <td class="text-success font-weight-bold">
+                        <%= customer.profit.toLocaleString(); %>
                     </td>
                     <td class="table__actions text-center" data-item-id="<%= customer.id %>">
                         <a href="#" class="table__actions-btn customerEditButton"
