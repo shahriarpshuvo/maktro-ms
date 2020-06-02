@@ -320,6 +320,7 @@ const saleFormShippingCost = document.querySelector('.saleForm-shippingCost');
 const saleFormDiscount = document.querySelector('.saleForm-discount');
 const saleFormPaid = document.querySelector('.saleForm-paid');
 const saleFormSalesDate = document.querySelector('.saleForm-salesDate');
+const saleFormComment = document.querySelector('.saleForm-comment');
 const saleEditButtons = document.querySelectorAll('.saleEditButton');
 
 if(saleEditButtons){
@@ -327,7 +328,7 @@ if(saleEditButtons){
         btn.addEventListener('click', async()=>{
             const ItemID = btn.parentElement.getAttribute('data-item-id');
             const res = await fetch(`${hostAPI}/sales/${ItemID}`);
-            const { entry, customer, product, quantity, rate, shippingCost, discount, paid, salesDate } = await res.json();
+            const { entry, customer, product, quantity, rate, shippingCost, discount, paid, salesDate, comment } = await res.json();
             saleForm.setAttribute('action', `/sales/${ItemID}?_method=patch`);
             saleForm.insertAdjacentHTML('afterbegin', `<input id="entryHiddenField" type="hidden" name="entry" value="${entry}">`);
             saleFormTitle.innerText = "Edit Sales Information";
@@ -339,6 +340,7 @@ if(saleEditButtons){
             saleFormDiscount.value = discount;
             saleFormPaid.value = paid;
             saleFormSalesDate.valueAsDate = new Date(salesDate);
+            saleFormComment.value = comment;
             saleFormCustomer.setAttribute('disabled', 'true');
             saleFormProduct.setAttribute('readonly', 'true');
             $('[data-dismiss="modal"]').on('click', function(){

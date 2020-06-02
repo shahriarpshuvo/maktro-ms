@@ -15,7 +15,7 @@ router.get('/invoice/:id', generateInvoice, (req, res) => {
 });
 
 router.get('/print/:id', (req, res) => {
-    var data = fs.readFileSync(`./${req.params.id}.pdf`);
+    var data = fs.readFileSync(`./files/invoice/${req.params.id}.pdf`);
     res.contentType("application/pdf");
     res.send(data);
 })

@@ -276,7 +276,7 @@ const docDefinition = (data) => {
                 style: 'lessFocused',
             },
             {
-                text: `${data.id}`,
+                text: `${data.comment}`,
                 style: 'generalText',
             },
             {
@@ -354,13 +354,11 @@ const GenerateInvoice = async (req, res, next) => {
         .populate('product')
         .populate('customer');
     var pdfDoc = await printer.createPdfKitDocument(docDefinition(sale));
-    if (fs.existsSync(`${req.params.id}.pdf`)) {
-        fs.unlinkSync(`${req.params.id}.pdf`);
+    if (fs.existsSync(`files/invoice/${req.params.id}.pdf`)) {
+        fs.unlinkSync(`files/invoice/${req.params.id}.pdf`);
     }
-    pdfDoc.pipe(fs.createWriteStream(`${req.params.id}.pdf`));
+    pdfDoc.pipe(fs.createWriteStream(`files/invoice/${req.params.id}.pdf`));
     pdfDoc.end();
-    res.invoiceId = `./${req.params.id}.pdf`;
-    console.log(res.invoiceId);
     return next();
 };
 

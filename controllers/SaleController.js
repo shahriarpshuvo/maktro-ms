@@ -35,30 +35,25 @@ const updateCustomerInfo = async () => {
                 };
             });
         }
-        // if(getReturn){
-        //     getReturn.forEach(returnRecord => {
-        //         if(returnRecord.customer == customerID){
-        //             totalReturn += returnRecord.amount;
-        //         }
-        //         customerRecords[customerID].returnAmount = totalReturn;
-        //     });
-        // }
+        if(getReturn){
+            getReturn.forEach(returnRecord => {
+                if(returnRecord.customer == customerID){
+                    totalReturn += returnRecord.amount;
+                }
+                customerRecords[customerID].returnAmount = totalReturn;
+            });
+        }
     });
 
-    for (const id in customerRecords) {
+  
+    for(const id in customerRecords){
         console.log(customerRecords);
         let returnAmount = customerRecords[id].returnAmount || 0;
-        let totalAmount = customerRecords[id].total || 0;
-        let amount = totalAmount - returnAmount;
+        let amount = customerRecords[id].total || 0;
         let paid = customerRecords[id].paid || 0;
         let due = amount - paid;
-        await Customer.findByIdAndUpdate(id, {
-            $set: {
-                amount,
-                paid,
-                due
-            }
-        });
+        let profit = amount - returnAmount;
+        await Customer.findByIdAndUpdate(id, {$set: { amount, paid, due, returnAmount, profit }});
     }
 }
 
@@ -71,7 +66,8 @@ SaleController.create = async (req, res) => {
         shippingCost,
         discount,
         paid,
-        salesDate
+        salesDate,
+        comment
     } = req.body;
     const validator = SaleValidator({
         customer,
@@ -133,7 +129,8 @@ SaleController.create = async (req, res) => {
             discount,
             amount,
             paid,
-            salesDate
+            salesDate,
+            comment
         }).save();
         updateCustomerInfo();
         req.flash('success', `Congratulation on new Sales! Record has been added successfully.`);
@@ -179,7 +176,8 @@ SaleController.update = async (req, res) => {
         shippingCost,
         discount,
         paid,
-        salesDate
+        salesDate,
+        comment
     } = req.body;
     const getProduct = await Product.findOne({
         code: product
@@ -209,7 +207,8 @@ SaleController.update = async (req, res) => {
             discount,
             paid,
             amount,
-            salesDate
+            salesDate,
+            comment
         }
     });
     updateCustomerInfo();
@@ -231,7 +230,8 @@ SaleController.getSale = async (req, res) => {
             discount,
             amount,
             paid,
-            salesDate
+            salesDate,
+            comment
         } = await Sale.findById(req.params.id).populate('product').populate('customer');
         const getProduct = await Product.findById(product);
         const getCustomer = await Customer.findById(customer);
@@ -246,7 +246,8 @@ SaleController.getSale = async (req, res) => {
                 discount,
                 amount,
                 paid,
-                salesDate
+                salesDate,
+                comment
             });
         }
         return res.send("Sale Doesn't Exist");

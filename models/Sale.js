@@ -47,6 +47,10 @@ const saleSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
+    comment:{
+        type: String,
+        default: '',
+    },
     createdAt: {
         type: Date,
         default: Date.now,
