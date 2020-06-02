@@ -76,8 +76,6 @@ const CustomerValidator = (data) => {
         name: Joi.string().required().trim(),
         address: Joi.string().required().trim(),
         phone: Joi.string().required().trim(),
-        amount: Joi.number().min(0),
-        paid: Joi.number().min(0),
     });
     return validateSchema(schema, data);
 }

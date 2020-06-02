@@ -7,7 +7,7 @@ const CustomerController = {};
 
 CustomerController.create = async (req, res) => {
     const { name, phone, address, amount, paid } = req.body;
-    const validator = CustomerValidator({ name, phone, address, amount, paid });
+    const validator = CustomerValidator({ name, phone, address });
     if (validator.error) {
         req.flash('error', validator.error);
         return res.redirect('/customers');
@@ -22,8 +22,8 @@ CustomerController.create = async (req, res) => {
         return res.redirect('/customers');
     }
     try {
-        const { name, phone, address, amount, paid } = validator.value;
-        customer = new Customer({ name, phone, address, amount, paid });
+        const { name, phone, address} = validator.value;
+        customer = new Customer({ name, phone, address });
         await customer.save();
         req.flash('success', 'New customer has been successfully added!');
         return res.redirect('/customers');
@@ -38,30 +38,38 @@ CustomerController.read = async (req, res) => {
     const getSales = await Sale.find({});
     const getReturn = await ReturnModel.find({});
     const getCustomers = await Customer.find({});
+
     let customerRecords = {}
     getCustomers.forEach((customer) => {
         let totalAmount = 0, totalPaid = 0, totalReturn = 0;
         customerID = customer.id;
-        getSales.forEach(sale => {
-            if(sale.customer == customerID){
-                totalAmount += sale.amount;
-                totalPaid += sale.paid;
-            }
-            customerRecords[customerID] = { total: totalAmount, paid: totalPaid, due: (totalAmount - totalPaid) };
-        });
-        getReturn.forEach(returnRecord => {
-            if(returnRecord.customer == customerID){
-                totalReturn += returnRecord.amount;
-            }
-            customerRecords[customerID].returnAmount = totalReturn;
-        });
+        if(getSales){
+            getSales.forEach(sale => {
+                if(sale.customer == customerID){
+                    totalAmount += sale.amount;
+                    totalPaid += sale.paid;
+                }
+                customerRecords[customerID] = { total: totalAmount, paid: totalPaid};
+            });
+        }
+        if(getReturn){
+            getReturn.forEach(returnRecord => {
+                if(returnRecord.customer == customerID){
+                    totalReturn += returnRecord.amount;
+                }
+                customerRecords[customerID].returnAmount = totalReturn;
+            });
+        }
     });
+
     for(const id in customerRecords){
-        await Customer.findByIdAndUpdate(id, {$set: {
-            amount: (customerRecords[id].total - customerRecords[id].returnAmount),
-            paid: customerRecords[id].paid,
-            due: customerRecords[id].due,
-        }});
+        console.log(customerRecords);
+        let returnAmount = customerRecords[id].returnAmount || 0;
+        let totalAmount = customerRecords[id].total || 0;
+        let amount = totalAmount - returnAmount;
+        let paid = customerRecords[id].paid || 0;
+        let due = amount - paid;
+        await Customer.findByIdAndUpdate(id, {$set: { amount, paid, due }});
     }
 
     const perPage = 30;
