@@ -15,13 +15,15 @@ EntryController.create = async (req, res) => {
     }
     let entry;
     try {
-        const getProduct = await Product.findOne({ code: validator.value.product });
+        const getProduct = await Product.findOne({
+            code: validator.value.product,
+        });
         entry = new Entry({
             product: getProduct._id,
             quantity: validator.value.quantity,
         });
     } catch (e) {
-        req.flash('error', 'Product Doesn\'t Exist');
+        req.flash('error', "Product Doesn't Exist");
         return res.redirect('/inventories');
     }
     try {
@@ -35,11 +37,53 @@ EntryController.create = async (req, res) => {
 };
 
 EntryController.read = async (req, res) => {
-    const perPage = 30;
+    const perPage = 1;
     const page = req.params.page || 1;
-    const entries = await Entry.find({type:'inventory'}).skip((perPage * page) - perPage).limit(perPage).populate('product').sort({createdAt: -1});
-    const count =  await Entry.find({type: 'inventory'}).countDocuments();
-    res.render('entries/index', { entries, current: page, pages: Math.ceil(count / perPage)});
+    let entries = await Entry.find({ type: 'inventory' })
+        .skip(perPage * page - perPage)
+        .limit(perPage)
+        .populate('product')
+        .sort({ createdAt: -1 });
+    let count = await Entry.find({ type: 'inventory' }).countDocuments();
+    if (req.query.searchQuery) {
+        entries = await Entry.aggregate()
+            .lookup({
+                from: 'products',
+                localField: 'product',
+                foreignField: '_id',
+                as: 'product',
+            })
+            .match({
+                type: 'inventory',
+                'product.code': { $regex: req.query.searchQuery, $options: 'i' },
+            })
+            .unwind({
+                preserveNullAndEmptyArrays: true, // this remove the object which is null
+                path: '$product',
+            })
+            .skip(perPage * page - perPage)
+            .limit(perPage)
+            .sort({ createdAt: -1 })
+            .exec();
+        let countDocs = await Entry.aggregate()
+            .lookup({
+                from: 'products',
+                localField: 'product',
+                foreignField: '_id',
+                as: 'product',
+            })
+            .match({
+                type: 'inventory',
+                'product.code': { $regex: req.query.searchQuery, $options: 'i' },
+            });
+        count = countDocs.length;
+    }
+
+    res.render('entries/index', {
+        entries,
+        current: page,
+        pages: Math.ceil(count / perPage),
+    });
 };
 
 EntryController.delete = async (req, res) => {
@@ -49,8 +93,11 @@ EntryController.delete = async (req, res) => {
 };
 
 EntryController.update = async (req, res) => {
-    const newEntry = await Entry.findByIdAndUpdate(req.params.id,
-        { $set: req.body }, { new: true });
+    const newEntry = await Entry.findByIdAndUpdate(
+        req.params.id,
+        { $set: req.body },
+        { new: true }
+    );
     const entries = await Entry.find({ product: newEntry.product });
     const newQuantity = entries.reduce((acc, curr) => acc + curr.quantity, 0);
     req.flash('success', 'Entry has been updated successfully!');

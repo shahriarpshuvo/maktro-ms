@@ -45,7 +45,6 @@ const updateCustomerInfo = async () => {
         }
     });
 
-  
     for(const id in customerRecords){
         console.log(customerRecords);
         let returnAmount = customerRecords[id].returnAmount || 0;

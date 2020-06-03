@@ -21,9 +21,10 @@
 </div>
 
 <%- include('../modules/_alert'); %>
-<%- include('./_search-form'); %>
+<%- include('../modules/_search-with-date.ejs'); %>
 <%- include('./_data'); %>
 <%- include('../modules/_pagination', {path: 'entries'}); %>
+
 <%- include('../inventories/_collect-form'); %>
 <%- include('../modules/_delete-form', {deleteItemTypes: 'entries'}); %>
 <%- include('../modules/_footer'); %>

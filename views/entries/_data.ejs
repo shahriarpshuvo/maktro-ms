@@ -12,7 +12,7 @@
             <tbody class="table__body">
                 <% if(locals.entries) {
                     entries.forEach((entry)=>{
-                        if (entry.type == 'inventory') { %>
+                        if (entry.type == 'inventory' && entry.product) { %>
                 <tr>
                     <td><%= entry.createdAt.toLocaleDateString(); %></td>
                     <td><%= entry.product.name; %></td>
