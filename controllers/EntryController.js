@@ -45,6 +45,7 @@ EntryController.read = async (req, res) => {
         .populate('product')
         .sort({ createdAt: -1 });
     let count = await Entry.find({ type: 'inventory' }).countDocuments();
+    let queryString = '';
     if (req.query.searchQuery) {
         entries = await Entry.aggregate()
             .lookup({
@@ -77,11 +78,13 @@ EntryController.read = async (req, res) => {
                 'product.code': { $regex: req.query.searchQuery, $options: 'i' },
             });
         count = countDocs.length;
+        queryString = req.query.searchQuery;
     }
 
     res.render('entries/index', {
         entries,
         current: page,
+        queryString,
         pages: Math.ceil(count / perPage),
     });
 };

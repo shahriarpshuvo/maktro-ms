@@ -2,9 +2,13 @@
     <ul class="pagination text-center">
         <% if (current == 1) { %>
             <li class="disabled"><a class="mr-2 btn btn-primary">&laquo; First</a></li>
-        <% } else { %>
+        <% } else {
+            if(queryString){ %>
+                <li><a class="mr-2 btn btn-primary" href="/<%= path %>/1/?searchQuery=<%= queryString %>">&laquo; First</a></li>
+            <% } else{ %>
             <li><a class="mr-2 btn btn-primary" href="/<%= path %>/1">&laquo; First</a></li>
-        <% } %>
+
+        <% }} %>
         <% let i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
         <% if (i !== 1) { %>
             <li class="disabled"><a class="mr-2 btn btn-primary">...</a></li>
@@ -12,17 +16,29 @@
         <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
             <% if (i == current) { %>
                 <li class="active"><a class="mr-2 btn btn-primary"><%= i %></a></li>
-            <% } else { %>
+            <% } else {
+                if(queryString){ %>
+                    <li>
+                        <a class="mr-2 btn btn-primary" href="/<%= path %>/<%= i %>/?searchQuery=<%= queryString %>">
+                        <%= i %>
+                        </a>
+                    </li>
+                <% } else { %>
                 <li><a  class="mr-2 btn btn-primary"href="/<%= path %>/<%= i %>"><%= i %></a></li>
-            <% } %>
+            <% }} %>
             <% if (i == Number(current) + 4 && i < pages) { %>
                 <li class="disabled"><a class="mr-2 btn btn-primary">...</a></li>
             <% } %>
         <% } %>
         <% if (current == pages) { %>
             <li class="disabled"><a class="mr-2 btn btn-primary">Last &raquo;</a></li>
-        <% } else { %>
+        <% } else{
+            if(queryString){ %>
+                <li>
+                    <li><a class="mr-2 btn btn-primary" href="/<%= path %>/<%= pages %>/?searchQuery=<%= queryString %>">Last &raquo;</a></li>
+                </li>
+            <% } else { %>
             <li><a  class="btn btn-primary"href="/<%= path %>/<%= pages %>">Last &raquo;</a></li>
-        <% } %>
+        <% }} %>
     </ul>
 <% } %>
