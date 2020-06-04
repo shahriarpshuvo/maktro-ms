@@ -78,26 +78,4 @@ UserController.getUser = async (req, res) => {
 };
 
 
-// Login
-UserController.login = async (req, res) => {
-    const { email, password } = req.body;
-    const validator = LoginValidator({ email, password });
-    if (validator.error) {
-        req.flash('error', validator.error);
-        return res.redirect('/');
-    }
-    const user = await User.findOne({ email: validator.value.email });
-    if (!user) {
-        req.flash('error', "User doesn't exist with this email account.");
-        return res.redirect('/');
-    }
-    const validPassword = await bcrypt.compare(password, user.password);
-    if (!validPassword) {
-        req.flash('error', 'Invalid Password!');
-        return res.redirect('/');
-    }
-    const token = jwt.sign({ id: user._id }, process.env.JWT_TOKEN, { expiresIn: '7d' });
-    return res.header('auth-token', token).send(token);
-};
-
 module.exports = UserController;

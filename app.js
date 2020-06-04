@@ -8,6 +8,8 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const flash = require('connect-flash');
 const cors = require('cors');
+const MongoStore = require('connect-mongo')(session);
+
 
 const router = require('./routes/index');
 
@@ -33,7 +35,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(methodOverride('_method'));
 app.use(cookieParser());
-app.use(session({ secret: 'maktro-ms', saveUninitialized: true, resave: true }));
+//app.use(session({ secret: 'maktro-ms', saveUninitialized: true, resave: true }));
+app.use(session({
+    secret: 'maktro-auth', saveUninitialized: false, resave: false,
+    cookie: {maxAge: 1000*60*60*24*7, httpOnly: true},
+    store: new MongoStore({
+        mongooseConnection: db,
+        collection: 'session',
+    }),
+}));
 app.use(flash());
 app.use((req, res, next) => {
     const successFlashMessageArr = req.flash('success');

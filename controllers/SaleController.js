@@ -202,7 +202,6 @@ SaleController.read = async (req, res) => {
     }
 
     sales = await sales.skip(perPage * page - perPage).limit(perPage).sort({ createdAt: -1 }).exec();
-    console.log(sales);
     updateCustomerInfo();
 
     res.render('sales/index', {

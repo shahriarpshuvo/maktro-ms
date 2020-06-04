@@ -1,7 +1,8 @@
 <%- include('./modules/_header', {page: "Login"}); %>
 
 <div class="login text-center bg-dark text-light">
-    <form class="form-signin" action="/users/login" method="post">
+    <%- include('./modules/_alert'); %>
+    <form class="form-signin" action="/login" method="post">
         <img class="mb-3" src="../images/logo.png" height="72">
         <h1 class="h5 mb-5 text-warning font-weight-normal">Maktro
             Management System</h1>
