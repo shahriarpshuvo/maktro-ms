@@ -4,8 +4,9 @@
 [x] Inventory
 [x] Returns
 [x] Pagination
+[x] Authentication
+[x] Permission
+
+[-] PDFMake
 [-] Dashboard
 [-] Search
-[-] Authentication
-[-] Permission
-[-] PDFMake

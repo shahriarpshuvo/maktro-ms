@@ -22,8 +22,8 @@
     background-color: var(--primary) !important;
 }
 
-.f-10 {
-    font-size: 10px !important;
+.f-12 {
+    font-size: 12px !important;
 }
 
 * {
@@ -35,9 +35,9 @@ body {
 }
 
 .copyright {
-    font-size: 10px;
+    font-size: 12px;
     position: absolute;
-    bottom: 10px;
+    bottom: 12px;
     left: 50%;
     transform: translateX(-50%);
     width: 100%;

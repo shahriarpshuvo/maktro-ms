@@ -16,11 +16,10 @@ align-items-center border-bottom mt-0 mb-3 mt-md-3 py-4">
     </div>
 </div>
 
-
 <%- include('../modules/_alert'); %>
-<%- include('./_search-form'); %>
+<%- include('../modules/_search_only_date', { path: 'expenses'}); %>
 <%- include('./_data'); %>
-<%- include('../modules/_pagination', {path: 'expenses'}); %>
+<%- include('../modules/_pagination', { path: 'expenses' }); %>
 <%- include('./_collect-form'); %>
 <%- include('../modules/_delete-form', {deleteItemTypes: 'expenses'}); %>
 <%- include('../modules/_footer'); %>

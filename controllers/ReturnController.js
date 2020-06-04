@@ -54,9 +54,69 @@ ReturnController.create = async (req, res) => {
 ReturnController.read = async (req, res) => {
     const perPage = 30;
     const page = req.params.page || 1;
-    const returnRecords = await ReturnModel.find({}).skip((perPage * page) - perPage).limit(perPage).populate('product').populate('customer').sort({createdAt: -1});
-    const  count =  await ReturnModel.countDocuments();
-    res.render('returns/index', { returnRecords, current: page, pages: Math.ceil(count / perPage)});
+    // const returnRecords = await ReturnModel.find({}).skip((perPage * page) - perPage).limit(perPage).populate('product').populate('customer').sort({createdAt: -1});
+    // const count =  await ReturnModel.countDocuments();
+
+
+    let returnRecords = ReturnModel.find({}).populate('product').populate('customer');
+    let count = await ReturnModel.countDocuments();
+
+    let queryString = {}, countDocs;
+    let lookUpProduct = {
+        from: 'products',
+        localField: 'product',
+        foreignField: '_id',
+        as: 'product',
+    };
+    let lookUpCustomer = {
+        from: 'customers',
+        localField: 'customer',
+        foreignField: '_id',
+        as: 'customer',
+    };
+    let matchObj = {
+        'customer.phone': { $regex: req.query.searchQuery, $options: 'i'},
+    }
+
+    if (req.query.searchQuery) {
+        returnRecords = ReturnModel.aggregate().lookup(lookUpProduct).lookup(lookUpCustomer).match(matchObj)
+            .unwind({
+                preserveNullAndEmptyArrays: true,
+                path: '$customer',
+            }).unwind({
+                preserveNullAndEmptyArrays: true,
+                path: '$product',
+            });
+        countDocs = ReturnModel.aggregate()
+            .lookup(lookUpProduct)
+            .match(matchObj);
+        queryString.query = req.query.searchQuery;
+    }
+    if(req.query.startDate){
+        returnRecords = returnRecords.match({
+            returnDate: {$gte: new Date(req.query.startDate)}
+        });
+        countDocs = countDocs.match({
+            returnDate: {$gte: new Date(req.query.startDate)}
+        });
+        queryString.startDate = req.query.startDate;
+    }
+    if(req.query.endDate){
+        returnRecords = returnRecords.match({
+            returnDate: {$lt: new Date(req.query.endDate)}
+        });
+        countDocs = countDocs.match({
+            returnDate: {$lt: new Date(req.query.endDate)}
+        });
+        queryString.endDate = req.query.endDate;
+    }
+    if(countDocs) {
+        countDocs = await countDocs.exec();
+        count = countDocs.length;
+    }
+
+    returnRecords = await returnRecords.skip(perPage * page - perPage).limit(perPage).sort({ returnDate: -1 }).exec();
+    res.render('returns/index', { returnRecords, queryString, current: page, pages: Math.ceil(count / perPage)});
 };
 
 

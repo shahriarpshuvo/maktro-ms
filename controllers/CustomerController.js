@@ -63,7 +63,6 @@ CustomerController.read = async (req, res) => {
     });
 
     for(const id in customerRecords){
-        console.log(customerRecords);
         let returnAmount = customerRecords[id].returnAmount || 0;
         let amount = customerRecords[id].total || 0;
         let paid = customerRecords[id].paid || 0;
@@ -74,9 +73,25 @@ CustomerController.read = async (req, res) => {
 
     const perPage = 30;
     const page = req.params.page || 1;
-    const customers = await Customer.find({}).skip((perPage * page) - perPage).limit(perPage).sort({createdAt: -1});
-    const count =  await Customer.countDocuments();
-    res.render('customers/index', { customers, current: page, pages: Math.ceil(count / perPage)});
+    let customers = Customer.find({});
+    let count =  await Customer.countDocuments();
+
+    let queryString = {}, countDocs;
+    let matchObj = {
+        'phone': { $regex: req.query.searchQuery, $options: 'i'},
+    }
+
+    if (req.query.searchQuery) {
+        customers = Customer.aggregate().match(matchObj);
+        countDocs = Customer.aggregate().match(matchObj);
+        queryString.query = req.query.searchQuery;
+    }
+    if(countDocs) {
+        countDocs = await countDocs.exec();
+        count = countDocs.length;
+    }
+    customers = await customers.skip((perPage * page) - perPage).limit(perPage).sort({createdAt: -1}).exec();
+    res.render('customers/index', { customers, queryString, current: page, pages: Math.ceil(count / perPage)});
 };
 
 

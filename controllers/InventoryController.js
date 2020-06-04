@@ -28,9 +28,37 @@ InventoryController.read = async (req, res) => {
 
     const perPage = 30;
     const page = req.params.page || 1;
-    const inventories = await Inventory.find({}).skip((perPage * page) - perPage).limit(perPage).populate('product');
-    const count =  await Inventory.countDocuments();
-    res.render('inventories/index', { inventories, current: page, pages: Math.ceil(count / perPage)});
+    let inventories = Inventory.find({}).populate('product');
+    let count =  await Inventory.countDocuments();
+
+    let lookUpProduct = {
+        from: 'products',
+        localField: 'product',
+        foreignField: '_id',
+        as: 'product',
+    };
+    let matchObj = {
+        'product.code': { $regex: req.query.searchQuery, $options: 'i'},
+    }
+    let queryString = {}, countDocs;
+    if (req.query.searchQuery) {
+        inventories = Inventory.aggregate().lookup(lookUpProduct).match(matchObj)
+            .unwind({
+                preserveNullAndEmptyArrays: true,
+                path: '$product',
+            });
+        countDocs = Inventory.aggregate()
+            .lookup(lookUpProduct)
+            .match(matchObj);
+        queryString.query = req.query.searchQuery;
+    }
+    if(countDocs) {
+        countDocs = await countDocs.exec();
+        count = countDocs.length;
+    }
+
+    inventories = await inventories.skip(perPage * page - perPage).limit(perPage).sort({ createdAt: -1 }).exec();
+    res.render('inventories/index', { inventories, queryString, current: page, pages: Math.ceil(count / perPage)});
 };
 
 module.exports = InventoryController;

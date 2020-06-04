@@ -32,9 +32,32 @@ ExpenseController.create = async (req, res) => {
 ExpenseController.read = async (req, res) => {
     const perPage = 30;
     const page = req.params.page || 1;
-    const expenses = await Expense.find({}).skip((perPage * page) - perPage).limit(perPage).sort({createdAt: -1});
-    const count =  await Expense.countDocuments();
-    res.render('expenses/index', { expenses, current: page, pages: Math.ceil(count / perPage)});
+    let expenses = Expense.find({});
+    let count =  await Expense.countDocuments();
+
+    let queryString = {}, countDocs;
+    if (req.query.startDate || req.query.endDate) {
+        expenses = Expense.aggregate();
+        countDocs = Expense.aggregate();
+        queryString.searchQuery = '';
+    }
+    if(req.query.startDate){
+        expenses = expenses.match({ expenseDate: {$gte: new Date(req.query.startDate)}});
+        countDocs = countDocs.match({ expenseDate: {$gte: new Date(req.query.startDate)}});
+        queryString.startDate = req.query.startDate;
+    }
+    if(req.query.endDate){
+        expenses = expenses.match({ expenseDate: {$lt: new Date(req.query.endDate)}});
+        countDocs = countDocs.match({ expenseDate: {$lt: new Date(req.query.endDate)} });
+        queryString.endDate = req.query.endDate;
+    }
+    if(countDocs) {
+        countDocs = await countDocs.exec();
+        count = countDocs.length;
+    }
+
+    expenses = await expenses.skip((perPage * page) - perPage).limit(perPage).sort({expenseDate: -1}).exec();
+    res.render('expenses/index', { expenses, queryString, current: page, pages: Math.ceil(count / perPage)});
 };
 
 ExpenseController.delete = async (req, res) => {

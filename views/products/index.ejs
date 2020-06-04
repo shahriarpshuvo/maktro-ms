@@ -17,7 +17,7 @@
     </div>
 </div>
 <%- include('../modules/_alert'); %>
-<%- include('./_search-form'); %>
+<%- include('../modules/_search', { path: 'products', placeholderText: 'Enter product code'}); %>
 <%- include('./_data'); %>
 <%- include('../modules/_pagination', {path: 'products'}); %>
 <%- include('./_collect-form'); %>

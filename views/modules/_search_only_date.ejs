@@ -1,5 +1,5 @@
 <div class="search-area mt-4 mt-md-5 mb-4">
-    <form action="" method="">
+    <form action="/<%= path %>" method="get" class="searchForm-onlyDate">
         <div class="container">
             <div
                 class="row d-flex justify-content-center align-items-start mb-3 mb-md-5">
@@ -11,19 +11,19 @@
                             </div>
                         </div>
                         <input type="date" class="form-control"
-                            name="startDate" />
+                        name="startDate" value="<%if(queryString.startDate){%><%= queryString.startDate; %><%}%>"/>
                         <input type="date" class="form-control"
-                            name="endDate" />
+                        name="endDate" value="<%if(queryString.endDate){%><%= queryString.endDate; %><%}%>"/>
                     </div>
 
                     <button type="submit" class="btn btn-primary mr-2">
                         <i class="ic-magnifying-glass"></i>
                         Search
                     </button>
-                    <button type="button" class="btn btn-secondary">
+                    <!-- <button type="button" class="btn btn-secondary">
                         <i class="ic-print"></i>
                         Print
-                    </button>
+                    </button> -->
                 </div>
             </div>
         </div>

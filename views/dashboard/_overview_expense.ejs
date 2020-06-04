@@ -1,0 +1,75 @@
+<div class="overview card border-danger text-uppercase my-3">
+    <div class="card-header bg-danger border-danger">
+        <h2 class="h4 text-light text-center my-3">
+            Expenses Overview
+        </h2>
+    </div>
+    <div class="container mb-4">
+        <div class="row justify-content-center text-center text-md-left">
+            <div class="col-md-12">
+                <div class="search-area mt-4 mt-md-5 mb-4">
+                    <form action="/" method="POST">
+                        <div class="container">
+                            <div
+                                class="row d-flex justify-content-center align-items-start">
+                                <div class="col-lg-5 mb-3 mr-lg-3">
+                                    <div class="input-group">
+                                        <select class="form-control"
+                                            name="category" required>
+                                            <option value="all">All Categories
+                                            </option>
+                                            <option value="equipments">
+                                                Equipments</option>
+                                            <option value="transport">Transport
+                                            </option>
+                                            <option value="salaryUtilities">
+                                                Salary & Utilities
+                                            </option>
+                                            <option value="retailHoldings">
+                                                Retail H/D</option>
+                                            <option value="stationeryTools">
+                                                Stationery & Tools
+                                            </option>
+                                            <option value="marketing">Marketing
+                                            </option>
+                                            <option value="courierCommission">
+                                                Courier &
+                                                Commission</option>
+                                            <option value="others">Others
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 d-flex">
+                                    <div class="input-group mr-4">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="ic-calendar"></i>
+                                            </div>
+                                        </div>
+                                        <input type="date" class="form-control"
+                                            name="startDate" />
+                                        <input type="date" class="form-control"
+                                            name="endDate" />
+                                    </div>
+
+                                    <button type="submit"
+                                        class="btn btn-danger mr-2">
+                                        <i class="ic-magnifying-glass"></i>
+                                        Search
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-sm-8 border-danger text-center">
+                <div class="card-body bg-light text-danger b">
+                    <h3 class="display-5"> &#x9f3; 238409</h3>
+                    <h6 class="card-title text-muted">Total Expenses</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

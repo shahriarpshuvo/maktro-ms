@@ -34,9 +34,26 @@ ProductController.create = async (req, res) => {
 ProductController.read = async (req, res) => {
     const perPage = 30;
     const page = req.params.page || 1;
-    const products = await Product.find({}).skip((perPage * page) - perPage).limit(perPage).sort({createdAt: -1});
-    const  count =  await Product.countDocuments();
-    res.render('products/index', { products, current: page, pages: Math.ceil(count / perPage)});
+    let products = Product.find({});
+    let count =  await Product.countDocuments();
+
+    let queryString = {}, countDocs;
+    let matchObj = {
+        'code': { $regex: req.query.searchQuery, $options: 'i'},
+    }
+
+    if (req.query.searchQuery) {
+        products = Product.aggregate().match(matchObj);
+        countDocs = Product.aggregate().match(matchObj);
+        queryString.query = req.query.searchQuery;
+    }
+    if(countDocs) {
+        countDocs = await countDocs.exec();
+        count = countDocs.length;
+    }
+
+    products = await products.skip((perPage * page) - perPage).limit(perPage).sort({createdAt: -1}).exec();
+    res.render('products/index', { products, queryString, current: page, pages: Math.ceil(count / perPage)});
 };
 
 ProductController.update = async (req, res) => {

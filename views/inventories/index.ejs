@@ -21,8 +21,8 @@
 </div>
 
 <%- include('../modules/_alert'); %>
-<%- include('./_search-form'); %>
+<%- include('../modules/_search', {path: 'inventories', placeholderText: 'Enter product code'}); %>
 <%- include('./_data'); %>
-<%- include('../modules/_pagination', {path: 'inventories'}); %>
+<%- include('../modules/_pagination', { path: 'inventories'}); %>
 <%- include('./_collect-form'); %>
 <%- include('../modules/_footer'); %>

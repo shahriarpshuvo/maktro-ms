@@ -16,9 +16,8 @@ align-items-center border-bottom mt-0 mb-3 mt-md-3 py-4">
     </div>
 </div>
 
-
 <%- include('../modules/_alert'); %>
-<%- include('./_search-form'); %>
+<%- include('../modules/_search-with-date', {path: 'returns', placeholderText: 'Enter phone number'}); %>
 <%- include('./_data'); %>
 <%- include('../modules/_pagination', {path: 'returns'}); %>
 <%- include('./_collect-form'); %>
