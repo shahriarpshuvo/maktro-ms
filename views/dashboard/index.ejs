@@ -8,8 +8,23 @@
 </div>
 
 <% if(user.role == 'admin') { %>
-    <%- include('./_overview_sales') %>
-    <%- include('./_overview_expense') %>
+    <nav class="mt-3">
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <a class="nav-item nav-link <%if (queryString.overview=='sales'){ %>active<%}%>" data-toggle="tab" href="#sales" role="tab"><span class="text-success">Sales Overview</span></a>
+          <a class="nav-item nav-link <%if (queryString.overview=='expense'){ %>active<%}%>" data-toggle="tab" href="#expense" role="tab"><span class="text-danger">Expense Overview</span></a>
+        </div>
+      </nav>
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade <%if (queryString.overview=='sales'){ %>show active<%}%>" id="sales" role="tabpanel">
+            <%- include('./_overview_sales') %>
+        </div>
+        <div class="tab-pane fade <%if (queryString.overview=='expense'){ %>show active<%}%>" id="expense" role="tabpanel">
+            <%- include('./_overview_expense') %>
+        </div>
+      </div>
+
+
+
 <% } %>
 
 

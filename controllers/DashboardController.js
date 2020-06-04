@@ -4,12 +4,13 @@ const DashboardController = {};
 
 
 DashboardController.read = async (req, res) => {
-
+    let queryString={};
+    queryString.overview = 'sales';
 
 
 
     let expenses = Expense.aggregate().match({});
-    let totalExp = 0, queryString={}, expTypes = req.query.expcat;
+    let totalExp = 0, expTypes = req.query.expcat;
     if(req.query.startDate){
         expenses = expenses.match({ expenseDate: {$gte: new Date(req.query.startDate)}});
         queryString.startDate = req.query.startDate;
@@ -24,6 +25,7 @@ DashboardController.read = async (req, res) => {
         else totalExp = expenses.reduce((acc, curr) => acc + curr.amount, 0);
         queryString.expcat = expTypes;
     }
+    if(expTypes) queryString.overview = 'expense';
     res.render('dashboard/index', {totalExp, queryString});
 };
 

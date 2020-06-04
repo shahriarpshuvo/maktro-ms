@@ -1,6 +1,6 @@
-<div class="overview card border-danger text-uppercase my-3">
+<div class="overview card border-danger text-uppercase">
     <div class="card-header bg-danger border-danger">
-        <h2 class="h4 text-light text-center my-3">
+        <h2 class="h4 text-light text-center">
             Expenses Overview
         </h2>
     </div>
@@ -14,29 +14,28 @@
                                 class="row d-flex justify-content-center align-items-start">
                                 <div class="col-lg-5 mb-3 mr-lg-3">
                                     <div class="input-group">
-                                        <!--TODO: Change Value-->
                                         <select class="form-control"
-                                            name="expcat" default="<%if(queryString.expcat){%><%= queryString.expcat; %><%}%>">
-                                            <option value=''>All Categories
+                                            name="expcat">
+                                            <option value='' >All Categories
                                             </option>
-                                            <option value="equipments">
+                                            <option value="equipments" <%if(queryString.expcat=='equipments'){%> selected <%}%>>
                                                 Equipments</option>
-                                            <option value="transport">Transport
+                                            <option value="transport" <%if(queryString.expcat=='transport'){%> selected <%}%>>Transport
                                             </option>
-                                            <option value="salaryUtilities">
+                                            <option value="salaryUtilities" <%if(queryString.expcat=='salaryUtilities'){%> selected <%}%>>
                                                 Salary & Utilities
                                             </option>
-                                            <option value="retailHoldings">
+                                            <option value="retailHoldings" <%if(queryString.expcat=='retailHoldings'){%> selected <%}%>>
                                                 Retail H/D</option>
-                                            <option value="stationeryTools">
+                                            <option value="stationeryTools" <%if(queryString.expcat=='stationeryTools'){%> selected <%}%>>
                                                 Stationery & Tools
                                             </option>
-                                            <option value="marketing">Marketing
+                                            <option value="marketing" <%if(queryString.expcat=='marketing'){%> selected <%}%>>Marketing
                                             </option>
-                                            <option value="courierCommission">
+                                            <option value="courierCommission" <%if(queryString.expcat=='courierCommission'){%> selected <%}%>>
                                                 Courier &
                                                 Commission</option>
-                                            <option value="others">Others
+                                            <option value="others" <%if(queryString.expcat=='others'){%> selected <%}%>>Others
                                             </option>
                                         </select>
                                     </div>
