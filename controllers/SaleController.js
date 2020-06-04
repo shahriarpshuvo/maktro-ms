@@ -144,13 +144,70 @@ SaleController.create = async (req, res) => {
 SaleController.read = async (req, res) => {
     const perPage = 30;
     const page = req.params.page || 1;
-    const sales = await Sale.find({}).skip((perPage * page) - perPage).limit(perPage).populate('product').populate('customer').sort({
-        createdAt: -1
-    });
-    const count = await Sale.countDocuments();
+    let sales = Sale.find({}).populate('product').populate('customer');
+    let count = await Sale.countDocuments();
+
+    let queryString = {}, countDocs;
+    let lookUpProduct = {
+        from: 'products',
+        localField: 'product',
+        foreignField: '_id',
+        as: 'product',
+    };
+    let lookUpCustomer = {
+        from: 'customers',
+        localField: 'customer',
+        foreignField: '_id',
+        as: 'customer',
+    };
+    let matchObj = {
+        'customer.phone': { $regex: req.query.searchQuery, $options: 'i'},
+    }
+
+    if (req.query.searchQuery) {
+        sales = Sale.aggregate().lookup(lookUpProduct).lookup(lookUpCustomer).match(matchObj)
+            .unwind({
+                preserveNullAndEmptyArrays: true,
+                path: '$customer',
+            }).unwind({
+                preserveNullAndEmptyArrays: true,
+                path: '$product',
+            });
+        countDocs = Sale.aggregate()
+            .lookup(lookUpProduct)
+            .match(matchObj);
+        queryString.query = req.query.searchQuery;
+    }
+    if(req.query.startDate){
+        sales = sales.match({
+            salesDate: {$gte: new Date(req.query.startDate)}
+        });
+        countDocs = countDocs.match({
+            salesDate: {$gte: new Date(req.query.startDate)}
+        });
+        queryString.startDate = req.query.startDate;
+    }
+    if(req.query.endDate){
+        sales = sales.match({
+            salesDate: {$lt: new Date(req.query.endDate)}
+        });
+        countDocs = countDocs.match({
+            salesDate: {$lt: new Date(req.query.endDate)}
+        });
+        queryString.endDate = req.query.endDate;
+    }
+    if(countDocs) {
+        countDocs = await countDocs.exec();
+        count = countDocs.length;
+    }
+
+    sales = await sales.skip(perPage * page - perPage).limit(perPage).sort({ createdAt: -1 }).exec();
+    console.log(sales);
     updateCustomerInfo();
+
     res.render('sales/index', {
         sales,
+        queryString,
         current: page,
         pages: Math.ceil(count / perPage)
     });

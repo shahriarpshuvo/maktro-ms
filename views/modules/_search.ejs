@@ -1,8 +1,8 @@
-<div class="search-area mb-4 mt-4 mt-md-5">
-    <form action="/<%= path %>" method="get" class="searchForm-withDate">
+<div class="search-area mt-4 mt-md-5 mb-4">
+    <form action="/<%= path %>" method="get" class="searchForm">
         <div class="container">
             <div class="row d-flex justify-content-center align-items-start">
-                <div class="col-lg-4 mb-3 mr-lg-3">
+                <div class="col-lg-5 mb-3 mr-lg-3 justify-self-center">
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i
@@ -14,19 +14,7 @@
                             required>
                     </div>
                 </div>
-                <div class="col-lg-7 d-flex">
-                    <div class="input-group mr-4">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text"><i
-                                    class="ic-calendar"></i>
-                            </div>
-                        </div>
-                        <input type="date" class="form-control"
-                            name="startDate" value="<%if(queryString.startDate){%><%= queryString.startDate; %><%}%>"/>
-                        <input type="date" class="form-control"
-                            name="endDate" value="<%if(queryString.endDate){%><%= queryString.endDate; %><%}%>"/>
-                    </div>
-
+                <div class="col-lg-2 d-flex">
                     <button type="submit" class="btn btn-primary mr-2">
                         <i class="ic-magnifying-glass"></i>
                         Search

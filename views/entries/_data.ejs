@@ -17,7 +17,7 @@
                     <td><%= entry.createdAt.toLocaleDateString(); %></td>
                     <td><%= entry.product.name; %></td>
                     <td><%= entry.quantity.toLocaleString(); %></td>
-                    <td class="table__actions text-center" data-item-id="<%= entry.id %>">
+                    <td class="table__actions text-center" data-item-id="<%= entry._id %>">
                         <a href="#" class="table__actions-btn inventoryEditButton"
                             data-toggle="modal" data-target="#addInventory"><i
                                 class="ic-pencil pr-2"></i>Edit</a>

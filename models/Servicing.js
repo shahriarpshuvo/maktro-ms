@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const tz = require('mongoose-timezone');
 
 const servicingSchema = new mongoose.Schema({
     product: {
@@ -39,4 +40,5 @@ const servicingSchema = new mongoose.Schema({
     },
 });
 
+servicingSchema.plugin(tz);
 module.exports = mongoose.model('Servicing', servicingSchema);

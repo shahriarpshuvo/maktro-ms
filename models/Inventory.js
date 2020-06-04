@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-// Will be updated on sales.quantity and returns.quantity
+const tz = require('mongoose-timezone');
+
 const inventorySchema = new mongoose.Schema({
     quantity: {
         type: Number,
@@ -16,7 +17,7 @@ const inventorySchema = new mongoose.Schema({
     },
     leftOver:{
         type: Number,
-        default: 0, 
+        default: 0,
     },
     product: {
         type: mongoose.Schema.Types.ObjectId,
@@ -24,4 +25,5 @@ const inventorySchema = new mongoose.Schema({
     },
 });
 
+inventorySchema.plugin(tz);
 module.exports = mongoose.model('Inventory', inventorySchema);

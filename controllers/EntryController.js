@@ -1,6 +1,5 @@
 /* eslint-disable no-underscore-dangle */
 const Entry = require('../models/Entry');
-const Inventory = require('../models/Inventory');
 const Product = require('../models/Product');
 const { EntryValidator } = require('../middlewares/Validator');
 
@@ -37,50 +36,58 @@ EntryController.create = async (req, res) => {
 };
 
 EntryController.read = async (req, res) => {
-    const perPage = 1;
+    const perPage = 30;
     const page = req.params.page || 1;
-    let entries = await Entry.find({ type: 'inventory' })
-        .skip(perPage * page - perPage)
-        .limit(perPage)
-        .populate('product')
-        .sort({ createdAt: -1 });
+    let entries = Entry.find({ type: 'inventory' }).populate('product');
     let count = await Entry.find({ type: 'inventory' }).countDocuments();
-    let queryString = '';
+
+
+    let lookUpProduct = {
+        from: 'products',
+        localField: 'product',
+        foreignField: '_id',
+        as: 'product',
+    };
+    let matchObj = {
+        type: 'inventory',
+        'product.code': { $regex: req.query.searchQuery, $options: 'i'},
+    }
+    let queryString = {}, countDocs;
     if (req.query.searchQuery) {
-        entries = await Entry.aggregate()
-            .lookup({
-                from: 'products',
-                localField: 'product',
-                foreignField: '_id',
-                as: 'product',
-            })
-            .match({
-                type: 'inventory',
-                'product.code': { $regex: req.query.searchQuery, $options: 'i' },
-            })
+        entries = Entry.aggregate().lookup(lookUpProduct).match(matchObj)
             .unwind({
-                preserveNullAndEmptyArrays: true, // this remove the object which is null
+                preserveNullAndEmptyArrays: true,
                 path: '$product',
-            })
-            .skip(perPage * page - perPage)
-            .limit(perPage)
-            .sort({ createdAt: -1 })
-            .exec();
-        let countDocs = await Entry.aggregate()
-            .lookup({
-                from: 'products',
-                localField: 'product',
-                foreignField: '_id',
-                as: 'product',
-            })
-            .match({
-                type: 'inventory',
-                'product.code': { $regex: req.query.searchQuery, $options: 'i' },
             });
+        countDocs = Entry.aggregate()
+            .lookup(lookUpProduct)
+            .match(matchObj);
+        queryString.query = req.query.searchQuery;
+    }
+    if(req.query.startDate){
+        entries = entries.match({
+            createdAt: {$gte: new Date(req.query.startDate)}
+        });
+        countDocs = countDocs.match({
+            createdAt: {$gte: new Date(req.query.startDate)}
+        });
+        queryString.startDate = req.query.startDate;
+    }
+    if(req.query.endDate){
+        entries = entries.match({
+            createdAt: {$lt: new Date(req.query.endDate)}
+        });
+        countDocs = countDocs.match({
+            createdAt: {$lt: new Date(req.query.endDate)}
+        });
+        queryString.endDate = req.query.endDate;
+    }
+    if(countDocs) {
+        countDocs = await countDocs.exec();
         count = countDocs.length;
-        queryString = req.query.searchQuery;
     }
 
+    entries = await entries.skip(perPage * page - perPage).limit(perPage).sort({ createdAt: -1 }).exec();
     res.render('entries/index', {
         entries,
         current: page,
@@ -89,11 +96,15 @@ EntryController.read = async (req, res) => {
     });
 };
 
+
+
 EntryController.delete = async (req, res) => {
-    const entry = await Entry.findByIdAndDelete(req.params.id);
+    await Entry.findByIdAndDelete(req.params.id);
     req.flash('success', 'Entry has been deleted successfully!');
     res.redirect('/entries');
 };
+
+
 
 EntryController.update = async (req, res) => {
     const newEntry = await Entry.findByIdAndUpdate(
@@ -101,8 +112,7 @@ EntryController.update = async (req, res) => {
         { $set: req.body },
         { new: true }
     );
-    const entries = await Entry.find({ product: newEntry.product });
-    const newQuantity = entries.reduce((acc, curr) => acc + curr.quantity, 0);
+    await Entry.find({ product: newEntry.product });
     req.flash('success', 'Entry has been updated successfully!');
     res.redirect('/entries');
 };

@@ -26,15 +26,15 @@
                     <td class="text-danger font-weight-bold">
                         <%= (sale.amount - sale.paid).toLocaleString(); %>
                     </td>
-                    <td class="table__actions text-center" data-item-id="<%= sale.id %>">
+                    <td class="table__actions text-center" data-item-id="<%= sale._id %>">
                         <a href="#" class="table__actions-btn saleEditButton"
                             data-toggle="modal" data-target="#addSales"><i
                                 class="ic-pencil pr-2"></i>Edit</a>
                         <a href="#" class="table__actions-btn"
                             data-toggle="modal" data-target="#deleteModal"><i
                                 class="ic-trash pr-2"></i>Delete</a>
-                        <a href="/sales/invoice/<%= sale.id %>" target="_blank" class="table__actions-btn"><i
-                                class="ic-print pr-2"></i>Invoice</a>
+                        <a href="/sales/invoice/<%= sale._id %>" target="_blank" class="table__actions-btn">
+                            <i class="ic-print pr-2"></i>Invoice</a>
                     </td>
                 </tr>
                 <% })} %>

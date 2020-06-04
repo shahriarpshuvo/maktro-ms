@@ -33,9 +33,38 @@ ServicingController.create = async (req, res) => {
 ServicingController.read = async (req, res) => {
     const perPage = 30;
     const page = req.params.page || 1;
-    const allServicing = await Servicing.find({}).populate('product').sort({createdAt: -1}).skip((perPage * page) - perPage).limit(perPage);
-    const  count =  await Servicing.countDocuments();
-    res.render('servicing/index', { allServicing, current: page, pages: Math.ceil(count / perPage)});
+    let allServicing = Servicing.find({}).populate('product');
+    let count =  await Servicing.countDocuments();
+
+    let queryString = {}, countDocs;
+    let lookUpProduct = {
+        from: 'products',
+        localField: 'product',
+        foreignField: '_id',
+        as: 'product',
+    };
+    let matchObj = {
+        'phone': { $regex: req.query.searchQuery, $options: 'i'},
+    }
+
+    if (req.query.searchQuery) {
+        allServicing = Servicing.aggregate().lookup(lookUpProduct).match(matchObj)
+            .unwind({
+                preserveNullAndEmptyArrays: true,
+                path: '$product',
+            });
+        countDocs = Servicing.aggregate()
+            .lookup(lookUpProduct)
+            .match(matchObj);
+        queryString.query = req.query.searchQuery;
+    }
+    if(countDocs) {
+        countDocs = await countDocs.exec();
+        count = countDocs.length;
+    }
+
+    allServicing = await allServicing.sort({createdAt: -1}).skip((perPage * page) - perPage).limit(perPage).exec();
+    res.render('servicing/index', { allServicing, queryString, current: page, pages: Math.ceil(count / perPage)});
 };
 
 ServicingController.delete = async (req, res) => {

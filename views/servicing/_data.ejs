@@ -28,9 +28,9 @@
                         <% } %>
                     </td>
                     <td><%= servicing.deliveryDate.toLocaleDateString(); %></td>
-                    <td class="table__actions text-center" data-item-id="<%= servicing.id %>">
+                    <td class="table__actions text-center" data-item-id="<%= servicing._id %>">
                         <% if(servicing.status =='received'){ %>
-                        <form class="d-inline-block p-0 m-0" action="<%=`/servicing/${servicing.id}?_method=patch`%>" method="post">
+                        <form class="d-inline-block p-0 m-0" action="<%=`/servicing/${servicing._id}?_method=patch`%>" method="post">
                             <input type="hidden" value="completed" name="status">
                             <button class="btn d-inline-block btn-link table__actions-btn mb-2" href="#" class="table__actions-btn">
                                 <i class="ic-check pr-1"></i>Completed

@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const tz = require('mongoose-timezone');
+
 const returnSchema = new mongoose.Schema({
     entry:{
         type: mongoose.Schema.Types.ObjectId,
@@ -32,4 +34,5 @@ const returnSchema = new mongoose.Schema({
     },
 });
 
+returnSchema.plugin(tz);
 module.exports = mongoose.model("Return", returnSchema);

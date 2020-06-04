@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const tz = require('mongoose-timezone');
 const expenseSchema = new mongoose.Schema({
     purpose: {
         type: String,
@@ -59,4 +59,5 @@ const expenseSchema = new mongoose.Schema({
     },
 });
 
+expenseSchema.plugin(tz);
 module.exports = mongoose.model('Expense', expenseSchema);

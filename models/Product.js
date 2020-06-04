@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const tz = require('mongoose-timezone');
+
 const productSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -24,4 +26,5 @@ const productSchema = new mongoose.Schema({
     },
 });
 
+productSchema.plugin(tz);
 module.exports = mongoose.model('Product', productSchema);
