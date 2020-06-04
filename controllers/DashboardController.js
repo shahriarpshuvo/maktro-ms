@@ -52,7 +52,6 @@ DashboardController.read = async (req, res) => {
     const totalPaid = sales.reduce((acc, curr) => acc + curr.paid, 0);
     const totalDue = totalSales - totalPaid;
     const salesData = { totalSales, totalPaid, totalDue };
-    
     let expenses = Expense.aggregate().match({});
     let totalExp = 0, expTypes = req.query.expcat;
     if(req.query.startDate){
