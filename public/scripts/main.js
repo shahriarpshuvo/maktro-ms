@@ -1,5 +1,8 @@
-const host = 'http://localhost:8000';
-const hostAPI = 'http://localhost:8000/api';
+const protocol = location.protocol;
+const slashes = protocol.concat("//");
+const host = slashes.concat(window.location.host);
+const hostAPI = host+'/api';
+
 const fetchURI = {
     products: `${hostAPI}/products`,
     customers: `${hostAPI}/customers`
