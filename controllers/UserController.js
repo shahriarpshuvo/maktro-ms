@@ -48,7 +48,12 @@ UserController.read = async (req, res) => {
 };
 
 UserController.update = async (req, res) => {
-    const user = await User.findByIdAndUpdate(req.params.id, { $set: req.body });
+    const {name, password, role} = req.body;
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+    const user = await User.findByIdAndUpdate(req.params.id, { $set: {
+        name, password:hashedPassword, role
+    } });
     req.flash('success', `User (${user.email}) has been updated successfully!`);
     res.redirect('/users');
 };
