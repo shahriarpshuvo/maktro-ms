@@ -10,7 +10,6 @@
                     <th>Paid</th>
                     <th>Due</th>
                     <th>Return</th>
-                    <th>Profit</th>
                     <th class="text-center">Actions</th>
                 </tr>
             </thead>
@@ -34,9 +33,6 @@
                     </td>
                     <td class="text-danger font-weight-bold">
                         <%= customer.returnAmount.toLocaleString(); %>
-                    </td>
-                    <td class="text-success font-weight-bold">
-                        <%= customer.profit.toLocaleString(); %>
                     </td>
                     <td class="table__actions text-center" data-item-id="<%= customer._id %>">
                         <a href="#" class="table__actions-btn customerEditButton"

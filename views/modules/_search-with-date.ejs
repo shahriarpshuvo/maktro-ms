@@ -5,8 +5,7 @@
                 <div class="col-lg-4 mb-3 mr-lg-3">
                     <div class="input-group">
                         <div class="input-group-prepend">
-                            <div class="input-group-text"><i
-                                    class="ic-magnifying-glass"></i></div>
+                            <div class="input-group-text"><i class="ic-magnifying-glass"></i></div>
                         </div>
                         <input type="text" class="form-control"
                             name="searchQuery" placeholder="<%= placeholderText %>"
@@ -14,7 +13,7 @@
                             required>
                     </div>
                 </div>
-                <div class="col-lg-7 d-flex">
+                <div class="col-lg-7 d-flex align-items-start">
                     <div class="input-group mr-4">
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i
@@ -27,7 +26,7 @@
                             name="endDate" value="<%if(queryString.endDate){%><%= queryString.endDate; %><%}%>"/>
                     </div>
 
-                    <button type="submit" class="btn btn-primary mr-2">
+                    <button type="submit" class="btn btn-primary mr-2" style="width: 33%">
                         <i class="ic-magnifying-glass"></i>
                         Search
                     </button>

@@ -1,6 +1,10 @@
 const PdfPrinter = require('pdfmake');
 const Sale = require('../models/Sale');
 const fs = require('fs');
+const dateFormat = require('dateformat');
+
+
+
 
 const fonts = {
     Roboto: {
@@ -28,7 +32,7 @@ const docDefinition = (data) => {
                             style: 'title',
                         },
                         {
-                            text: `Razia Sulatana Road, \n Mohammadpur, Dhaka-1209, \nContact: 01717998833, 01331283455`,
+                            text: `2/23 Razia Sultana Road,\n Mohammadpur, Dhaka.\nwww.maktro.com\n01714-178875, 01714-178876`,
                             style: 'generalText',
                         },
                     ],
@@ -42,11 +46,6 @@ const docDefinition = (data) => {
                             text: `Invoice ID: ${data.id.slice(-8)}`,
                             alignment: 'right',
                             style: 'lessFocused',
-                        },
-                        {
-                            text: `Date: ${new Date().toLocaleDateString()}, ${new Date().toLocaleTimeString()}`,
-                            alignment: 'right',
-                            style: 'generalText',
                         },
                         {
                             text: '',
@@ -87,7 +86,7 @@ const docDefinition = (data) => {
                 style: 'table',
             },
             {
-                text: `Sales Date: ${data.salesDate.toLocaleDateString()}`,
+                text: `Sales Date: ${dateFormat(data.salesDate, "mmmm d, yyyy")}`,
                 alignment: 'center',
                 style: 'lessFocused',
             },
@@ -354,11 +353,11 @@ const GenerateInvoice = async (req, res, next) => {
         .populate('product')
         .populate('customer');
     var pdfDoc = await printer.createPdfKitDocument(docDefinition(sale));
-    if (fs.existsSync(`files/invoice/${req.params.id}.pdf`)) {
-        fs.unlinkSync(`files/invoice/${req.params.id}.pdf`);
+    if (!fs.existsSync(`files/invoice/${req.params.id}.pdf`)) {
+        //fs.unlinkSync(`files/invoice/${req.params.id}.pdf`);
+        pdfDoc.pipe(fs.createWriteStream(`files/invoice/${req.params.id}.pdf`));
+        pdfDoc.end();
     }
-    pdfDoc.pipe(fs.createWriteStream(`files/invoice/${req.params.id}.pdf`));
-    pdfDoc.end();
     return next();
 };
 

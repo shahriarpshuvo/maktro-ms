@@ -1,5 +1,6 @@
 const PdfPrinter = require('pdfmake');
 const Servicing = require('../models/Servicing');
+const dateFormat = require('dateformat');
 const fs = require('fs');
 
 const fonts = {
@@ -28,7 +29,7 @@ const docDefinition = (data) => {
                             style: 'title',
                         },
                         {
-                            text: `Razia Sulatana Road, \n Mohammadpur, Dhaka-1209, \nContact: 01717998833, 01331283455`,
+                            text: `2/23 Razia Sultana Road,\n Mohammadpur, Dhaka.\nwww.maktro.com\n01714-178875, 01714-178876`,
                             style: 'generalText',
                         },
                     ],
@@ -48,11 +49,6 @@ const docDefinition = (data) => {
                             alignment: 'right',
                             bold: true,
                             style: 'primaryText',
-                        },
-                        {
-                            text: `Date: ${new Date().toLocaleDateString()}, ${new Date().toLocaleTimeString()}`,
-                            alignment: 'right',
-                            style: 'generalText',
                         },
                         {
                             text: '',
@@ -93,7 +89,7 @@ const docDefinition = (data) => {
                 style: 'table',
             },
             {
-                text: `Received Date: ${data.createdAt.toLocaleDateString()}`,
+                text: `Received Date: ${dateFormat(data.createdAt, "mmmm d, yyyy")}`,
                 alignment: 'center',
                 style: 'lessFocused',
             },
@@ -131,7 +127,7 @@ const docDefinition = (data) => {
 
                         [
                             {
-                                text: `Expected Delivery Date:\n${data.deliveryDate.toLocaleDateString()}`,
+                                text: `Expected Delivery Date:\n${dateFormat(data.deliverDate, "mmmm d, yyyy")}`,
                                 style: 'tableText',
                                 margin: 5,
                                 colSpan: 2

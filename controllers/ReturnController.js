@@ -112,7 +112,10 @@ ReturnController.read = async (req, res) => {
         count = countDocs.length;
     }
 
+
     returnRecords = await returnRecords.skip(perPage * page - perPage).limit(perPage).sort({ returnDate: -1 }).exec();
+    returnRecords = returnRecords.filter((returnRecord) => returnRecord.customer !== null);
+    returnRecords = returnRecords.filter((returnRecord) => returnRecord.product !== null);
     res.render('returns/index', { returnRecords, queryString, current: page, pages: Math.ceil(count / perPage)});
 };
 
