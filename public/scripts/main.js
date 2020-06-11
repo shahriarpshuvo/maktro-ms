@@ -183,7 +183,7 @@ if(inventoryEditButtons){
 }
 
 /*******************************
- * Get Serving and Edit
+ * Get Servicing and Edit
  *******************************/
 const servicingForm = document.querySelector('.servicingForm');
 const servicingFormTitle = document.querySelector('.servicingForm-title');
@@ -192,6 +192,7 @@ const servicingFormAddress = document.querySelector('.servicingForm-address');
 const servicingFormPhone = document.querySelector('.servicingForm-phone');
 const servicingFormProduct = document.querySelector('.servicingForm-product');
 const servicingFormQuantity = document.querySelector('.servicingForm-quantity');
+const servicingFormServiceCharge = document.querySelector('.servicingForm-serviceCharge');
 const servicingFormDeliveryDate = document.querySelector('.servicingForm-deliveryDate');
 const servicingFormStatus = document.querySelector('.servicingForm-status');
 const servicingEditButtons = document.querySelectorAll('.servicingEditButton');
@@ -201,7 +202,7 @@ if(servicingEditButtons){
         btn.addEventListener('click', async()=>{
             const ItemID = btn.parentElement.getAttribute('data-item-id');
             const res = await fetch(`${hostAPI}/servicing/${ItemID}`);
-            const { name, address, phone, product, quantity, deliveryDate, status } = await res.json();
+            const { name, address, phone, product, quantity, serviceCharge, deliveryDate, status } = await res.json();
             servicingForm.setAttribute('action', `/servicing/${ItemID}?_method=patch`);
             servicingFormTitle.innerText = "Edit Servicing";
             servicingFormName.value = name;
@@ -209,6 +210,8 @@ if(servicingEditButtons){
             servicingFormPhone.value = phone;
             servicingFormProduct.value = product.code;
             servicingFormQuantity.value = quantity;
+            servicingFormServiceCharge.value = serviceCharge;
+            servicingFormServiceCharge.setAttribute("required", 'true');
             servicingFormDeliveryDate.valueAsDate = new Date(deliveryDate);
             servicingFormStatus.value = status;
             servicingFormProduct.setAttribute('disabled', 'true');
@@ -216,14 +219,15 @@ if(servicingEditButtons){
                 servicingForm.reset();
                 servicingFormTitle.innerText = "Add New Servicing";
                 servicingFormProduct.removeAttribute('disabled')
-                servicingForm.setAttribute('action', '/entries');
+                servicingFormServiceCharge.removeAttribute('required');
+                servicingForm.setAttribute('action', '/servicing');
             })
         })
     })
 }
 
 /*******************************
- * Get Serving and Edit
+ * Get Expense and Edit
  *******************************/
 const expenseForm = document.querySelector('.expenseForm');
 const expenseFormTitle = document.querySelector('.expenseForm-title');
@@ -395,7 +399,7 @@ if(returnEditButtons){
                 returnFormTitle.innerText = "Add New Return";
                 returnFormCustomer.removeAttribute('disabled')
                 returnFormProduct.removeAttribute('disabled')
-                returnForm.setAttribute('action', '/sales');
+                returnForm.setAttribute('action', '/returns');
             })
         })
     })

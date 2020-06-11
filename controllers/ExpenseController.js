@@ -4,10 +4,19 @@ const { ExpenseValidator } = require('../middlewares/Validator');
 const ExpenseController = {};
 
 ExpenseController.create = async (req, res) => {
-    const {
+    let {
         purpose, equipments, transports, courierCommission, retailHoldings,
         stationeryTools, salaryUtilities, marketing, others, expenseDate,
     } = req.body;
+    equipments = equipments ? equipments: 0;
+    transports = transports ? transports: 0;
+    courierCommission = courierCommission ? courierCommission: 0;
+    retailHoldings = retailHoldings ? retailHoldings : 0;
+    stationeryTools = stationeryTools ? stationeryTools : 0;
+    salaryUtilities = salaryUtilities ? salaryUtilities : 0;
+    marketing = marketing ? marketing : 0;
+    others = others ? others : 0;
+
     const validator = ExpenseValidator({ purpose, equipments, transports, courierCommission, retailHoldings, stationeryTools, salaryUtilities, marketing, others });
     if (validator.error) {
         req.flash('error', validator.error);

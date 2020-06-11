@@ -15,18 +15,20 @@
 Maximum Times Required to Implement: 3 Days
 [x] Invoice DATE format Update (Sales & Servicing)
 [x] Remove Customer Profit Count
-[x] Update Maktro location and phone on Invoice
+[x] Update Maktro Location and Phone on Invoice
 [x] Fixed Broken Search Form
+[x] Delete Function / [Filter Null Product/Customer];
+[x] Add Customer Button on Sales Page
+[x] Expense Not Required Fields
+[x] Servicing Charge
 
-[-] Delete Function / [Filter Null Product/Customer];
-[-] Invoice Total Due update for individual function (InvoiceGenerator)
-[-] Update Role Management
+
 [-] Inventory Overview
 [-] Return Overview
-[-] Expense Not Required Fields
+[-] Invoice Total Due update for individual function (InvoiceGenerator)
+[-] Invoice Discount and Due Updates
 [-] Add Balance Button (New Sales without Product)
-[-] Add Customer Button on Sales Page
-[-] Servicing Charge
+[-] Update Role Management
 
 ## Features
 

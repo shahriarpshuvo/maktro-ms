@@ -4,11 +4,12 @@
             <thead class="table__header">
                 <tr>
                     <th>Name</th>
+                    <th>Phone</th>
                     <th>Product</th>
                     <th>Quantity</th>
-                    <th>Phone Number</th>
+                    <th>Charge</th>
                     <th>Status</th>
-                    <th>Delivery Date</th>
+                    <th>Delivery</th>
                     <th class="text-center">Actions</th>
                 </tr>
             </thead>
@@ -17,9 +18,10 @@
                     allServicing.forEach((servicing) => { %>
                 <tr>
                     <td><%= servicing.name; %></td>
-                    <td><%= servicing.product.name; %></td>
-                    <td><%= servicing.quantity.toLocaleString(); %></td>
                     <td><%= servicing.phone; %></td>
+                    <td><% if(servicing.product){ %><%= servicing.product.name; %><%}%></td>
+                    <td><%= servicing.quantity.toLocaleString(); %></td>
+                    <td><%= servicing.serviceCharge.toLocaleString(); %></td>
                     <td>
                         <% if(servicing.status =='received'){ %>
                             <span class="badge badge-danger text-uppercase">received</span>

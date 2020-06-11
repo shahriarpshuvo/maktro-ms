@@ -26,6 +26,11 @@ const servicingSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
+    serviceCharge : {
+        type: Number,
+        required: true,
+        default: 0
+    },
     status: {
         type: String,
         required: true,

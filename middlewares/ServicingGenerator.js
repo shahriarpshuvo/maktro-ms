@@ -105,7 +105,7 @@ const docDefinition = (data) => {
                                 margin: 6,
                             },
                             {
-                                text: 'Quantity(n)',
+                                text: 'Amount',
                                 style: 'tableHeader',
                                 alignment: 'center',
                                 margin: 6,
@@ -118,7 +118,20 @@ const docDefinition = (data) => {
                                 margin: 5,
                             },
                             {
-                                text: `${data.quantity.toLocaleString()}`,
+                                text: `${data.quantity.toLocaleString()} Unit(s)`,
+                                style: 'tableText',
+                                alignment: 'center',
+                                margin: 5,
+                            },
+                        ],
+                        [
+                            {
+                                text: `Servicing Charge`,
+                                style: 'tableText',
+                                margin: 5,
+                            },
+                            {
+                                text: `${data.serviceCharge ? data.serviceCharge.toLocaleString()+' Tk/-' : '-'}`,
                                 style: 'tableText',
                                 alignment: 'center',
                                 margin: 5,

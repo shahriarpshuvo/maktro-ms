@@ -50,6 +50,7 @@ const ServicingValidator = (data) => {
         phone: Joi.string().required().trim().max(11),
         product: Joi.string().uppercase().required().trim(),
         quantity: Joi.number().min(1).required(),
+        serviceCharge: Joi.number().min(0).required(),
         deliveryDate: Joi.date().required(),
         status: Joi.string().required(),
     });

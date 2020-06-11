@@ -30,12 +30,10 @@
                     </div>
 
                     <div class="row align-items-center">
-                        <div class="col-md-7">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label for="product">Product Code</label>
-                                <span class="f-10 text-muted">(Can be found on
-                                    product
-                                    page)</span>
+                                <span class="f-10 text-muted">(Can be found on Product page.)</span>
                                     <input type="text"
                                     class="form-control servicingForm-product product-input-query" name="product"
                                     placeholder="Eg. MBL-001-002" required autocomplete="off"/>
@@ -43,12 +41,17 @@
                                     </ul>
                             </div>
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="quantity">Quantity</label>
-                                <input type="number" class="form-control servicingForm-quantity"
-                                    name="quantity" placeholder="Eg. 50"
-                                    required min="1"/>
+                                <input type="number" class="form-control servicingForm-quantity" name="quantity" placeholder="Eg. 50" required min="1"/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="serviceCharge">Service Charge</label>
+                                <input type="number" class="form-control servicingForm-serviceCharge"
+                                       name="serviceCharge" placeholder="Eg. 5000"/>
                             </div>
                         </div>
                     </div>

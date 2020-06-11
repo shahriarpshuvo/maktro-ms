@@ -6,7 +6,8 @@ const ServicingController = {};
 
 ServicingController.create = async (req, res) => {
     const { name, address, phone, product, quantity, deliveryDate, status } = req.body;
-    const validator = ServicingValidator({ name, address, phone, product, quantity, deliveryDate, status });
+    const serviceCharge = req.body.serviceCharge ? req.body.serviceCharge : 0;
+    const validator = ServicingValidator({ name, address, phone, product, quantity, serviceCharge, deliveryDate, status });
     if (validator.error) {
         req.flash('error', validator.error);
         return res.redirect('/servicing');
@@ -17,10 +18,8 @@ ServicingController.create = async (req, res) => {
         return res.redirect('/servicing');
     }
     try{
-        const { name, address, phone, quantity, deliveryDate, status } = validator.value;
-        servicing = new Servicing({
-            name, address, phone, product: getProduct._id, quantity, deliveryDate, status
-        });
+        const { name, address, phone, quantity, serviceCharge, deliveryDate, status } = validator.value;
+        const servicing = new Servicing({ name, address, phone, product: getProduct._id, quantity, serviceCharge, deliveryDate, status });
         await servicing.save();
         req.flash('success', `New servicing has been successfully added!`);
         return res.redirect('/servicing');
@@ -50,7 +49,7 @@ ServicingController.read = async (req, res) => {
     if (req.query.searchQuery) {
         allServicing = Servicing.aggregate().lookup(lookUpProduct).match(matchObj)
             .unwind({
-                preserveNullAndEmptyArrays: true,
+                preserveNullAndEmptyArrays: false,
                 path: '$product',
             });
         countDocs = Servicing.aggregate()
@@ -63,7 +62,8 @@ ServicingController.read = async (req, res) => {
         count = countDocs.length;
     }
 
-    allServicing = await allServicing.sort({createdAt: -1}).skip((perPage * page) - perPage).limit(perPage).exec();
+    allServicing = await allServicing.sort({ createdAt: -1 }).skip((perPage * page) - perPage).limit(perPage).exec();
+    allServicing = allServicing.filter((servicing) => servicing.product !== null);
     res.render('servicing/index', { allServicing, queryString, current: page, pages: Math.ceil(count / perPage)});
 };
 
@@ -82,10 +82,10 @@ ServicingController.update = async (req, res) => {
 //API
 ServicingController.getServicing = async (req, res) => {
     try {
-        const { name, address, phone, product, quantity, deliveryDate, status } = await Servicing.findById(req.params.id).populate('product');
+        const { name, address, phone, product, quantity, serviceCharge, deliveryDate, status } = await Servicing.findById(req.params.id).populate('product');
         if (name) {
             return res.send({
-                name, address, phone, product, quantity, deliveryDate, status
+                name, address, phone, product, quantity, serviceCharge, deliveryDate, status
             });
         }
         return res.send("Servicing Doesn't Exist");

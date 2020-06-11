@@ -6,8 +6,6 @@ const Inventory = require('../models/Inventory');
 const { ReturnValidator } = require('../middlewares/Validator');
 
 const ReturnController = {};
-
-
 ReturnController.create = async (req, res) => {
     const { customer, product, quantity, amount, returnDate } = req.body;
     const validator = ReturnValidator({ customer, product, quantity, amount });
@@ -111,7 +109,6 @@ ReturnController.read = async (req, res) => {
         countDocs = await countDocs.exec();
         count = countDocs.length;
     }
-
 
     returnRecords = await returnRecords.skip(perPage * page - perPage).limit(perPage).sort({ returnDate: -1 }).exec();
     returnRecords = returnRecords.filter((returnRecord) => returnRecord.customer !== null);
