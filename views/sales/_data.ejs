@@ -19,17 +19,19 @@
                 <tr>
                     <td><%= sale.salesDate.toLocaleDateString(); %></td>
                     <td><%= sale.customer.name; %></td>
-                    <td><%= sale.product.name; %></td>
-                    <td><%= sale.quantity.toLocaleString(); %></td>
-                    <td class="text-info font-weight-bold"><%= sale.amount.toLocaleString(); %></td>
+                    <td><% if(sale.product){%><%= sale.product.name; %><%} else { %> - <%}%></td>
+                    <td><% if(sale.quantity){%><%= sale.quantity.toLocaleString(); %><%} else { %> - <%}%></td>
+                    <td class="text-info font-weight-bold"><% if(sale.amount){%><%= sale.amount.toLocaleString(); %><%} else { %> - <%}%></td>
                     <td class="text-success font-weight-bold"><%= sale.paid.toLocaleString(); %></td>
                     <td class="text-danger font-weight-bold">
-                        <%= (sale.amount - sale.paid).toLocaleString(); %>
+                        <% if(sale.amount){%><%= (sale.amount - sale.paid).toLocaleString(); %><%} else {%> - <%}%>
                     </td>
                     <td class="table__actions text-center" data-item-id="<%= sale._id %>">
+                        <% if(sale.product){%>
                         <a href="#" class="table__actions-btn saleEditButton"
                             data-toggle="modal" data-target="#addSales"><i
                                 class="ic-pencil pr-2"></i>Edit</a>
+                        <%}%>
                         <a href="#" class="table__actions-btn"
                             data-toggle="modal" data-target="#deleteModal"><i
                                 class="ic-trash pr-2"></i>Delete</a>

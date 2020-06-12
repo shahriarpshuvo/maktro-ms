@@ -16,33 +16,27 @@ const saleSchema = new mongoose.Schema({
     },
     quantity: {
         type: Number,
-        required: true,
-        min: 0
+        default: 0
     },
     rate: {
         type: Number,
-        required: true,
-        min: 0
+        default: 0
     },
     amount: {
         type: Number,
-        required: true,
-        min: 0
+        default: 0
     },
     shippingCost: {
         type: Number,
-        required: true,
-        min: 0
+        default: 0
     },
     discount: {
         type: Number,
-        required: true,
-        min: 0
+        default: 0
     },
     paid: {
         type: Number,
         required: true,
-        min: 0,
     },
     salesDate: {
         type: Date,

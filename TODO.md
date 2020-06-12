@@ -23,10 +23,11 @@ Maximum Times Required to Implement: 3 Days
 [x] Servicing Charge
 [x] Inventory Overview
 [x] Return Overview
+[x] Add Balance Button (New Sales without Product)
 
 [-] Invoice Total Due update for individual function (InvoiceGenerator)
 [-] Invoice Discount and Due Updates
-[-] Add Balance Button (New Sales without Product)
+
 [-] Update Role Management
 
 ## Features

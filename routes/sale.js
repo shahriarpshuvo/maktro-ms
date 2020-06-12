@@ -4,6 +4,7 @@ const SaleController = require('../controllers/SaleController');
 router.post('/', SaleController.create);
 router.get('/:page', SaleController.read);
 router.get('/', SaleController.read);
+router.post('/add-balance', SaleController.addBalance);
 router.patch('/:id', SaleController.update);
 router.delete('/:id', SaleController.delete);
 

@@ -12,18 +12,19 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="/customers/payment?_method=patch" method="post">
+                <form action="/sales/add-balance" method="post">
                     <div class="form-group">
-                        <label for="phone">Customer ID (Phone
-                            Number)</label>
-                        <input type="text" class="form-control customer-input-query" name="phone"
-                            placeholder="Make sure, you've typed correctly"
-                            required maxlength="11" autocomplete="off"/>
+                        <label for="customer">Customer ID</label>
+                        <span class="f-10 text-muted">(Can be
+                            found on customer page)</span>
+                        <input type="text"
+                            class="form-control customer-input-query"
+                            name="customer" placeholder="Eg. 01717998833"
+                            maxlength="11" required autocomplete="off"/>
                         <ul class="list-group auto-suggestion customer-input-query-group"></ul>
                     </div>
                     <div class="form-group">
-                        <label for="paid">Add
-                            Payment</label>
+                        <label for="paid">Payment Amount</label>
                         <input type="number" class="form-control"
                             name="paid"
                             placeholder="New payment balance"

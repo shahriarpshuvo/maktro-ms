@@ -153,6 +153,41 @@ SaleController.create = async (req, res) => {
     }
 };
 
+SaleController.addBalance = async (req, res) => {
+    const {
+        customer,
+        paid,
+        comment,
+    } = req.body;
+    const getCustomer = await Customer.findOne({
+        phone: customer,
+    });
+    if (!getCustomer) {
+        req.flash(
+            'error',
+            "User doesn't exist with this ID. Please try again!"
+        );
+        return res.redirect('/sales');
+    }
+    try {
+        await new Sale({
+            customer: getCustomer._id,
+            paid,
+            comment,
+        }).save();
+
+        generateInvoice();
+        req.flash(
+            'success',
+            `Balance has been added successfully for "${getCustomer.name}".`
+        );
+        return res.redirect('/sales');
+    } catch (e) {
+        req.flash('error', `Error While Saving Data - ${e}`);
+        return res.redirect('/sales');
+    }
+};
+
 SaleController.read = async (req, res) => {
     const perPage = 30;
     const page = req.params.page || 1;
