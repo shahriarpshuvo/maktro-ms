@@ -1,0 +1,48 @@
+<div class="overview card border-warning text-uppercase">
+    <div class="card-header bg-warning border-warning">
+        <h2 class="h4 text-light text-center">
+            Inventory
+        </h2>
+    </div>
+    <div class="container mb-4">
+        <div class="row justify-content-center text-center text-md-left">
+            <div class="col-md-12">
+                <div class="search-area mt-4 mt-md-5 mb-4">
+                    <form action="/dashboard" method="get">
+                        <div class="container">
+                            <div class="row d-flex justify-content-center align-items-start">
+                                <div class="col-lg-7 d-flex align-items-start">
+                                    <div class="input-group mr-4">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="ic-calendar"></i>
+                                            </div>
+                                        </div>
+                                        <input type="date" class="form-control"
+                                               name="startDateReturns"
+                                               value="<% if(queryString.startDateReturns){ %><%= queryString.startDateReturns; %><% } %>"/>
+                                        <input type="date" class="form-control"
+                                               name="endDateReturns"
+                                               value="<% if(queryString.endDateReturns){ %><%= queryString.endDateReturns; %><% } %>"/>
+                                    </div>
+
+                                    <button type="submit"
+                                            class="btn btn-warning text-light mr-2" style="width: 33%;">
+                                        <i class="ic-magnifying-glass"></i>
+                                        Search
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-sm-6 border-warning text-center">
+                <div class="card-body bg-light text-warning">
+                    <h3 class="display-5"><%= totalReturnsAmount %></h3>
+                    <h6 class="card-title text-muted">Total Returns (Tk.)</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

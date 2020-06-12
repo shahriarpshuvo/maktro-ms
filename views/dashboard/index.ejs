@@ -28,6 +28,10 @@
          role="tabpanel">
         <%- include('./_overview_expense') %>
     </div>
+    <div class="tab-pane fade <% if (queryString.overview == 'returns'){ %>show active<% } %>" id="returns"
+         role="tabpanel">
+        <%- include('./_overview_returns.ejs') %>
+    </div>
     <div class="tab-pane fade <% if (queryString.overview == 'inventory'){ %>show active<% } %>" id="inventory"
          role="tabpanel">
         <%- include('./_overview_inventory.ejs') %>

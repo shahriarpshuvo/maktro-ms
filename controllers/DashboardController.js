@@ -1,6 +1,7 @@
 const Expense = require('../models/Expense');
 const Sale = require('../models/Sale');
 const Entry = require('../models/Entry');
+const ReturnModel = require('../models/Return');
 
 const DashboardController = {};
 
@@ -24,10 +25,10 @@ DashboardController.read = async (req, res) => {
     // Sales Overview
     queryString.overview = 'sales';
     let sales = Sale.aggregate().lookup(lookUpProduct).lookup(lookUpCustomer).unwind({
-        preserveNullAndEmptyArrays: true,
+        preserveNullAndEmptyArrays: false,
         path: '$customer',
     }).unwind({
-        preserveNullAndEmptyArrays: true,
+        preserveNullAndEmptyArrays: false,
         path: '$product',
     });
 
@@ -93,13 +94,37 @@ DashboardController.read = async (req, res) => {
         entries= entries.match({ createdAt: {$lt: new Date(req.query.endDateInventory)}});
         queryString.endDateInventory = req.query.endDateInventory;
     }
+    if(req.query.inventoryQuery || req.query.startDateInventory ||req.query.endDateInventory) queryString.overview = 'inventory';
     entries = await entries.exec();
     let totalSalesUnits = '';
     if(entries){
         totalSalesUnits = entries.reduce((acc, curr) => acc + curr.quantity, 0);
-        queryString.overview = 'inventory';
     }
-    res.render('dashboard/index', {totalExp, queryString, salesData, totalSalesUnits});
+
+    // Returns Overview
+    let allReturns = ReturnModel.aggregate().lookup(lookUpProduct).lookup(lookUpCustomer).unwind({
+        preserveNullAndEmptyArrays: false,
+        path: '$customer',
+    }).unwind({
+        preserveNullAndEmptyArrays: false,
+        path: '$product',
+    });
+    if(req.query.startDateReturns){
+        allReturns = allReturns.match({ returnDate: {$gte: new Date(req.query.startDateReturns)}});
+        queryString.startDateReturns = req.query.startDateReturns;
+    }
+    if(req.query.endDateReturns){
+        entries= allReturns.match({ returnDate: {$lt: new Date(req.query.endDateReturns)}});
+        queryString.endDateReturns = req.query.endDateReturns;
+    }
+    if(req.query.startDateReturns ||req.query.endDateReturns) queryString.overview = 'returns';
+    allReturns = await allReturns.exec();
+    let totalReturnsAmount = '';
+    if(entries){
+        totalReturnsAmount = allReturns.reduce((acc, curr) => acc + curr.amount, 0);
+    }
+
+    res.render('dashboard/index', {totalExp, queryString, salesData, totalSalesUnits, totalReturnsAmount});
 };
 
 
