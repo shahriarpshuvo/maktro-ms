@@ -125,6 +125,7 @@ SaleController.create = async (req, res) => {
             product: getProduct._id,
             quantity,
             type: 'sale',
+            createdAt: salesDate
         }).save();
         await new Sale({
             entry: newEntry._id,
@@ -277,6 +278,7 @@ SaleController.update = async (req, res) => {
     await Entry.findByIdAndUpdate(entry, {
         $set: {
             quantity,
+            createdAt: salesDate,
         },
     });
     await Sale.findByIdAndUpdate(req.params.id, {

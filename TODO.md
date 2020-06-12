@@ -21,9 +21,9 @@ Maximum Times Required to Implement: 3 Days
 [x] Add Customer Button on Sales Page
 [x] Expense Not Required Fields
 [x] Servicing Charge
+[x] Inventory Overview
 
 
-[-] Inventory Overview
 [-] Return Overview
 [-] Invoice Total Due update for individual function (InvoiceGenerator)
 [-] Invoice Discount and Due Updates
