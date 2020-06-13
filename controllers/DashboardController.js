@@ -24,21 +24,22 @@ DashboardController.read = async (req, res) => {
 
     // Sales Overview
     queryString.overview = 'sales';
-    let sales = Sale.aggregate().lookup(lookUpProduct).lookup(lookUpCustomer).unwind({
-        preserveNullAndEmptyArrays: false,
-        path: '$customer',
-    }).unwind({
-        preserveNullAndEmptyArrays: false,
-        path: '$product',
-    });
+    let sales = Sale.aggregate().match({});
 
     if (req.query.salesType == 'customer' && req.query.salesQuery) {
-        sales = sales.match({'customer.phone': req.query.salesQuery});
+        sales = sales.lookup(lookUpCustomer).unwind({
+            preserveNullAndEmptyArrays: false,
+            path: '$customer',
+        }).match({'customer.phone': req.query.salesQuery});
         queryString.salesType = req.query.salesType;
         queryString.startDate = req.query.salesQuery;
     }
+
     if (req.query.salesType == 'product' && req.query.salesQuery) {
-        sales = sales.match({'product.code': req.query.salesQuery});
+        sales = sales.lookup(lookUpProduct).unwind({
+            preserveNullAndEmptyArrays: false,
+            path: '$product',
+        }).match({'product.code': req.query.salesQuery});
         queryString.salesType = req.query.salesType;
         queryString.salesQuery = req.query.salesQuery;
     }
