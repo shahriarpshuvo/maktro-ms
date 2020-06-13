@@ -27,10 +27,10 @@
                         <% if(sale.amount){%><%= (sale.amount - sale.paid).toLocaleString(); %><%} else {%> - <%}%>
                     </td>
                     <td class="table__actions text-center" data-item-id="<%= sale._id %>">
-                        <% if(sale.product){%>
-                        <a href="#" class="table__actions-btn saleEditButton"
+                        <% if(sale.product){ %>
+                        <!-- <a href="#" class="table__actions-btn saleEditButton"
                             data-toggle="modal" data-target="#addSales"><i
-                                class="ic-pencil pr-2"></i>Edit</a>
+                                class="ic-pencil pr-2"></i>Edit</a> -->
                         <%}%>
                         <a href="#" class="table__actions-btn"
                             data-toggle="modal" data-target="#deleteModal"><i

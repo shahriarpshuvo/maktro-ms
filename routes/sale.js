@@ -11,11 +11,7 @@ router.delete('/:id', SaleController.delete);
 const generateInvoice = require('../middlewares/InvoiceGenerator');
 const fs = require('fs');
 
-router.get('/invoice/:id', generateInvoice, (req, res) => {
-    res.redirect(`/sales/print/${req.params.id}`);
-});
-
-router.get('/print/:id', (req, res) => {
+router.get('/invoice/:id', (req, res) => {
     const data = fs.readFileSync(`./files/invoice/${req.params.id}.pdf`);
     res.contentType("application/pdf");
     res.send(data);

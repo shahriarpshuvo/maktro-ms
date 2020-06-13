@@ -127,7 +127,7 @@ SaleController.create = async (req, res) => {
             type: 'sale',
             createdAt: salesDate
         }).save();
-        await new Sale({
+        const newSale = await new Sale({
             entry: newEntry._id,
             customer: getCustomer._id,
             product: getProduct._id,
@@ -140,8 +140,8 @@ SaleController.create = async (req, res) => {
             salesDate,
             comment,
         }).save();
-        updateCustomerInfo();
-        generateInvoice();
+        await updateCustomerInfo();
+        generateInvoice(newSale._id, '');
         req.flash(
             'success',
             `Congratulation on new Sales! Record has been added successfully.`
@@ -170,13 +170,13 @@ SaleController.addBalance = async (req, res) => {
         return res.redirect('/sales');
     }
     try {
-        await new Sale({
+        const newSale = await new Sale({
             customer: getCustomer._id,
             paid,
             comment,
         }).save();
-
-        generateInvoice();
+        await updateCustomerInfo();
+        generateInvoice(newSale._id, 'payment');
         req.flash(
             'success',
             `Balance has been added successfully for "${getCustomer.name}".`
@@ -256,7 +256,7 @@ SaleController.read = async (req, res) => {
         .limit(perPage)
         .sort({ createdAt: -1 })
         .exec();
-    updateCustomerInfo();
+    await updateCustomerInfo();
 
     sales = sales.filter((sale) => sale.customer !== null);
     sales = sales.filter((sale) => sale.product !== null);
@@ -272,7 +272,7 @@ SaleController.read = async (req, res) => {
 SaleController.delete = async (req, res) => {
     const getSale = await Sale.findByIdAndDelete(req.params.id);
     await Entry.findByIdAndDelete(getSale.entry);
-    updateCustomerInfo();
+    await updateCustomerInfo();
     req.flash('success', `Sale has been deleted successfully!`);
     res.redirect('/sales');
 };
@@ -316,7 +316,7 @@ SaleController.update = async (req, res) => {
             createdAt: salesDate,
         },
     });
-    await Sale.findByIdAndUpdate(req.params.id, {
+    const newSale = await Sale.findByIdAndUpdate(req.params.id, {
         $set: {
             quantity,
             rate,
@@ -328,7 +328,9 @@ SaleController.update = async (req, res) => {
             comment,
         },
     });
-    updateCustomerInfo();
+
+    await updateCustomerInfo();
+    generateInvoice(newSale._id, '');
     req.flash('success', `Sales information has been updated successfully!`);
     res.redirect('/sales');
 };

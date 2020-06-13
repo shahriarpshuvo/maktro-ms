@@ -3,9 +3,6 @@ const Sale = require('../models/Sale');
 const fs = require('fs');
 const dateFormat = require('dateformat');
 
-
-
-
 const fonts = {
     Roboto: {
         normal: 'public/fonts/Roboto-Regular.ttf',
@@ -18,6 +15,253 @@ const fonts = {
 const printer = new PdfPrinter(fonts);
 
 const docDefinition = (data) => {
+    let tableBodyData = [];
+    if (data.product) {
+        tableBodyData.push([
+            {
+                text: 'Description',
+                style: 'tableHeader',
+                alignment: 'center',
+                margin: 6,
+            },
+            {
+                text: 'Quantity (n)',
+                style: 'tableHeader',
+                alignment: 'center',
+                margin: 6,
+            },
+            {
+                text: 'Rate (Tk.)',
+                style: 'tableHeader',
+                alignment: 'center',
+                margin: 6,
+            },
+            {
+                text: 'Amount (Tk.)',
+                style: 'tableHeader',
+                alignment: 'center',
+                margin: 6,
+            },
+        ]);
+        tableBodyData.push([
+            {
+                text: `Product Name: \n${data.product.name}`,
+                style: 'tableText',
+                margin: 5,
+            },
+            {
+                text: `${data.quantity.toLocaleString()}`,
+                style: 'tableText',
+                alignment: 'center',
+                margin: 5,
+            },
+            {
+                text: `${data.rate.toLocaleString()}`,
+                style: 'tableText',
+                alignment: 'center',
+                margin: 5,
+            },
+            {
+                text: `${(data.rate * data.quantity).toLocaleString()}`,
+                style: 'tableText',
+                alignment: 'right',
+                margin: 5,
+            },
+        ]);
+    } else {
+        tableBodyData.push([
+            {
+                text: 'Description',
+                style: 'tableHeader',
+                alignment: 'center',
+                margin: 6,
+                colSpan: 3,
+            },
+            { text: '' },
+            { text: '' },
+            {
+                text: 'Amount (Tk.)',
+                style: 'tableHeader',
+                alignment: 'center',
+                margin: 6,
+            },
+        ]);
+    }
+
+    if (data.shippingCost) {
+        tableBodyData.push([
+            {
+                text: 'Shipping Cost',
+                style: 'tableText',
+                margin: 5,
+                colSpan: 3,
+            },
+            { text: '' },
+            { text: '' },
+            {
+                text: `${data.shippingCost.toLocaleString()}`,
+                style: 'tableText',
+                alignment: 'right',
+                margin: 5,
+            },
+        ]);
+    }
+
+    if (data.discount) {
+        tableBodyData.push([
+            {
+                text: 'Discount',
+                style: 'tableText',
+                margin: 5,
+                colSpan: 3,
+            },
+            { text: '' },
+            { text: '' },
+            {
+                text: `- ${data.discount.toLocaleString()}`,
+                style: 'tableText',
+                alignment: 'right',
+                margin: 5,
+            },
+        ]);
+    }
+
+    if (data.rate * data.quantity) {
+        tableBodyData.push([
+            {
+                text: 'Net Bill',
+                style: 'tableText',
+                margin: 5,
+                colSpan: 3,
+            },
+            { text: '' },
+            { text: '' },
+            {
+                text: `${(
+                    data.rate * data.quantity -
+                    data.discount +
+                    data.shippingCost
+                ).toLocaleString()}`,
+                style: 'tableText',
+                alignment: 'right',
+                margin: 5,
+            },
+        ]);
+    }
+
+    if (data.paid) {
+        tableBodyData.push([
+            {
+                text: 'Paid',
+                style: 'tableText',
+                margin: 5,
+                colSpan: 3,
+            },
+            { text: '' },
+            { text: '' },
+            {
+                text: `${data.paid.toLocaleString()}`,
+                style: 'tableText',
+                alignment: 'right',
+                margin: 5,
+            },
+        ]);
+    }
+
+
+
+    if (
+        data.rate * data.quantity -
+        data.discount +
+        data.shippingCost -
+        data.paid > 0
+    ) {
+        tableBodyData.push([
+            {
+                text: 'Current Due',
+                style: 'tableText',
+                margin: 5,
+                colSpan: 3,
+            },
+            { text: '' },
+            { text: '' },
+            {
+                text: `(${(
+                    data.rate * data.quantity -
+                    data.discount +
+                    data.shippingCost -
+                    data.paid
+                ).toLocaleString()})`,
+                style: 'tableText',
+                alignment: 'right',
+                margin: 5,
+            },
+        ]);
+    }
+
+    if (data.customer.due) {
+        tableBodyData.push([
+            {
+                text: 'Previous Due',
+                style: 'tableText',
+                margin: 5,
+                colSpan: 3,
+            },
+            { text: '' },
+            { text: '' },
+            {
+                text: `(${(
+                    data.customer.due -
+                    (data.rate * data.quantity -
+                        data.discount +
+                        data.shippingCost -
+                        data.paid)
+                ).toLocaleString()})`,
+                style: 'tableText',
+                alignment: 'right',
+                margin: 5,
+            },
+        ]);
+    }
+
+    if (data.customer.due) {
+        tableBodyData.push([
+            {
+                text: 'Total Due',
+                style: 'tableText',
+                margin: 5,
+                colSpan: 3,
+            },
+            { text: '' },
+            { text: '' },
+            {
+                text: `(${data.customer.due.toLocaleString()})`,
+                style: 'tableText',
+                alignment: 'right',
+                margin: 5,
+            },
+        ]);
+    }
+
+    if(data.customer.due == 0){
+        tableBodyData.push([
+            {
+                text: 'Total Due',
+                style: 'tableText',
+                margin: 5,
+                colSpan: 3,
+            },
+            { text: '' },
+            { text: '' },
+            {
+                text: `(${data.customer.due.toLocaleString()})`,
+                style: 'tableText',
+                alignment: 'right',
+                margin: 5,
+            },
+        ]);
+    }
+
     return {
         content: [
             {
@@ -86,184 +330,17 @@ const docDefinition = (data) => {
                 style: 'table',
             },
             {
-                text: `Sales Date: ${dateFormat(data.salesDate, "mmmm d, yyyy")}`,
+                text: `Issued at: ${dateFormat(
+                    data.salesDate,
+                    'mmmm d, yyyy'
+                )}`,
                 alignment: 'center',
                 style: 'lessFocused',
             },
             {
                 table: {
                     widths: [200, '*', '*', '*'],
-                    body: [
-                        [
-                            {
-                                text: 'Description',
-                                style: 'tableHeader',
-                                alignment: 'center',
-                                margin: 6,
-                            },
-                            {
-                                text: 'Quantity(n)',
-                                style: 'tableHeader',
-                                alignment: 'center',
-                                margin: 6,
-                            },
-                            {
-                                text: 'Rate(Tk.)',
-                                style: 'tableHeader',
-                                alignment: 'center',
-                                margin: 6,
-                            },
-                            {
-                                text: 'Total(Tk.)',
-                                style: 'tableHeader',
-                                alignment: 'center',
-                                margin: 6,
-                            },
-                        ],
-                        [
-                            {
-                                text: `Product Name: \n${data.product.name}`,
-                                style: 'tableText',
-                                margin: 5,
-                            },
-                            {
-                                text: `${data.quantity.toLocaleString()}`,
-                                style: 'tableText',
-                                alignment: 'center',
-                                margin: 5,
-                            },
-                            {
-                                text: `${data.rate.toLocaleString()}`,
-                                style: 'tableText',
-                                alignment: 'center',
-                                margin: 5,
-                            },
-                            {
-                                text: `${(
-                                    data.rate * data.quantity
-                                ).toLocaleString()}`,
-                                style: 'tableText',
-                                alignment: 'right',
-                                margin: 5,
-                            },
-                        ],
-                        [
-                            {
-                                text: 'Shipping Cost',
-                                style: 'tableText',
-                                margin: 5,
-                            },
-                            { text: '' },
-                            { text: '' },
-                            {
-                                text: `${data.shippingCost.toLocaleString()}`,
-                                style: 'tableText',
-                                alignment: 'right',
-                                margin: 5,
-                            },
-                        ],
-                        [
-                            { text: 'Discount', style: 'tableText', margin: 5 },
-                            { text: '' },
-                            { text: '' },
-                            {
-                                text: `- ${data.discount.toLocaleString()}`,
-                                style: 'tableText',
-                                alignment: 'right',
-                                margin: 5,
-                            },
-                        ],
-                        [
-                            { text: 'Paid', style: 'tableText', margin: 5 },
-                            { text: '' },
-                            { text: '' },
-                            {
-                                text: `${data.paid.toLocaleString()}`,
-                                style: 'tableText',
-                                alignment: 'right',
-                                margin: 5,
-                            },
-                        ],
-                        [
-                            {
-                                text: 'Net Bill',
-                                style: 'tableText',
-                                margin: 5,
-                                colSpan: 3,
-                            },
-                            { text: '' },
-                            { text: '' },
-                            {
-                                text: `${(
-                                    data.rate * data.quantity -
-                                    data.discount +
-                                    data.shippingCost
-                                ).toLocaleString()}`,
-                                style: 'tableText',
-                                alignment: 'right',
-                                margin: 5,
-                            },
-                        ],
-                        [
-                            {
-                                text: 'Current Due',
-                                style: 'tableText',
-                                margin: 5,
-                                colSpan: 3,
-                            },
-                            { text: '' },
-                            { text: '' },
-                            {
-                                text: `(${(
-                                    data.rate * data.quantity -
-                                    data.discount +
-                                    data.shippingCost -
-                                    data.paid
-                                ).toLocaleString()})`,
-                                style: 'tableText',
-                                alignment: 'right',
-                                margin: 5,
-                            },
-                        ],
-                        [
-                            {
-                                text: 'Previous Due',
-                                style: 'tableText',
-                                margin: 5,
-                                colSpan: 3,
-                            },
-                            { text: '' },
-                            { text: '' },
-                            {
-                                text: `(${(
-                                    data.customer.due -
-                                    (data.rate * data.quantity -
-                                        data.discount +
-                                        data.shippingCost -
-                                        data.paid)
-                                ).toLocaleString()})`,
-                                style: 'tableText',
-                                alignment: 'right',
-                                margin: 5,
-                            },
-                        ],
-                        [
-                            {
-                                text: 'Total Due',
-                                style: 'tableText',
-                                margin: 5,
-                                colSpan: 3,
-                            },
-                            { text: '' },
-                            { text: '' },
-                            {
-                                text: `(${data.customer.due.toLocaleString()})`,
-                                style: 'tableText',
-                                alignment: 'right',
-                                margin: 5,
-                            },
-                        ],
-                    ],
+                    body: tableBodyData,
                 },
             },
             {
@@ -344,21 +421,28 @@ const docDefinition = (data) => {
                 fontSize: 12,
                 color: '#333',
             },
+            height0: {
+                height: 0,
+                lineHeight: 0,
+            },
         },
     };
 };
 
-const GenerateInvoice = async (req, res, next) => {
-    const sale = await Sale.findById(req.params.id)
-        .populate('product')
-        .populate('customer');
-    var pdfDoc = await printer.createPdfKitDocument(docDefinition(sale));
-    if (!fs.existsSync(`files/invoice/${req.params.id}.pdf`)) {
-        //fs.unlinkSync(`files/invoice/${req.params.id}.pdf`);
-        pdfDoc.pipe(fs.createWriteStream(`files/invoice/${req.params.id}.pdf`));
+
+const GenerateInvoice = async (id, type) => {
+    let sale;
+    if(type == 'payment'){
+        sale = await Sale.findById(id).populate('customer');
+    } else {
+        sale = await Sale.findById(id).populate('product').populate('customer');
+    }
+    let pdfDoc = await printer.createPdfKitDocument(docDefinition(sale));
+    if (!fs.existsSync(`files/invoice/${id}.pdf`)) {
+        pdfDoc.pipe(fs.createWriteStream(`files/invoice/${id}.pdf`));
         pdfDoc.end();
     }
-    return next();
+
 };
 
 module.exports = GenerateInvoice;
