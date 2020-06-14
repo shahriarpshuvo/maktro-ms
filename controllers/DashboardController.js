@@ -64,10 +64,12 @@ DashboardController.read = async (req, res) => {
     if(req.query.startDate){
         expenses = expenses.match({ expenseDate: {$gte: new Date(req.query.startDate)}});
         queryString.startDate = req.query.startDate;
+        queryString.overview = 'expense';
     }
     if(req.query.endDate){
         expenses= expenses.match({ expenseDate: {$lt: new Date(req.query.endDate)}});
         queryString.endDate = req.query.endDate;
+        queryString.overview = 'expense';
     }
     expenses = await expenses.exec();
     if(expenses){
