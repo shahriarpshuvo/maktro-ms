@@ -8,7 +8,6 @@ const DashboardController = {};
 
 DashboardController.read = async (req, res) => {
     let queryString={};
-
     let lookUpProduct = {
         from: 'products',
         localField: 'product',
