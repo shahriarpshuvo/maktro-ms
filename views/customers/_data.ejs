@@ -6,11 +6,13 @@
                     <th>Name</th>
                     <th>Phone</th>
                     <th>Address</th>
+                    <% if(user.role == 'admin') { %>
                     <th>Total</th>
                     <th>Paid</th>
                     <th>Due</th>
                     <th>Return</th>
                     <th class="text-center">Actions</th>
+                    <% } %>
                 </tr>
             </thead>
             <tbody class="table__body">
@@ -20,6 +22,7 @@
                     <td><%= customer.name; %></td>
                     <td><%= customer.phone; %></td>
                     <td class="address-box"><%= customer.address; %></td>
+                    <% if(user.role == 'admin') { %>
                     <td><%= customer.amount.toLocaleString(); %></td>
                     <td>
                         <strong class="text-success"><%= customer.paid.toLocaleString(); %></strong>
@@ -42,6 +45,7 @@
                             data-toggle="modal" data-target="#deleteModal"><i
                                 class="ic-trash pr-2"></i>Delete</a>
                     </td>
+                    <% } %>
                 </tr>
                 <% })} %>
             </tbody>

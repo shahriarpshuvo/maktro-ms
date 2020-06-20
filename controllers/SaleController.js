@@ -256,7 +256,7 @@ SaleController.read = async (req, res) => {
         .limit(perPage)
         .sort({ createdAt: -1 })
         .exec();
-    await updateCustomerInfo();
+    //await updateCustomerInfo();
 
     sales = sales.filter((sale) => sale.customer !== null);
     sales = sales.filter((sale) => sale.product !== null);

@@ -26,7 +26,7 @@ router.use('/inventories', PermissionHandler(['admin', 'inventory']), inventoryR
 router.use('/entries', PermissionHandler(['admin', 'inventory']), entryRouter);
 router.use('/servicing', PermissionHandler(['admin', 'servicing']), servicingRouter);
 router.use('/expenses', PermissionHandler(['admin', 'expense']), expenseRouter);
-router.use('/customers', PermissionHandler(['admin']), customerRouter);
+router.use('/customers', PermissionHandler(['admin', 'sales']), customerRouter);
 router.use('/sales', PermissionHandler(['admin', 'sales']), saleRouter);
 router.use('/returns', PermissionHandler(['admin', 'sales']), returnRouter);
 
