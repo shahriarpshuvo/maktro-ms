@@ -1,6 +1,4 @@
 const Customer = require('../models/Customer');
-const Sale = require('../models/Sale');
-const ReturnModel = require('../models/Return');
 const { CustomerValidator } = require('../middlewares/Validator');
 const CustomerController = {};
 
@@ -33,46 +31,6 @@ CustomerController.create = async (req, res) => {
 };
 
 CustomerController.read = async (req, res) => {
-  const getSales = await Sale.find({});
-  const getReturn = await ReturnModel.find({});
-  const getCustomers = await Customer.find({});
-
-  let customerRecords = {};
-  getCustomers.forEach((customer) => {
-    let totalAmount = 0,
-      totalPaid = 0,
-      totalReturn = 0;
-    customerID = customer.id;
-    if (getSales) {
-      getSales.forEach((sale) => {
-        if (sale.customer == customerID) {
-          totalAmount += sale.amount;
-          totalPaid += sale.paid;
-        }
-        customerRecords[customerID] = { total: totalAmount, paid: totalPaid };
-      });
-    }
-    if (getReturn) {
-      getReturn.forEach((returnRecord) => {
-        if (returnRecord.customer == customerID) {
-          totalReturn += returnRecord.amount;
-        }
-        customerRecords[customerID].returnAmount = totalReturn;
-      });
-    }
-  });
-
-  for (const id in customerRecords) {
-    let returnAmount = customerRecords[id].returnAmount || 0;
-    let amount = customerRecords[id].total || 0;
-    let paid = customerRecords[id].paid || 0;
-    let due = amount - paid;
-    let profit = amount - returnAmount;
-    await Customer.findByIdAndUpdate(id, {
-      $set: { amount, paid, due, returnAmount, profit },
-    });
-  }
-
   const perPage = 30;
   const page = req.params.page || 1;
   let customers = Customer.find({});
@@ -107,7 +65,7 @@ CustomerController.read = async (req, res) => {
 };
 
 CustomerController.delete = async (req, res) => {
-  await Customer.findByIdAndDelete(req.params.id);
+  await Customer.deleteOne({ _id: req.params.id });
   req.flash('success', `Customer has been deleted successfully!`);
   res.redirect('/customers');
 };

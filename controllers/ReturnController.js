@@ -5,6 +5,19 @@ const Entry = require('../models/Entry');
 const Inventory = require('../models/Inventory');
 const { ReturnValidator } = require('../middlewares/Validator');
 
+const updateCustomerInfo = async (customer) => {
+  const getReturns = await ReturnModel.find({ customer });
+  let returnAmount = 0;
+
+  if (getReturns) {
+    getReturns.forEach((returnRecord) => {
+      returnAmount += returnRecord.amount;
+    });
+  }
+
+  await Customer.findByIdAndUpdate(customer, { $set: { returnAmount } });
+};
+
 const ReturnController = {};
 ReturnController.create = async (req, res) => {
   const { customer, product, quantity, amount, returnDate } = req.body;
@@ -38,7 +51,8 @@ ReturnController.create = async (req, res) => {
       type: 'return',
     }).save();
     let setReturnDate = returnDate || new Date();
-    await new ReturnModel({
+
+    const { customer } = await new ReturnModel({
       entry: newEntry._id,
       customer: getCustomer._id,
       product: getProduct._id,
@@ -46,6 +60,8 @@ ReturnController.create = async (req, res) => {
       amount,
       returnDate: setReturnDate,
     }).save();
+    await updateCustomerInfo(customer);
+
     req.flash('success', `A new Returns record has been added successfully!`);
     return res.redirect('/returns');
   } catch (e) {
@@ -140,8 +156,11 @@ ReturnController.read = async (req, res) => {
 };
 
 ReturnController.delete = async (req, res) => {
-  const getReturn = await ReturnModel.findByIdAndDelete(req.params.id);
-  await Entry.findByIdAndDelete(getReturn.entry);
+  const { customer, entry } = await ReturnModel.findById(req.params.id);
+  await ReturnModel.findByIdAndDelete(req.params.id);
+  await Entry.findByIdAndDelete(entry);
+  await updateCustomerInfo(customer);
+
   req.flash('success', `Return has been deleted successfully!`);
   res.redirect('/returns');
 };
@@ -155,9 +174,10 @@ ReturnController.update = async (req, res) => {
     return res.redirect('/return');
   }
   await Entry.findByIdAndUpdate(entry, { $set: { quantity } });
-  await ReturnModel.findByIdAndUpdate(req.params.id, {
+  const updatedReturn = await ReturnModel.findByIdAndUpdate(req.params.id, {
     $set: { quantity, amount, returnDate },
   });
+  await updateCustomerInfo(updatedReturn.customer);
   req.flash('success', `Returns information has been updated successfully!`);
   res.redirect('/returns');
 };
