@@ -8,5 +8,4 @@ router.patch('/payment', CustomerController.updateBalance);
 router.patch('/:id', CustomerController.update);
 router.delete('/:id', CustomerController.delete);
 
-
 module.exports = router;

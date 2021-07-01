@@ -1,420 +1,553 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <!-- Favicon -->
+    <link
+      rel="shortcut icon"
+      href="../images/favicon.ico"
+      type="image/x-icon"
+    />
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato:400,700,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../images/icons/style.css" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../vendors/bootstrap.min.css" />
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../styles/main.css" />
 
-<head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport"
-    content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <!-- Favicon -->
-  <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
-  <!-- Fonts -->
-  <link
-    href="https://fonts.googleapis.com/css?family=Lato:400,700,900&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="../images/icons/style.css">
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="../vendors/bootstrap.min.css">
-  <!-- Main CSS -->
-  <link rel="stylesheet" href="../styles/main.css">
+    <title>MaktroMS</title>
+  </head>
 
-  <title>MaktroMS</title>
-</head>
+  <body>
+    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 pr-3">
+      <a class="navbar-brand col-1 col-md-2 mr-0" href="/">
+        <img class="navbar-brand__logo pl-2" src="../images/logo.png" />
+        <span class="navbar-brand__name">MS</span>
+      </a>
+      <button
+        class="btn btn-secondary navbar-toggler d-md-none"
+        type="button"
+        data-toggle="collapse"
+        data-target="#sideBar"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="30"
+          height="30"
+          viewBox="0 0 30 30"
+          role="img"
+          focusable="false"
+        >
+          <title>Menu</title>
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-miterlimit="10"
+            stroke-width="2"
+            d="M4 7h22M4 15h22M4 23h22"
+          />
+        </svg>
+      </button>
 
-<body>
-  <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 pr-3">
-    <a class="navbar-brand col-1 col-md-2 mr-0" href="/">
-      <img class="navbar-brand__logo pl-2" src="../images/logo.png">
-      <span class="navbar-brand__name">MS</span>
-    </a>
-    <button class="btn btn-secondary navbar-toggler d-md-none" type="button"
-      data-toggle="collapse" data-target="#sideBar">
-      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
-        viewBox="0 0 30 30" role="img" focusable="false">
-        <title>Menu</title>
-        <path stroke="currentColor" stroke-linecap="round"
-          stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22" />
-      </svg>
-    </button>
+      <ul
+        class="
+          navbar-nav
+          flex-row
+          w-100
+          justify-content-center justify-content-md-end
+          align-items-center
+          text-white
+          py-2
+          bg-md-light
+        "
+      >
+        <li class="nav-item mr-2">July 11, 2020</li>
+        <li class="nav-item mr-2">|</li>
+        <li class="nav-item text-warning font-weight-bold mr-3">
+          Tanzim Rahman
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <i class="ic-share-alternitive"></i>&nbsp; Sign out</a
+          >
+        </li>
+      </ul>
+    </nav>
 
-    <ul
-      class="navbar-nav flex-row w-100 justify-content-center
-            justify-content-md-end align-items-center text-white py-2 bg-md-light">
-      <li class="nav-item mr-2">
-        July 11, 2020
-      </li>
-      <li class="nav-item mr-2">
-        |
-      </li>
-      <li class="nav-item text-warning font-weight-bold mr-3">
-        Tanzim Rahman
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">
-          <i class="ic-share-alternitive"></i>&nbsp; Sign out</a>
-      </li>
-    </ul>
-  </nav>
-
-
-
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-2 bg-light navbar navbar-expand-md p-0 pl-md-3 mt-5
-        mt-md-0 overflow-hidden">
-        <nav
-          class="collapse navbar-collapse sidebar flex-column align-items-md-start "
-          id="sideBar">
-          <ul class="nav flex-column align-items-center align-items-md-start">
-            <li class="nav-item">
-              <a class="nav-link active" href="index.html">
-                <i class="ic-home"></i>
-                Dashboard
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="inventories.html">
-                <i class="ic-archive"></i>
-                Inventories
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="sales.html">
-                <i class="ic-calculator"></i>
-                Sales
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="returns.html">
-                <i class="ic-back-in-time"></i>
-                Returns
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="customers.html">
-                <i class="ic-v-card"></i>
-                Customers
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="expenses.html">
-                <i class="ic-credit-card"></i>
-                Expenses
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="servicing.html">
-                <i class="ic-tools"></i>
-                Servicing
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="products.html">
-                <i class="ic-shopping-cart"></i>
-                Products
-              </a>
-            </li>
-          </ul>
-          <h6 class="sidebar-heading px-3 mt-4 mb-1 text-center
-            text-muted">
-            <span class="text-center text-md-left">Access
-              Controls</span>
-          </h6>
-          <ul
-            class="nav flex-column mb-2 align-items-center align-items-md-start">
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <i class="ic-user"></i>
-                Users
-              </a>
-            </li>
-          </ul>
-          <div class="copyright text-center text-muted">
-            Made with &hearts; by <a href="#"
-              class="text-secondary">1MANDEV.COM</a>
-          </div>
-        </nav>
-      </div>
-
-      <main role="main"
-        class="content-area col-md-9 ml-sm-auto col-lg-10 px-2 px-md-4">
+    <div class="container-fluid">
+      <div class="row">
         <div
-          class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom mt-0 mb-3 mt-md-3 py-4">
-          <h1 class="h3 content-header">
-            <i class="ic-v-card"></i>
-            Customers
-          </h1>
-          <div class="content-action btn-toolbar mb-2 mb-md-0">
-            <button type="button" class="btn btn-sm  mr-3 btn-secondary"
-              data-toggle="modal" data-target="#addBalance">
-              <i class="ic-plus"></i>
-              Add Balance
-            </button>
-            <button type="button" class="btn btn-sm btn-primary"
-              data-toggle="modal" data-target="#addCustomer">
-              <i class="ic-plus"></i>
-              Add New Customer
-            </button>
-
-          </div>
+          class="
+            col-md-2
+            bg-light
+            navbar navbar-expand-md
+            p-0
+            pl-md-3
+            mt-5 mt-md-0
+            overflow-hidden
+          "
+        >
+          <nav
+            class="
+              collapse
+              navbar-collapse
+              sidebar
+              flex-column
+              align-items-md-start
+            "
+            id="sideBar"
+          >
+            <ul class="nav flex-column align-items-center align-items-md-start">
+              <li class="nav-item">
+                <a class="nav-link active" href="index.html">
+                  <i class="ic-home"></i>
+                  Dashboard
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="inventories.html">
+                  <i class="ic-archive"></i>
+                  Inventories
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="sales.html">
+                  <i class="ic-calculator"></i>
+                  Sales
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="returns.html">
+                  <i class="ic-back-in-time"></i>
+                  Returns
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="customers.html">
+                  <i class="ic-v-card"></i>
+                  Customers
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="expenses.html">
+                  <i class="ic-credit-card"></i>
+                  Expenses
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="servicing.html">
+                  <i class="ic-tools"></i>
+                  Servicing
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="products.html">
+                  <i class="ic-shopping-cart"></i>
+                  Products
+                </a>
+              </li>
+            </ul>
+            <h6 class="sidebar-heading px-3 mt-4 mb-1 text-center text-muted">
+              <span class="text-center text-md-left">Access Controls</span>
+            </h6>
+            <ul
+              class="
+                nav
+                flex-column
+                mb-2
+                align-items-center align-items-md-start
+              "
+            >
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <i class="ic-user"></i>
+                  Users
+                </a>
+              </li>
+            </ul>
+            <div class="copyright text-center text-muted">
+              Made with &hearts; by
+              <a href="#" class="text-secondary">1MANDEV.COM</a>
+            </div>
+          </nav>
         </div>
 
-        <div class="search-area mt-4 mt-md-5 mb-4">
-          <form action="" method="" class="">
-            <div class="container">
-              <div class="row d-flex justify-content-center align-items-start">
-                <div class="col-lg-4 mb-3 mr-lg-3">
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <div class="input-group-text">
-                        <i class="ic-magnifying-glass"></i>
+        <main
+          role="main"
+          class="content-area col-md-9 ml-sm-auto col-lg-10 px-2 px-md-4"
+        >
+          <div
+            class="
+              d-flex
+              justify-content-between
+              flex-wrap flex-md-nowrap
+              align-items-center
+              border-bottom
+              mt-0
+              mb-3
+              mt-md-3
+              py-4
+            "
+          >
+            <h1 class="h3 content-header">
+              <i class="ic-v-card"></i>
+              Customers
+            </h1>
+            <div class="content-action btn-toolbar mb-2 mb-md-0">
+              <button
+                type="button"
+                class="btn btn-sm mr-3 btn-secondary"
+                data-toggle="modal"
+                data-target="#addBalance"
+              >
+                <i class="ic-plus"></i>
+                Add Balance
+              </button>
+              <button
+                type="button"
+                class="btn btn-sm btn-primary"
+                data-toggle="modal"
+                data-target="#addCustomer"
+              >
+                <i class="ic-plus"></i>
+                Add New Customer
+              </button>
+            </div>
+          </div>
+
+          <div class="search-area mt-4 mt-md-5 mb-4">
+            <form action="" method="" class="">
+              <div class="container">
+                <div
+                  class="row d-flex justify-content-center align-items-start"
+                >
+                  <div class="col-lg-4 mb-3 mr-lg-3">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">
+                          <i class="ic-magnifying-glass"></i>
+                        </div>
                       </div>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name=" searchQuery"
+                        placeholder="Enter phone number"
+                      />
                     </div>
-                    <input type="text" class="form-control" name=" searchQuery"
-                      placeholder="Enter phone number" />
+                  </div>
+                  <div class="col-lg-7 d-flex">
+                    <div class="input-group mr-4">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">
+                          <i class="ic-calendar"></i>
+                        </div>
+                      </div>
+                      <input
+                        type="date"
+                        class="form-control"
+                        name="startDate"
+                      />
+                      <input type="date" class="form-control" name="endDate" />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary mr-2">
+                      <i class="ic-magnifying-glass"></i>
+                      Search
+                    </button>
+                    <button type="button" class="btn btn-secondary">
+                      <i class="ic-print"></i>
+                      Print
+                    </button>
                   </div>
                 </div>
-                <div class="col-lg-7 d-flex">
-                  <div class="input-group mr-4">
-                    <div class="input-group-prepend">
-                      <div class="input-group-text">
-                        <i class="ic-calendar"></i>
+              </div>
+            </form>
+          </div>
+
+          <!-- Add Product -->
+          <div
+            class="modal fade"
+            id="addCustomer"
+            tabindex="-1"
+            role="dialog"
+            data-backdrop="static"
+          >
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title t-primary">Customer</h5>
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form action="" method="">
+                    <div class="form-group">
+                      <label for="name">Name</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="name"
+                        placeholder="John Doe"
+                        required
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="address">Address</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="address"
+                        placeholder="22B Baker Street, London"
+                        required
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="phone">Phone Number</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="phone"
+                        placeholder="01717000000"
+                        required
+                      />
+                    </div>
+
+                    <div class="row align-items-center">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="amount">Total Amount</label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            name="amount"
+                            disabled
+                            placeholder="Eg. 50000"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="paid">Paid Amount</label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            name="paid"
+                            disabled
+                            placeholder="Eg. 20000"
+                          />
+                        </div>
                       </div>
                     </div>
-                    <input type="date" class="form-control" name="startDate" />
-                    <input type="date" class="form-control" name="endDate" />
-                  </div>
 
-                  <button type="submit" class="btn btn-primary mr-2">
-                    <i class="ic-magnifying-glass"></i>
-                    Search
-                  </button>
-                  <button type="button" class="btn btn-secondary">
-                    <i class="ic-print"></i>
-                    Print
-                  </button>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-dismiss="modal"
+                      >
+                        <i class="ic-cross"></i> Close
+                      </button>
+                      <button type="submit" class="btn btn-primary">
+                        <i class="ic-check"></i> Save Changes
+                      </button>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
-          </form>
-        </div>
+          </div>
 
-        <!-- Add Product -->
-        <div class="modal fade" id="addCustomer" tabindex="-1" role="dialog"
-          data-backdrop="static">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title t-primary">
-                  Customer
-                </h5>
-                <button type="button" class="close" data-dismiss="modal"
-                  aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <form action="" method="">
-                  <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" class="form-control" name="name"
-                      placeholder="John Doe" required />
-                  </div>
-                  <div class="form-group">
-                    <label for="address">Address</label>
-                    <input type="text" class="form-control" name="address"
-                      placeholder="22B Baker Street, London" required />
-                  </div>
-                  <div class="form-group">
-                    <label for="phone">Phone Number</label>
-                    <input type="text" class="form-control" name="phone"
-                      placeholder="01717000000" required />
-                  </div>
+          <div
+            class="modal fade"
+            id="addBalance"
+            tabindex="-1"
+            role="dialog"
+            data-backdrop="static"
+          >
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title t-primary">Add Balance</h5>
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form action="" method="">
+                    <div class="form-group">
+                      <label for="phone">Customer ID (Phone Number)</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="phone"
+                        placeholder="Make sure, you've typed correctly"
+                        required
+                      />
+                    </div>
 
-                  <div class="row align-items-center">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="amount">Total
-                          Amount</label>
-                        <input type="number" class="form-control" name="amount"
-                          disabled placeholder="Eg. 50000" />
+                    <div class="row align-items-center">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="amount">Add Amount</label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            name="amount"
+                            placeholder="Only if necessary"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="paid">Add Payment</label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            name="paid"
+                            placeholder="New payment balance"
+                            required
+                          />
+                        </div>
                       </div>
                     </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="paid">Paid
-                          Amount</label>
-                        <input type="number" class="form-control" name="paid"
-                          disabled placeholder="Eg. 20000" />
-                      </div>
+
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-dismiss="modal"
+                      >
+                        <i class="ic-cross"></i> Close
+                      </button>
+                      <button type="submit" class="btn btn-primary">
+                        <i class="ic-check"></i> Save Changes
+                      </button>
                     </div>
-                  </div>
-
-
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary"
-                      data-dismiss="modal">
-                      <i class="ic-cross"></i> Close
-                    </button>
-                    <button type="submit" class="btn btn-primary">
-                      <i class="ic-check"></i> Save
-                      Changes
-                    </button>
-                  </div>
-                </form>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div class="modal fade" id="addBalance" tabindex="-1" role="dialog"
-          data-backdrop="static">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title t-primary">
-                  Add Balance
-                </h5>
-                <button type="button" class="close" data-dismiss="modal"
-                  aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <form action="" method="">
-                  <div class="form-group">
-                    <label for="phone">Customer ID (Phone
-                      Number)</label>
-                    <input type="text" class="form-control" name="phone"
-                      placeholder="Make sure, you've typed correctly"
-                      required />
-                  </div>
-
-                  <div class="row align-items-center">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="amount">Add
-                          Amount</label>
-                        <input type="number" class="form-control" name="amount"
-                          placeholder="Only if necessary" />
-                      </div>
+          <!-- Delete Modals -->
+          <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title text-danger">Delete Items?</h5>
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  Do you really want to delete this?
+                  <p class="text-muted">This action is irreversible.</p>
+                  <form action="" method="post">
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-dismiss="modal"
+                      >
+                        <i class="ic-cross"></i> Close
+                      </button>
+                      <button type="submit" class="btn btn-danger">
+                        <i class="ic-trash"></i> Confirm Delete
+                      </button>
                     </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="paid">Add
-                          Payment</label>
-                        <input type="number" class="form-control" name="paid"
-                          placeholder="New payment balance" required />
-                      </div>
-                    </div>
-                  </div>
-
-
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary"
-                      data-dismiss="modal">
-                      <i class="ic-cross"></i> Close
-                    </button>
-                    <button type="submit" class="btn btn-primary">
-                      <i class="ic-check"></i> Save
-                      Changes
-                    </button>
-                  </div>
-                </form>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <!-- Delete Modals -->
-        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title text-danger">Delete
-                  Items?</h5>
-                <button type="button" class="close" data-dismiss="modal"
-                  aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                Do you really want to delete this?
-                <p class="text-muted">This action is
-                  irreversible.</p>
-                <form action="" method="post">
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary"
-                      data-dismiss="modal">
-                      <i class="ic-cross"></i> Close
-                    </button>
-                    <button type="submit" class="btn btn-danger">
-                      <i class="ic-trash"></i> Confirm
-                      Delete
-                    </button>
-                  </div>
-                </form>
-              </div>
+          <div class="content-box">
+            <div class="table-responsive">
+              <table class="table table-striped table-sm">
+                <thead class="table__header">
+                  <tr>
+                    <th>Name</th>
+                    <th>Phone Number</th>
+                    <th>Address</th>
+                    <th>Total Amount(Tk.)</th>
+                    <th>Paid(Tk.)</th>
+                    <th>Due(Tk.)</th>
+                    <th class="text-center">Actions</th>
+                  </tr>
+                </thead>
+                <tbody class="table__body">
+                  <tr>
+                    <td>Shahriar Parvez</td>
+                    <td>01992150982</td>
+                    <td class="address-box">
+                      Shuvo Shop, Shihali Hat, Shibganj, Bogra - 5810
+                    </td>
+                    <td>12093049</td>
+                    <td>
+                      237944<br />
+                      <span class="badge text-muted text-uppercase p-0">
+                        UPDATE: 12/19/20
+                      </span>
+                    </td>
+                    <td class="text-danger">2379434</td>
+                    <td class="table__actions text-center">
+                      <a
+                        href="#"
+                        class="table__actions-btn"
+                        data-toggle="modal"
+                        data-target="#addCustomer"
+                        ><i class="ic-pencil pr-2"></i>Edit</a
+                      >
+                      <a
+                        href="#"
+                        class="table__actions-btn"
+                        data-toggle="modal"
+                        data-target="#deleteModal"
+                        ><i class="ic-trash pr-2"></i>Delete</a
+                      >
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
-        </div>
-
-        <div class="content-box">
-          <div class="table-responsive">
-            <table class="table table-striped table-sm">
-              <thead class="table__header">
-                <tr>
-                  <th>Name</th>
-                  <th>Phone Number</th>
-                  <th>Address</th>
-                  <th>Total Amount(Tk.)</th>
-                  <th>Paid(Tk.)</th>
-                  <th>Due(Tk.)</th>
-                  <th class="text-center">Actions</th>
-                </tr>
-              </thead>
-              <tbody class="table__body">
-                <tr>
-                  <td>Shahriar Parvez</td>
-                  <td>01992150982</td>
-                  <td class="address-box">Shuvo Shop, Shihali
-                    Hat, Shibganj, Bogra
-                    - 5810</td>
-                  <td>12093049</td>
-                  <td>
-                    237944<br>
-                    <span class="badge text-muted text-uppercase p-0">
-                      UPDATE: 12/19/20
-                    </span>
-                  </td>
-                  <td class="text-danger">
-                    2379434
-                  </td>
-                  <td class="table__actions text-center">
-                    <a href="#" class="table__actions-btn" data-toggle="modal"
-                      data-target="#addCustomer"><i
-                        class="ic-pencil pr-2"></i>Edit</a>
-                    <a href="#" class="table__actions-btn" data-toggle="modal"
-                      data-target="#deleteModal"><i
-                        class="ic-trash pr-2"></i>Delete</a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </main>
+        </main>
+      </div>
     </div>
-  </div>
 
-  <!-- jQuery -->
-  <script src="../vendors/jquery.slim.min.js"></script>
-  <!-- PopperJS -->
-  <script src="../vendors/popper.min.js"></script>
-  <!-- Bootstrap Js -->
-  <script src="../vendors/bootstrap.min.js"></script>
-  <!-- Main Js -->
-  <script src="../scripts/main.js"></script>
-</body>
-
+    <!-- jQuery -->
+    <script src="../vendors/jquery.slim.min.js"></script>
+    <!-- PopperJS -->
+    <script src="../vendors/popper.min.js"></script>
+    <!-- Bootstrap Js -->
+    <script src="../vendors/bootstrap.min.js"></script>
+    <!-- Main Js -->
+    <script src="../scripts/main.js"></script>
+  </body>
 </html>

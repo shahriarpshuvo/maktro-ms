@@ -1,18 +1,18 @@
 @font-face {
-  font-family: "maktro-ms";
-  src: url("fonts/maktro-ms.eot?40hb42");
-  src: url("fonts/maktro-ms.eot?40hb42#iefix") format("embedded-opentype"),
-    url("fonts/maktro-ms.ttf?40hb42") format("truetype"),
-    url("fonts/maktro-ms.woff?40hb42") format("woff");
+  font-family: 'maktro-ms';
+  src: url('fonts/maktro-ms.eot?40hb42');
+  src: url('fonts/maktro-ms.eot?40hb42#iefix') format('embedded-opentype'),
+    url('fonts/maktro-ms.ttf?40hb42') format('truetype'),
+    url('fonts/maktro-ms.woff?40hb42') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: block;
 }
 
-[class^="ic-"],
-[class*=" ic-"] {
+[class^='ic-'],
+[class*=' ic-'] {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: "maktro-ms" !important;
+  font-family: 'maktro-ms' !important;
   speak: none;
   font-style: normal;
   font-weight: normal;
@@ -26,321 +26,321 @@
 }
 
 .ic-warning:before {
-  content: "\e900";
+  content: '\e900';
 }
 
 .ic-chevron-down:before {
-  content: "\e901";
+  content: '\e901';
 }
 
 .ic-chevron-left:before {
-  content: "\e902";
+  content: '\e902';
 }
 
 .ic-chevron-right:before {
-  content: "\e903";
+  content: '\e903';
 }
 
 .ic-chevron-up:before {
-  content: "\e904";
+  content: '\e904';
 }
 
 .ic-controller-paus:before {
-  content: "\e905";
+  content: '\e905';
 }
 
 .ic-controller-play:before {
-  content: "\e906";
+  content: '\e906';
 }
 
 .ic-controller-stop:before {
-  content: "\e907";
+  content: '\e907';
 }
 
 .ic-dots-three-horizontal:before {
-  content: "\e908";
+  content: '\e908';
 }
 
 .ic-dots-three-vertical:before {
-  content: "\e909";
+  content: '\e909';
 }
 
 .ic-add-user:before {
-  content: "\e90a";
+  content: '\e90a';
 }
 
 .ic-block:before {
-  content: "\e90b";
+  content: '\e90b';
 }
 
 .ic-calendar:before {
-  content: "\e90c";
+  content: '\e90c';
 }
 
 .ic-check:before {
-  content: "\e90d";
+  content: '\e90d';
 }
 
 .ic-cog:before {
-  content: "\e90e";
+  content: '\e90e';
 }
 
 .ic-credit-card:before {
-  content: "\e90f";
+  content: '\e90f';
 }
 
 .ic-credit:before {
-  content: "\e910";
+  content: '\e910';
 }
 
 .ic-cross:before {
-  content: "\e911";
+  content: '\e911';
 }
 
 .ic-cycle:before {
-  content: "\e912";
+  content: '\e912';
 }
 
 .ic-export:before {
-  content: "\e913";
+  content: '\e913';
 }
 
 .ic-globe:before {
-  content: "\e914";
+  content: '\e914';
 }
 
 .ic-help-with-circle:before {
-  content: "\e915";
+  content: '\e915';
 }
 
 .ic-help:before {
-  content: "\e916";
+  content: '\e916';
 }
 
 .ic-home:before {
-  content: "\e917";
+  content: '\e917';
 }
 
 .ic-info-with-circle:before {
-  content: "\e918";
+  content: '\e918';
 }
 
 .ic-info:before {
-  content: "\e919";
+  content: '\e919';
 }
 
 .ic-location:before {
-  content: "\e91a";
+  content: '\e91a';
 }
 
 .ic-megaphone:before {
-  content: "\e91b";
+  content: '\e91b';
 }
 
 .ic-menu:before {
-  content: "\e91c";
+  content: '\e91c';
 }
 
 .ic-message:before {
-  content: "\e91d";
+  content: '\e91d';
 }
 
 .ic-minus:before {
-  content: "\e91e";
+  content: '\e91e';
 }
 
 .ic-new-message:before {
-  content: "\e91f";
+  content: '\e91f';
 }
 
 .ic-pencil:before {
-  content: "\e920";
+  content: '\e920';
 }
 
 .ic-phone:before {
-  content: "\e921";
+  content: '\e921';
 }
 
 .ic-pin:before {
-  content: "\e922";
+  content: '\e922';
 }
 
 .ic-plus:before {
-  content: "\e923";
+  content: '\e923';
 }
 
 .ic-quote:before {
-  content: "\e924";
+  content: '\e924';
 }
 
 .ic-shop:before {
-  content: "\e925";
+  content: '\e925';
 }
 
 .ic-shopping-cart:before {
-  content: "\e926";
+  content: '\e926';
 }
 
 .ic-sound-mix:before {
-  content: "\e927";
+  content: '\e927';
 }
 
 .ic-star:before {
-  content: "\e928";
+  content: '\e928';
 }
 
 .ic-switch:before {
-  content: "\e929";
+  content: '\e929';
 }
 
 .ic-tools:before {
-  content: "\e92a";
+  content: '\e92a';
 }
 
 .ic-typing:before {
-  content: "\e92b";
+  content: '\e92b';
 }
 
 .ic-user:before {
-  content: "\e92c";
+  content: '\e92c';
 }
 
 .ic-arrow-down:before {
-  content: "\e92d";
+  content: '\e92d';
 }
 
 .ic-arrow-left:before {
-  content: "\e92e";
+  content: '\e92e';
 }
 
 .ic-arrow-right:before {
-  content: "\e92f";
+  content: '\e92f';
 }
 
 .ic-arrow-up:before {
-  content: "\e930";
+  content: '\e930';
 }
 
 .ic-save:before {
-  content: "\e931";
+  content: '\e931';
 }
 
 .ic-trash:before {
-  content: "\e932";
+  content: '\e932';
 }
 
 .ic-archive:before {
-  content: "\e933";
+  content: '\e933';
 }
 
 .ic-attachment:before {
-  content: "\e934";
+  content: '\e934';
 }
 
 .ic-back-in-time:before {
-  content: "\e935";
+  content: '\e935';
 }
 
 .ic-battery:before {
-  content: "\e936";
+  content: '\e936';
 }
 
 .ic-briefcase:before {
-  content: "\e937";
+  content: '\e937';
 }
 
 .ic-calculator:before {
-  content: "\e938";
+  content: '\e938';
 }
 
 .ic-compass:before {
-  content: "\e939";
+  content: '\e939';
 }
 
 .ic-edit:before {
-  content: "\e93a";
+  content: '\e93a';
 }
 
 .ic-flag:before {
-  content: "\e93b";
+  content: '\e93b';
 }
 
 .ic-forward:before {
-  content: "\e93c";
+  content: '\e93c';
 }
 
 .ic-funnel:before {
-  content: "\e93d";
+  content: '\e93d';
 }
 
 .ic-gauge:before {
-  content: "\e93e";
+  content: '\e93e';
 }
 
 .ic-grid:before {
-  content: "\e93f";
+  content: '\e93f';
 }
 
 .ic-hour-glass:before {
-  content: "\e940";
+  content: '\e940';
 }
 
 .ic-key:before {
-  content: "\e941";
+  content: '\e941';
 }
 
 .ic-lock-open:before {
-  content: "\e942";
+  content: '\e942';
 }
 
 .ic-lock:before {
-  content: "\e943";
+  content: '\e943';
 }
 
 .ic-magnifying-glass:before {
-  content: "\e944";
+  content: '\e944';
 }
 
 .ic-mail:before {
-  content: "\e945";
+  content: '\e945';
 }
 
 .ic-pie-chart:before {
-  content: "\e946";
+  content: '\e946';
 }
 
 .ic-print:before {
-  content: "\e947";
+  content: '\e947';
 }
 
 .ic-publish:before {
-  content: "\e948";
+  content: '\e948';
 }
 
 .ic-radio:before {
-  content: "\e949";
+  content: '\e949';
 }
 
 .ic-rss:before {
-  content: "\e94a";
+  content: '\e94a';
 }
 
 .ic-scissors:before {
-  content: "\e94b";
+  content: '\e94b';
 }
 
 .ic-share-alternitive:before {
-  content: "\e94c";
+  content: '\e94c';
 }
 
 .ic-shopping-bag:before {
-  content: "\e94d";
+  content: '\e94d';
 }
 
 .ic-tv:before {
-  content: "\e94e";
+  content: '\e94e';
 }
 
 .ic-v-card:before {
-  content: "\e94f";
+  content: '\e94f';
 }

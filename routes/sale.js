@@ -12,9 +12,9 @@ const generateInvoice = require('../middlewares/InvoiceGenerator');
 const fs = require('fs');
 
 router.get('/invoice/:id', (req, res) => {
-    const data = fs.readFileSync(`./files/invoice/${req.params.id}.pdf`);
-    res.contentType("application/pdf");
-    res.send(data);
+  const data = fs.readFileSync(`./files/invoice/${req.params.id}.pdf`);
+  res.contentType('application/pdf');
+  res.send(data);
 });
 
 module.exports = router;
