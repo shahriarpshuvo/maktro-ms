@@ -1,46 +1,168 @@
-<%- include('../modules/_header', {page: "Dashboard"}); %>
-<%- include('../modules/_navs', {page: "Dashboard"}); %>
+<%- include('../modules/_header', {page: "Dashboard"}); %> <%-
+include('../modules/_navs', {page: "Dashboard"}); %>
 
 <div class="dashboard-intro text-center p-3">
-    <h3 class="display-4">👨‍💻</h3>
-    <h5 class="mb-3">Welcome, <%= user.name %>!</h5>
-    <p>Maktro Management System</p>
+  <h3 class="display-4">👨‍💻</h3>
+  <h5 class="mb-3">Welcome, <%= user.name %>!</h5>
+  <p>Maktro Management System</p>
 </div>
 
 <% if(user.role == 'admin') { %>
 <nav class="mt-3">
-    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <a class="nav-item nav-link <% if (queryString.overview == 'sales'){ %>active<% } %>" data-toggle="tab"
-           href="#sales" role="tab"><span class="text-success">Sales Overview</span></a>
-        <a class="nav-item nav-link <% if (queryString.overview == 'expense'){ %>active<% } %>" data-toggle="tab"
-           href="#expense" role="tab"><span class="text-danger">Expense Overview</span></a>
-        <a class="nav-item nav-link <% if (queryString.overview == 'returns'){ %>active<% } %>" data-toggle="tab"
-           href="#returns" role="tab"><span class="text-warning">Returns Overview</span></a>
-        <a class="nav-item nav-link <% if (queryString.overview == 'inventory'){ %>active<% } %>" data-toggle="tab"
-           href="#inventory" role="tab"><span class="text-info">Inventory Overview</span></a>
-    </div>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a
+      class="
+        nav-item nav-link
+        <%
+        if
+        (queryString.overview
+        ==
+        'sales'){
+        %>active<%
+        }
+        %>
+      "
+      data-toggle="tab"
+      href="#sales"
+      role="tab"
+      ><span class="text-success">Sales Overview</span></a
+    >
+    <a
+      class="
+        nav-item nav-link
+        <%
+        if
+        (queryString.overview
+        ==
+        'expense'){
+        %>active<%
+        }
+        %>
+      "
+      data-toggle="tab"
+      href="#expense"
+      role="tab"
+      ><span class="text-danger">Expense Overview</span></a
+    >
+    <a
+      class="
+        nav-item nav-link
+        <%
+        if
+        (queryString.overview
+        ==
+        'returns'){
+        %>active<%
+        }
+        %>
+      "
+      data-toggle="tab"
+      href="#returns"
+      role="tab"
+      ><span class="text-warning">Returns Overview</span></a
+    >
+    <a
+      class="
+        nav-item nav-link
+        <%
+        if
+        (queryString.overview
+        ==
+        'inventory'){
+        %>active<%
+        }
+        %>
+      "
+      data-toggle="tab"
+      href="#inventory"
+      role="tab"
+      ><span class="text-info">Inventory Overview</span></a
+    >
+  </div>
 </nav>
 <div class="tab-content" id="nav-tabContent">
-    <div class="tab-pane fade <% if (queryString.overview == 'sales'){ %>show active<% } %>" id="sales" role="tabpanel">
-        <%- include('./_overview_sales') %>
-    </div>
-    <div class="tab-pane fade <% if (queryString.overview == 'expense'){ %>show active<% } %>" id="expense"
-         role="tabpanel">
-        <%- include('./_overview_expense') %>
-    </div>
-    <div class="tab-pane fade <% if (queryString.overview == 'returns'){ %>show active<% } %>" id="returns"
-         role="tabpanel">
-        <%- include('./_overview_returns.ejs') %>
-    </div>
-    <div class="tab-pane fade <% if (queryString.overview == 'inventory'){ %>show active<% } %>" id="inventory"
-         role="tabpanel">
-        <%- include('./_overview_inventory.ejs') %>
-    </div>
+  <div
+    class="
+      tab-pane
+      fade
+      <%
+      if
+      (queryString.overview
+      ==
+      'sales'){
+      %>show
+      active<%
+      }
+      %>
+    "
+    id="sales"
+    role="tabpanel"
+  >
+    <%- include('./_overview_sales') %>
+  </div>
+  <div
+    class="
+      tab-pane
+      fade
+      <%
+      if
+      (queryString.overview
+      ==
+      'expense'){
+      %>show
+      active<%
+      }
+      %>
+    "
+    id="expense"
+    role="tabpanel"
+  >
+    <%- include('./_overview_expense') %>
+  </div>
+  <div
+    class="
+      tab-pane
+      fade
+      <%
+      if
+      (queryString.overview
+      ==
+      'returns'){
+      %>show
+      active<%
+      }
+      %>
+    "
+    id="returns"
+    role="tabpanel"
+  >
+    <%- include('./_overview_returns.ejs') %>
+  </div>
+  <div
+    class="
+      tab-pane
+      fade
+      <%
+      if
+      (queryString.overview
+      ==
+      'inventory'){
+      %>show
+      active<%
+      }
+      %>
+    "
+    id="inventory"
+    role="tabpanel"
+  >
+    <%- include('./_overview_inventory.ejs') %>
+  </div>
 </div>
-
 
 <% } %>
 
-
-<p class="text-center text-muted mt-4">&copy; Maktro.com 2020 | We Make Consumers' Electronics.</p>
+<p class="text-center text-muted mt-4">
+  &copy; Maktro.com <%= new Date.getFullYear() %> | We Make Consumers'
+  Electronics.
+</p>
 <%- include('../modules/_footer'); %>
