@@ -36,7 +36,7 @@ app.use(cookieParser());
 //app.use(session({ secret: 'maktro-ms', saveUninitialized: true, resave: true }));
 app.use(
   session({
-    secret: 'maktro-auth',
+    secret: process.env.SECRET_KEY,
     saveUninitialized: false,
     resave: false,
     cookie: { maxAge: 1000 * 60 * 60 * 24 * 7, httpOnly: true },
